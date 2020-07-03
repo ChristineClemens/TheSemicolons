@@ -55,6 +55,12 @@ class DB {
             });
         });
     }
+
+    removeOne(tableName, condition){
+        return new Promise((resolve, reject)=>{
+            this.connection.query("DELETE FROM ? WHERE ?", [tableName, condition])
+        })
+    }
 }
 
 module.exports = DB;
