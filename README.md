@@ -13,7 +13,8 @@ https://www.draw.io/#G12CCzF-e3eBD7XnBb7OgelXhI-kiYer6f
 https://www.figma.com/file/BdrlllmXs89G7oDkYk77NU/TheSemicolons?node-id=0%3A1
 
 
-
+SQLUSER=
+SQLPASS=
 
 
 ### read me start from here
