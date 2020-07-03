@@ -8,20 +8,29 @@ class DB {
     close() {
         return close_db(this.connection);
     }
-    
-    query( sql, args ) {
-        return new Promise( ( resolve, reject ) => {
-            this.connection.query( sql, args, ( err, rows ) => {
-                if ( err )
-                    return reject( err );
-                resolve( rows );
-            } );
-        } );
+
+    query(sql, args) {
+        return new Promise((resolve, reject) => {
+            this.connection.query(sql, args, (err, rows) => {
+                if (err) return reject(err);
+                resolve(rows);
+            });
+        });
     }
 
     selectAll(tableName) {
         return new Promise((resolve, reject) => {
             this.connection.query("SELECT * FROM ??", [tableName], function (err, rows) {
+                if (err) reject(err);
+                resolve(rows);
+            });
+        });
+    }
+
+    selectSome(tableName, whereConditions) {
+        //Where condition is an object
+        return new Promise((resolve, reject) => {
+            this.connection.query("SELECT * FROM ?? WHERE ?", [tableName, whereConditions], function (err, rows) {
                 if (err) reject(err);
                 resolve(rows);
             });
