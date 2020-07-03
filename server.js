@@ -57,12 +57,13 @@ const userInViews = require("./lib/middleware/userInViews");
 const authRouter = require("./routes/auth");
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
-
+const bookRouter = require("./controllers/book_controller")
 //Actually initializing the routes we've created
 app.use(userInViews());
 app.use("/", authRouter);
 app.use("/", indexRouter);
 app.use("/", usersRouter);
+app.use("/", bookRouter)
 
 app.listen(PORT, function () {
     console.log("App listening on PORT " + PORT);
