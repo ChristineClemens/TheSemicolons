@@ -14,7 +14,7 @@ https://www.figma.com/file/BdrlllmXs89G7oDkYk77NU/TheSemicolons?node-id=0%3A1
 
 
 SQLUSER=
-SQLPASS=
+SQLJASS=
 
 
 ### read me start from here
