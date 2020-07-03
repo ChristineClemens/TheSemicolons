@@ -5,6 +5,6 @@ class BookModel {
         let db = new orm("mylibrary")
         let userBooks = await db.selectSome("books", {user_added: userID})
         await db.close()
-        returb userBooks
+        return userBooks
     }
 }
