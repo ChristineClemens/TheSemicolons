@@ -18,11 +18,3 @@ CREATE TABLE books(
     user_added integer,
     foreign key (user_added) references users(id)
     );
-
-    
-    
-    
-    
-
-
- 
