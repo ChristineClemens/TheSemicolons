@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const express = require("express");
 const secured = require("../lib/middleware/secured");
 const router = express.Router();
@@ -19,7 +21,7 @@ module.exports = router;
 
 
 //JAMES, LOOK WHAT WE DID.
-var APIKey = "AIzaSyAVDdcFdW0ng8X7gOa1ODlAlSmCmrhtFQE";
+var APIKey = process.env.API_KEY;
 
 //Define title input as API call.
 async function addBook() {
@@ -44,5 +46,6 @@ async function addBook() {
 
     //Inserted new book information into the books table.
     var sql = `INSERT INTO books (title, author, genre, description, page_count, book_cover) 
-    VALUES (${bookInfo.title}, ${bookInfo.author}, ${bookInfo.genre}, ${bookInfo.description}, ${bookInfo.page_count}, ${bookInfo.book_cover})`
+    VALUES (${bookInfo.title}, ${bookInfo.author}, ${bookInfo.genre}, ${bookInfo.description}, 
+    ${bookInfo.page_count}, ${bookInfo.book_cover})`;
 })};
