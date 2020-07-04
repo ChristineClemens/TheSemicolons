@@ -15,3 +15,16 @@ class UserModel {
         await db.close();
     }
 }
+
+
+//add credit
+
+//remove credit
+
+//get credits
+
+//add location for pickup
+
+// change location for pickup
+
+//remove location for pickup

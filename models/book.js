@@ -1,33 +1,22 @@
 const orm = require("../config/orm");
 
 class BookModel {
-    async getBooksByUser(userID) {
+    async getBooks(column, search){
+        //conditions is an object with column to search : value to find
         let db = new orm("mylibrary");
-        let userBooks = await db.selectSome("books", { user_added: userID });
+        let books = await db.selectSome("books", column, search);
         await db.close();
-        return userBooks;
+        return books;
     }
-
-    async getBooksByGenre(genreName) {
+    async getAllBooks(){
+        //conditions is an object with column to search : value to find
         let db = new orm("mylibrary");
-        let genreBooks = await db.selectSome("books", { genre: genreName });
-        await db.close();
-        return genreBooks;
-    }
-
-    async getBooksByTitle(bookTitle) {
-        let db = new orm("mylibrary");
-        let books = await db.selectSome("books", { title: bookTitle });
+        let books = await db.selectAll("books");
         await db.close();
         return books;
     }
 
-    async getBooksByAuthor(bookAuthor) {
-        let db = new orm("mylibrary");
-        let books = await db.selectSome("books", { author: bookAuthor });
-        await db.close();
-        return books;
-    }
+
 
     async addBook(book) {
         //book is an object with title, author, etc
@@ -40,4 +29,10 @@ class BookModel {
         let db = new orm("mylibrary");
         await db.updateOne("books", newUser, { id: bookID });
     }
+    async removeBook(bookID){
+        let db = new orm("mylibrary")
+        await db.removeOne("books", {id: bookID})
+    }
 }
+
+module.exports = BookModel

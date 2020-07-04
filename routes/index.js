@@ -1,10 +1,10 @@
-var express = require('express');
-var router = express.Router();
+const express = require("express");
+const router = express.Router();
 
 /* GET home page. */
-router.get('/', function (req, res, next) {
-    console.log(req.user)
-  res.render('index', { title: 'Welcome to PageExchange' });
+router.get("/", function (req, res, next) {
+    console.log(req.user);
+    res.render("index", { title: "Welcome to PageExchange" });
 });
 
 module.exports = router;

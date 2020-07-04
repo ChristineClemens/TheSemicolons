@@ -27,10 +27,10 @@ class DB {
         });
     }
 
-    selectSome(tableName, whereConditions) {
+    selectSome(tableName, columnName, searchValue) {
         //Where condition is an object
         return new Promise((resolve, reject) => {
-            this.connection.query("SELECT * FROM ?? WHERE ?", [tableName, whereConditions], function (err, rows) {
+            this.connection.query("SELECT * FROM ?? WHERE ?? = ?", [tableName, columnName, searchValue], function (err, rows) {
                 if (err) reject(err);
                 resolve(rows);
             });
@@ -54,6 +54,12 @@ class DB {
                 resolve(rows);
             });
         });
+    }
+
+    removeOne(tableName, condition){
+        return new Promise((resolve, reject)=>{
+            this.connection.query("DELETE FROM ? WHERE ?", [tableName, condition])
+        })
     }
 }
 

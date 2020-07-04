@@ -53,17 +53,33 @@ passport.serializeUser(function (user, done) {
 passport.deserializeUser(function (user, done) {
     done(null, user);
 });
+
+//For authentication
 const userInViews = require("./lib/middleware/userInViews");
 const authRouter = require("./routes/auth");
-const indexRouter = require("./routes/index");
-const usersRouter = require("./routes/users");
 
-//Actually initializing the routes we've created
+//api calls
+const usersApiRouter = require("./controllers/user_controller");
+const bookApiRouter = require("./controllers/book_controller");
+
+//pages/routes
+const indexRouter = require("./routes/index");
+const mylibrary = require("./routes/mylibrary");
+const browseRouter = require("./routes/browse")
+//initializing the routes we've created
 app.use(userInViews());
 app.use("/", authRouter);
 app.use("/", indexRouter);
-app.use("/", usersRouter);
-
+app.use("/api", usersApiRouter);
+app.use("/api", bookApiRouter);
+app.use("/", mylibrary);
+app.use("/", browseRouter)
 app.listen(PORT, function () {
     console.log("App listening on PORT " + PORT);
 });
+
+
+//STEPS TO ADDING A PAGE
+//create a handlebar file in views
+//Create a router, define in routes/ and render the handlebar file
+//import the router into server.js
