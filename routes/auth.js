@@ -1,10 +1,10 @@
-var express = require("express");
-var router = express.Router();
-var passport = require("passport");
+const express = require("express");
+const router = express.Router();
+const passport = require("passport");
 require("dotenv").config();
-var util = require("util");
-var url = require("url");
-var querystring = require("querystring");
+const util = require("util");
+const url = require("url");
+const querystring = require("querystring");
 
 // Perform the login, after login Auth0 will redirect to callback
 router.get(
@@ -32,7 +32,7 @@ router.get("/callback", function (req, res, next) {
             }
             const returnTo = req.session.returnTo;
             delete req.session.returnTo;
-            res.redirect(returnTo || "/user");
+            res.redirect(returnTo || "/mylibrary");
         });
     })(req, res, next);
 });
