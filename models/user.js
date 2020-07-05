@@ -38,7 +38,7 @@ async function changeLocation(userLocation) {
 //remove location for pickup
 async function removeLocation(userLocation) {
     let db = new orm ("mylibrary");
-    await db.removeOne("users", u{location: userLocation});
+    await db.removeOne("users", {location: userLocation});
     await db.close();
 }
 
