@@ -66,7 +66,6 @@ class DB {
 
     leftJoinWhere(leftTable, rightTable, leftKey, rightKey, whereClauseCol, whereClauseVal) {
         return new Promise((resolve, reject) => {
-            console.log(leftTable, rightTable, leftKey, rightKey, whereClauseCol, whereClauseVal)
             this.connection.query("SELECT * FROM ?? LEFT JOIN ?? ON ?? = ?? WHERE ?? = ?", [leftTable, rightTable, leftKey, rightKey, whereClauseCol, whereClauseVal], function (err, rows) {
                 if (err) reject(err);
                 resolve(rows);

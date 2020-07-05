@@ -61,19 +61,23 @@ const authRouter = require("./routes/auth");
 //api calls
 const usersApiRouter = require("./controllers/user_controller");
 const bookApiRouter = require("./routes/book_api");
+const messagesAPIRouter = require("./routes/messages_api")
 
 //pages/routes
 const indexRouter = require("./routes/index");
 const mylibrary = require("./routes/mylibrary");
 const browseRouter = require("./routes/browse")
+const bookRequest = require("./routes/bookRequest")
 //initializing the routes we've created
 app.use(userInViews());
 app.use("/", authRouter);
 app.use("/", indexRouter);
 app.use("/api", usersApiRouter);
 app.use("/api", bookApiRouter);
+app.use("/api", messagesAPIRouter)
 app.use("/", mylibrary);
 app.use("/", browseRouter)
+app.use("/", bookRequest)
 app.listen(PORT, function () {
     console.log("App listening on PORT " + PORT);
 });

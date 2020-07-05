@@ -16,6 +16,13 @@ class BookModel {
         return books;
     }
 
+    async getBookAndUser(bookID){
+        let db = new orm("mylibrary");
+        let book = await db.leftJoinWhere('books', 'users', "books.possession_id", "users.id", "books.id", bookID) ;
+        await db.close();
+        return book;
+    }
+
 
 
     async addBook(book) {

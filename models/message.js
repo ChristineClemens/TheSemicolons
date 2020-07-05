@@ -9,7 +9,9 @@ class MessageModel{
     }
 
     async addMessage(senderID, recipientID, message, bookID){
-        
+        let db = new orm("mylibrary");
+        await db.insertOne("messages", {sender_id: senderID, recipient_id: recipientID, message_text: message, book_requested_id: bookID})
+        await db.close()
     }
 
 }
