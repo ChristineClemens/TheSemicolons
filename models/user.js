@@ -24,9 +24,23 @@ class UserModel {
 //get credits
 
 //add location for pickup
-
+async function addLocation(userLocation) {
+    let db = new orm ("mylibrary");
+    await db.insertOne("users", {location: userLocation});
+    await db.close();
+}
 // change location for pickup
-
+async function changeLocation(userLocation) {
+    let db = new orm ("mylibrary");
+    await db.updateOne("users", {location: userLocation});
+    await db.close();
+}
 //remove location for pickup
+async function removeLocation(userLocation) {
+    let db = new orm ("mylibrary");
+    await db.removeOne("users", u{location: userLocation});
+    await db.close();
+}
+
 
 module.exports = UserModel
