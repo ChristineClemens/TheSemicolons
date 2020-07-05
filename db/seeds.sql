@@ -37,4 +37,4 @@ Lannister—the first a swordsman without equal, the second a dwarf whose stunte
 mind. All are heading for Winterfell and a fateful encounter that will change the course of kingdoms. 
 Meanwhile, across the Narrow Sea, Prince Viserys, heir of the fallen House Targaryen, which once ruled all 
 of Westeros, schemes to reclaim the throne with an army of barbarian Dothraki—whose loyalty he will purchase 
-in the only coin left to him: his beautiful yet innocent sister, Daenerys.', '720', 'https://books.google.ca/books/content?id=5NomkK4EV68C&printsec=frontcover&img=1&zoom=1&edge=curl&imgtk=AFLRE70qQ61-n8AH6P8WzSFH3S1mM6_lYJl8cnmuB_UGZStXyIYtZpKjyAXNL-e6g29SaQUzNjKyltIIPYZzfXo4MGeMI0-SLa1o42j3NfMSIF15WQ9V9xhkJSS7pT-_59T0QmZGlrRj', '4'. CURDATE() );
+in the only coin left to him: his beautiful yet innocent sister, Daenerys.', '720', 'https://books.google.ca/books/content?id=5NomkK4EV68C&printsec=frontcover&img=1&zoom=1&edge=curl&imgtk=AFLRE70qQ61-n8AH6P8WzSFH3S1mM6_lYJl8cnmuB_UGZStXyIYtZpKjyAXNL-e6g29SaQUzNjKyltIIPYZzfXo4MGeMI0-SLa1o42j3NfMSIF15WQ9V9xhkJSS7pT-_59T0QmZGlrRj', '4', CURDATE() );
