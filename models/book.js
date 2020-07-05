@@ -28,10 +28,12 @@ class BookModel {
     async updateBook(newUser, bookID) {
         let db = new orm("mylibrary");
         await db.updateOne("books", newUser, { id: bookID });
+        await db.close()
     }
     async removeBook(bookID){
         let db = new orm("mylibrary")
         await db.removeOne("books", {id: bookID})
+        await db.close()
     }
 }
 

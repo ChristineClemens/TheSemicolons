@@ -23,3 +23,15 @@ possession_id INTEGER,
 date_added INTEGER,
 FOREIGN KEY (possession_id) REFERENCES users(id)
 );
+
+CREATE TABLE messages (
+
+id INT AUTO_INCREMENT PRIMARY KEY,
+sender_id INT NOT NULL,
+recipient_id INT NOT NULL,
+message_text VARCHAR(5000),
+book_requested_id INT NOT NULL,
+FOREIGN KEY (sender_id) REFERENCES users(id),
+FOREIGN KEY (recipient_id) REFERENCES users(id),
+FOREIGN KEY (book_requested_id) REFERENCES books(id)
+);
