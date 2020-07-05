@@ -2,12 +2,12 @@ const orm = require("../config/orm");
 
 class BookModel {
     async getBooks(column, search){
-        //conditions is an object with column to search : value to find
         let db = new orm("mylibrary");
         let books = await db.selectSome("books", column, search);
         await db.close();
         return books;
     }
+    
     async getAllBooks(){
         //conditions is an object with column to search : value to find
         let db = new orm("mylibrary");

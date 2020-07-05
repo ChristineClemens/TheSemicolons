@@ -1,7 +1,7 @@
-INSERT INTO users (auth_id) VALUES ('auth0|5efe8a69a15b7b001361ce52');
-INSERT INTO users (auth_id) VALUES ('google-oauth2|107478579241719314235');
-INSERT INTO users (auth_id) VALUES ('google-oauth2|113832903861403532486');
-INSERT INTO users (auth_id) VALUES ('google.oauth2|117292005270119800251');
+INSERT INTO users (auth_id) VALUES ('auth0|5efe8a69a15b7b001361ce52'),
+    ('google-oauth2|107478579241719314235'),
+    ('google-oauth2|113832903861403532486'),
+    ('google.oauth2|117292005270119800251');
 
 INSERT INTO books (title, author, genre, description, page_count, book_cover, possession_id, date_added)
 VALUES ('The Last Theorem', 'Arthur C. Clarke, Frederik Pohl', 'Fiction, Science Fiction, Alien Contact', 'Two of science 

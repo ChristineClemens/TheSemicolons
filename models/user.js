@@ -3,7 +3,7 @@ const orm = require("../config/orm");
 class UserModel {
     async getUserByID(userID) {
         let db = new orm("mylibrary");
-        let user = await db.selectSome("users", { id: userID });
+        let user = await db.selectSome("users", "auth_id", userID);
         await db.close();
         return user;
     }
@@ -28,3 +28,5 @@ class UserModel {
 // change location for pickup
 
 //remove location for pickup
+
+module.exports = UserModel

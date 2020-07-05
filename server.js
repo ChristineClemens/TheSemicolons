@@ -60,7 +60,7 @@ const authRouter = require("./routes/auth");
 
 //api calls
 const usersApiRouter = require("./controllers/user_controller");
-const bookApiRouter = require("./controllers/book_controller");
+const bookApiRouter = require("./routes/book_api");
 
 //pages/routes
 const indexRouter = require("./routes/index");
