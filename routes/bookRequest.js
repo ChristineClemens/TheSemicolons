@@ -16,6 +16,12 @@ router.get("/request_book/:bookID", secured(), async function (req, res, next) {
     console.log("request page loaded");
 
     const bookInformation = (await BookModel.getBookAndUser(req.params.bookID))[0]
+
+    if (!bookInformation){
+        res.render("404", {title: "404 Incorrect Book ID"})
+        return
+    }
+
     console.log("bookInformation", bookInformation)
     console.log(bookInformation.title)
 
