@@ -59,7 +59,7 @@ const userInViews = require("./lib/middleware/userInViews");
 const authRouter = require("./routes/auth");
 
 //api calls
-const usersApiRouter = require("./controllers/user_controller");
+// const usersApiRouter = require("./controllers/user_controller");
 const bookApiRouter = require("./routes/book_api");
 const messagesAPIRouter = require("./routes/messages_api")
 
@@ -72,7 +72,7 @@ const messages = require("./routes/messages")
 //initializing the routes we've created
 app.use(userInViews());
 app.use("/", authRouter);
-app.use("/api", usersApiRouter);
+// app.use("/api", usersApiRouter);
 app.use("/api", bookApiRouter);
 app.use("/api", messagesAPIRouter)
 app.use("/", indexRouter);
