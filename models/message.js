@@ -14,6 +14,13 @@ class MessageModel{
         await db.close()
     }
 
+    async getMessageChain(userID, senderID){
+        //Gets all the messages, and then returns only the ones between the sender and the current user
+        let messages = await this.getMessages(userID)
+        messages = messages.filter((message) => message.sender_id == senderID)
+        return messages
+    }
+
 }
 
 

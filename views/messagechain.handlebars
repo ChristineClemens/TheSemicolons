@@ -1,0 +1,53 @@
+<h3></h3>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+
+    }
+
+    *+* {
+        margin-top: 1em;
+    }
+
+    .sender {
+        font-size: 0.7em;
+        color: #333;
+    }
+</style>
+<div id="messageContainer">
+    {{#if messages}}
+    {{#each messages}}
+    <p>{{message}}</p>
+    <p class="sender">From: {{sender}}</p>
+    {{/each}}
+    {{else}}
+    <p>You have no messages</p>
+    {{/if}}
+    <textarea name="messageText" id="messageText" cols="30" rows="10"></textarea>
+    <br>
+    <button id="send-button" data-recipient={{recipient}} data-book={{bookID}}>Send Message</button>
+
+    <script>
+        const sendButton = document.querySelector("#send-button")
+
+
+        sendButton.addEventListener("click", async function () {
+            const messageText = document.querySelector("#messageText").value
+            console.log(messageText)
+            document.querySelector("#messageText").value = ''
+            //send the message to the server, then send the user back to the browse page
+            await fetch("/api/send_message", {
+                method: "POST",
+                headers: { 'Content-Type': "application/json" },
+                body: JSON.stringify({
+                    bookID: sendButton.dataset.book,
+                    messageText: messageText
+                })
+            })
+
+            window.location.reload(false)
+
+        })
+    </script>
+</div>
