@@ -25,8 +25,10 @@ router.get("/mylibrary", secured(), async function (req, res, next) {
     if (userInDB.length === 0) {
         //add the user to the db
         console.log("New user detected")
+        UserModel.addUser({auth_id: userID});
 
         //present user with some pretty page welcoming them and enabling them to add their first book?
+        
         //or view books if that's the primary use case
         res.render("mylibrary", {
             userProfile: JSON.stringify(userProfile, null, 2),
@@ -36,6 +38,7 @@ router.get("/mylibrary", secured(), async function (req, res, next) {
 
 
     } else {
+        
         res.render("mylibrary", {
             userProfile: JSON.stringify(userProfile, null, 2),
             userName: userName,
