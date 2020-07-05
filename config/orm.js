@@ -29,7 +29,10 @@ class DB {
 
     selectSome(tableName, columnName, searchValue) {
         return new Promise((resolve, reject) => {
-            this.connection.query("SELECT * FROM ?? WHERE ?? = ?", [tableName, columnName, searchValue], function (err, rows) {
+            this.connection.query("SELECT * FROM ?? WHERE ?? = ?", [tableName, columnName, searchValue], function (
+                err,
+                rows
+            ) {
                 if (err) reject(err);
                 resolve(rows);
             });
@@ -55,10 +58,20 @@ class DB {
         });
     }
 
-    removeOne(tableName, condition){
-        return new Promise((resolve, reject)=>{
-            this.connection.query("DELETE FROM ? WHERE ?", [tableName, condition])
-        })
+    removeOne(tableName, condition) {
+        return new Promise((resolve, reject) => {
+            this.connection.query("DELETE FROM ? WHERE ?", [tableName, condition]);
+        });
+    }
+
+    leftJoinWhere(leftTable, rightTable, leftKey, rightKey, whereClauseCol, whereClauseVal) {
+        return new Promise((resolve, reject) => {
+            console.log(leftTable, rightTable, leftKey, rightKey, whereClauseCol, whereClauseVal)
+            this.connection.query("SELECT * FROM ?? LEFT JOIN ?? ON ?? = ?? WHERE ?? = ?", [leftTable, rightTable, leftKey, rightKey, whereClauseCol, whereClauseVal], function (err, rows) {
+                if (err) reject(err);
+                resolve(rows);
+            });
+        });
     }
 }
 

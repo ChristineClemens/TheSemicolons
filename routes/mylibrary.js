@@ -10,6 +10,9 @@ const BookModel = new book();
 const user = require("../models/user");
 const UserModel = new user();
 
+const message = require("../models/message");
+const MessageModel = new message();
+
 /* GET user profile page for my library. */
 router.get("/mylibrary", secured(), async function (req, res, next) {
     console.log("MyLibrary Page opened");
@@ -27,6 +30,8 @@ router.get("/mylibrary", secured(), async function (req, res, next) {
         console.log("New user detected")
         UserModel.addUser({auth_id: userID});
 
+        //check needed for location added before book entry or here
+
         //present user with some pretty page welcoming them and enabling them to add their first book?
         
         //or view books if that's the primary use case
@@ -38,6 +43,8 @@ router.get("/mylibrary", secured(), async function (req, res, next) {
 
 
     } else {
+        let messages = await MessageModel.getMessages(userID)
+        console.log("messages ", messages)
         
         res.render("mylibrary", {
             userProfile: JSON.stringify(userProfile, null, 2),
