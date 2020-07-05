@@ -28,7 +28,6 @@ class DB {
     }
 
     selectSome(tableName, columnName, searchValue) {
-        //Where condition is an object
         return new Promise((resolve, reject) => {
             this.connection.query("SELECT * FROM ?? WHERE ?? = ?", [tableName, columnName, searchValue], function (err, rows) {
                 if (err) reject(err);
