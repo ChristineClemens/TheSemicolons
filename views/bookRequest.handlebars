@@ -1,0 +1,31 @@
+<h3>Request to borrow {{bookTitle}}</h3>
+<p>This is the page we'll end up at after a user clicks a request button on a book they like.</p>
+<img src="{{bookCover}}" alt="{{bookTitle}}">
+<p>The person who has {{bookTitle}} has selected {{meetupLocation}} as their meetup spot. Send them a message requesting
+    a meetup time.</p>
+<textarea name="messageTest" id="messageText" cols="30" rows="10"></textarea>
+<button id="send-button" data-recipient={{recipient}} data-book={{bookID}}>Send Request</button>
+
+<script>
+    const sendButton = document.querySelector("#send-button")
+
+
+    sendButton.addEventListener("click", async function () {
+        const messageText = document.querySelector("#messageText").value
+        console.log(messageText)
+        console.log("wtf bro why aren't you sending this")
+        document.querySelector("#messageText").value = ''
+        //send the message to the server, then send the user back to the browse page
+        await fetch("/api/send_request", {
+            method: "POST",
+            headers: { 'Content-Type': "application/json" },
+            body: JSON.stringify({
+                bookID: sendButton.dataset.book,
+                messageText: messageText
+            })
+        })
+
+        window.location.href = "/browse"
+
+    })
+</script>
