@@ -27,7 +27,7 @@ router.get("/mylibrary", secured(), async function (req, res, next) {
 
     //everytime new login, catch user id, check if user id in db
     let userInDB = await UserModel.getUserByID(userID);
-    console.log('name', userInDB.name)
+    console.log('name', userInDB[0].name)
     if (userInDB.length === 0 || !userInDB[0].name) {
         //add the user to the db
         console.log("New user detected")
@@ -49,16 +49,16 @@ router.get("/mylibrary", secured(), async function (req, res, next) {
 
 
     } else {
-        // let messages = await MessageModel.getMessages(userID)
-        // let usersBooks = await BookModel.getBooks("posession_id", userInDB[0].id)
-        // console.log("usersBooks", usersBooks)
-        // console.log("messages ", messages)
+        let messages = await MessageModel.getMessages(userID)
+        let usersBooks = await BookModel.getBooks("possession_id", userInDB[0].id)
+        console.log("usersBooks", usersBooks)
+        console.log("messages ", messages)
         
         res.render("mylibrary", {
             userProfile: JSON.stringify(userProfile, null, 2),
             userName: userName,
             title: "My Library",
-            // books: usersBooks
+            books: usersBooks
         });
     }
 
