@@ -69,17 +69,16 @@ const mylibrary = require("./routes/mylibrary");
 const browseRouter = require("./routes/browse")
 const bookRequest = require("./routes/bookRequest")
 const messages = require("./routes/messages")
+
+//TEMP
+const TEMPuserpage = require("./routes/TEMPnewuser")
 //initializing the routes we've created
 app.use(userInViews());
 app.use("/", authRouter);
-// app.use("/api", usersApiRouter);
-app.use("/api", bookApiRouter);
-app.use("/api", messagesAPIRouter)
-app.use("/", indexRouter);
-app.use("/", mylibrary);
-app.use("/", browseRouter)
-app.use("/", bookRequest)
-app.use("/", messages)
+// app.use("/api", usersApiRouter); 
+app.use("/api", bookApiRouter, messagesAPIRouter);
+app.use("/", indexRouter, mylibrary, browseRouter, bookRequest, messages, TEMPuserpage);
+
 app.listen(PORT, function () {
     console.log("App listening on PORT " + PORT);
 });
