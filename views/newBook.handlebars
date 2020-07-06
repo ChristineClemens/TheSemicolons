@@ -1,0 +1,32 @@
+<label for="title">Book Title</label>
+<input type="text" id="title" name="title">
+<label for="author">Book Author</label>
+<input type="text" id="author" name="author">
+<button id="submitButton">Submit New Book</button>
+
+<script>
+
+
+    document.querySelector("#submitButton").addEventListener("click", function () {
+        titleInp = document.querySelector("#title")
+        authorInp = document.querySelector("#author")
+        const title = titleInp.value
+        console.log('title', title)
+        titleInp.value = ''
+        const author = authorInp.value
+        authorInp.value = ''
+        fetch("/api/books", {
+            method: "POST",
+            headers: { 'Content-Type': "application/json" },
+            body: JSON.stringify({
+                book: {
+                    title: title,
+                    author: author
+                }
+            })
+        })
+    })
+
+
+
+</script>
