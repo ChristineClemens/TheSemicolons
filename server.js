@@ -76,8 +76,8 @@ const TEMPuserpage = require("./routes/TEMPnewuser")
 //initializing the routes we've created
 app.use(userInViews());
 app.use("/", authRouter);
-// app.use("/api", usersApiRouter); 
-app.use("/api", bookApiRouter, messagesAPIRouter);
+
+app.use("/api", bookApiRouter, messagesAPIRouter, usersApiRouter);
 app.use("/", indexRouter, mylibrary, browseRouter, bookRequest, messages, TEMPuserpage);
 
 app.listen(PORT, function () {
