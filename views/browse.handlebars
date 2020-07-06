@@ -1,0 +1,22 @@
+<style>
+    #book-container {
+        display: grid;
+        align-items: center;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+    .book {
+        background-color: gray;
+    }
+</style>
+<h2>Browse</h2>
+<p>Browse and search page</p>
+<div id="book-container">
+    {{#each books}}
+        <div class="book">
+            <h6>{{title}}</h6>
+            <img src="{{book_cover}}" alt="{{title}}">
+
+            <a href="/request_book/{{id}}">Request Book</a>
+        </div>
+    {{/each}}
+</div>
