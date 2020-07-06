@@ -92,7 +92,7 @@ async function addBook() {
 
             //Inserted new book information into the books table.
             var sql = `INSERT INTO books (title, author, genre, description, page_count, book_cover) 
-    VALUES (${bookInfo.title}, ${bookInfo.author}, ${bookInfo.genre}, ${bookInfo.description}, 
-    ${bookInfo.page_count}, ${bookInfo.book_cover})`;
+            VALUES (${bookInfo.title}, ${bookInfo.author}, ${bookInfo.genre}, ${bookInfo.description}, 
+            ${bookInfo.page_count}, ${bookInfo.book_cover})`;
         });
 }

@@ -59,7 +59,8 @@ const userInViews = require("./lib/middleware/userInViews");
 const authRouter = require("./routes/auth");
 
 //api calls
-// const usersApiRouter = require("./controllers/user_controller");
+
+const usersApiRouter = require("./routes/user_api");
 const bookApiRouter = require("./routes/book_api");
 const messagesAPIRouter = require("./routes/messages_api")
 
