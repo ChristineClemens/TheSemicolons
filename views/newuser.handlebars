@@ -15,13 +15,13 @@
     //Use user input in the nameInput field as the value to be inserted into the database.
 
 document.querySelector("#saveBtn").addEventListener("click", function () {
-    submitName();
+    {{!-- submitName(); --}}
     submitLocation();
-}
+});
 
 async function submitName() {
     const nameInput = document.querySelector("#nameInput").value;
-    await fetch ("/api/users"), {
+    await fetch ("/api/user", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify ({
