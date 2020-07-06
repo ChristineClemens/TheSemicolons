@@ -1,26 +1,29 @@
 <style>
-        #search-welcome {
-            position: absolute;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            right: 0;
-            display: flex;
-            align-items: center;
-          }
-        #searchImg-container {
-          width: 100%;
-          margin: 0;
-          height: 500px !important;
-          opacity: 0.5 !important;
-          background-image: url(assets/bgimg.jpg);
-          background-size: cover;
-          background-repeat: no-repeat;
-        }
-        .welcome {
-          align-items: center;
-        }
-    </style>
+    #search-welcome {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        display: flex;
+        align-items: center;
+        z-index: -1;
+    }
+
+    #searchImg-container {
+        width: 100%;
+        margin: 0;
+        height: 500px !important;
+        opacity: 0.5 !important;
+        background-image: url(/assets/bgimg.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    .welcome {
+        align-items: center;
+    }
+</style>
 
 <div id="header"></div>
 <div id="navBar">
@@ -65,11 +68,6 @@
             <div class="container welcome">
                 <div class="text-center">
                     <h2 class="mb-3">Search your book ...</h2>
-                    <div class="form-inline">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search for books..."
-                            aria-label="Search">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                    </div>
                 </div>
             </div>
         </div>
@@ -77,8 +75,24 @@
 </div>
 
 
-<div id="main">
+<div id="main" class="container">
+    <div class="form-inline">
+        <input id="searchField" class="form-control w-75 mr-sm-2" type="search" placeholder="Search for books..." aria-label="Search">
+        <button id="searchButton" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 
+    </div>
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="genre" value="option1">
+        <label class="form-check-label" for="inlineRadio1">Genre</label>
+    </div>
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="title" value="option2">
+        <label class="form-check-label" for="inlineRadio2">Title</label>
+    </div>
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="author" value="option3">
+        <label class="form-check-label" for="inlineRadio3">Author</label>
+    </div>
     {{#each books}}
     <div class="result-list row mt-4 ml-4">
         <div class="col-auto d-none d-lg-block">
@@ -108,3 +122,24 @@
 </div>
 
 <div id="footer"></div>
+
+<script>
+    document.querySelector("#searchButton").addEventListener("click", async function () {
+        let searchType = "title";
+        if (document.querySelector("#genre").checked){
+            searchType = "genre"
+        } else if (document.querySelector("#title").checked){
+            searchType = "title"
+        } else if (document.querySelector("#author").checked){
+            searchType = "author"
+        }
+
+        let searchText = (document.querySelector("#searchField").value).trim()
+
+        if (searchText !== ""){
+            window.location.href = `/browse/${searchType}/${searchText}`
+        }
+        
+        
+    })
+</script>

@@ -7,6 +7,13 @@ class BookModel {
         await db.close();
         return books;
     }
+    
+    async getBooksFuzzy(column, search) {
+        let db = new orm("mylibrary");
+        let books = await db.selectSomeFuzzy("books", column, search);
+        await db.close();
+        return books;
+    }
 
     async getBookFromDBID(db_id) {
         let db = new orm("mylibrary");
