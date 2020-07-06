@@ -28,26 +28,28 @@ class UserModel {
 
 
    //add credit
-    async function addCredits(userCredits){
+    async addCredits(userCredits, auth_id){
         let db = new orm ("mylibrary")
-        await db.insertOne ("users", {credits: userCredits})
+        await db.updateOne ("users", {credits: userCredits},{auth_id: auth_id})
         await db.close()
 
     }
 
     //remove credit
-    async function removeCredits(userCredits){
+    async removeCredits(userCredits, auth_id){
         let db = new orm ("mylibrary")
-        await db.updateOne ("users", {credits: userCredits})
+        await db.updateOne ("users", {credits: userCredits}, {auth_id: auth_id})
         await db.close()
 
     }
 
     //get credits
-    async function checkCredits(userCredits){
+    async checkCredits(auth_id){
         let db = new orm ("mylibrary")
-        await db.selectSome ("users", {credits: userCredits})
+        let credits = await db.selectSome ("users","auth_id",auth_id)
+        console.log(credits)
         await db.close()
+        
     }
 
 
