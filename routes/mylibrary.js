@@ -25,20 +25,23 @@ router.get("/mylibrary", secured(), async function (req, res, next) {
 
     //everytime new login, catch user id, check if user id in db
     let userInDB = await UserModel.getUserByID(userID);
-    if (userInDB.length === 0) {
+    console.log("userInDB", userInDB)
+    if (userInDB.length === 0 || !userInDB.name) {
         //add the user to the db
         console.log("New user detected")
-        UserModel.addUser({auth_id: userID});
+        if (userInDB.length == 0){
+            UserModel.addUser({auth_id: userID});
+        }
 
         //check needed for location added before book entry or here
 
         //present user with some pretty page welcoming them and enabling them to add their first book?
         
         //or view books if that's the primary use case
-        res.render("mylibrary", {
+        res.render("newuser", {
             userProfile: JSON.stringify(userProfile, null, 2),
             userName: userName,
-            title: "My Library",
+            title: "Welcome!",
         });
 
 
