@@ -13,16 +13,34 @@ const UserModel = new user();
 const message = require("../models/message");
 const MessageModel = new message();
 
-
-
-var userLocation = "";
-
+//Check database using auth_id to determine if a location exists.
+//If a location value does not exist, POST new location to database.
 router.post("/location", secured(), async function (req, res, next) {
     const { _raw, _json, ...userProfile } = req.user;
     let location = await UserModel.getLocation(userProfile.user_id);
     if (!location) {
-        addLocation();
-    } else if ()
+        UserModel.addLocation(userLocation);
+    }
+});
+
+//Check database using auth_id to determine if a location exists.
+//If a location value exists, PUT (replace) new location in database.
+router.put("/location", secured(), async function (req, res, next) {
+    const { _raw, _json, ...userProfile } = req.user;
+    let location = await UserModel.getLocation(userProfile.user_id);
+    if (location) {
+    UserModel.changeLocation(userLocation);
+    }
+});
+
+//Check database using auth_id to determine if a location exists.
+//If a location value exists, DELETE old location from database.
+router.delete("/location", secured(), async function (req, res, next) {
+    const { _raw, _json, ...userProfile } = req.user;
+    let location = await UserModel.getLocation(userProfile.user_id);
+    if (location) {
+    UserModel.removeLocation(userLocation);
+    }
 });
 
 module.exports = router;
