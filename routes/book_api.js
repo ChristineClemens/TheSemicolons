@@ -25,6 +25,10 @@ router.get("/books", async function(req, res){
     res.status(200).send(JSON.stringify(books))
 })
 
+// router.get("/booksInfo/:title/:author", async function(req, res){
+
+// })
+
 //get books based on condition
 // this doesn't work yet, figuring it out still
 router.get("/booksearch/:condition/:query", async function(req, res){
