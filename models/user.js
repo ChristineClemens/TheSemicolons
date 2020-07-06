@@ -26,6 +26,12 @@ class UserModel {
         await db.close();
     }
 
+    async updateName(name, userID){
+        let db = new orm ("mylibrary")
+        await db.updateOne ("users", {name: name},{auth_id: userID})
+        await db.close()
+    }
+
 
 
    //add credit
