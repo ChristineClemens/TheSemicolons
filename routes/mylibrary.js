@@ -49,13 +49,16 @@ router.get("/mylibrary", secured(), async function (req, res, next) {
 
 
     } else {
-        let messages = await MessageModel.getMessages(userID)
-        console.log("messages ", messages)
+        // let messages = await MessageModel.getMessages(userID)
+        // let usersBooks = await BookModel.getBooks("posession_id", userInDB[0].id)
+        // console.log("usersBooks", usersBooks)
+        // console.log("messages ", messages)
         
         res.render("mylibrary", {
             userProfile: JSON.stringify(userProfile, null, 2),
             userName: userName,
             title: "My Library",
+            // books: usersBooks
         });
     }
 
