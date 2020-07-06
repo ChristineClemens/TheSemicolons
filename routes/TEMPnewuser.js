@@ -12,3 +12,9 @@ router.get("/newuser", secured(), async function (req, res, next) {
 });
 
 module.exports = router;
+
+
+
+
+
+
