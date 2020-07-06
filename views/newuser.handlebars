@@ -1,13 +1,37 @@
 <h2>Welcome to PageExchange!</h2>
 <p>Enter some details about yourself</p>
 <label for="name">Your Name</label>
-<input type="text" id="name" name="name">
+<input type="text" id="nameInput" name="name">
 <label for="location">Your preferred location to meet up:</label>
-<input type="text" id="location" name="location">
+<input type="text" id="locationInput" name="location">
 <br>    
-<button id="saveButt">Save</button>
-
+<button id="saveBtn">Save</button>
+<div id="displayName"></div>
+<div id="displayLocation"></div>
 <script>
-    //on confirmation, send the information to the api/users route and add the user, then reload the page.  The server
-    //will check on page reload for the presence of the required data and serve the mylibrary page
+    //On confirmation, send the information to the api/users route and add the user, then reload the page.  
+    //The server will check on page reload for the presence of the required data and serve the mylibrary page
+    //Use user input in the nameInput field as the value to be inserted into the database.
+
+async function submitName() {
+    const nameInput = document.querySelector("#nameInput").value;
+    await fetch ("/api/users"), {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify ({
+            userName:nameInput
+        })
+    })
+}
+
+async function submitLocation() {
+    const locationInput = document.querySelector("#locationInput").value;
+    await fetch("/api/location", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            userLocation: locationInput
+        })
+    })
+}
 </script>

@@ -1,4 +1,5 @@
 const orm = require("../config/orm");
+const DB = require("../config/orm");
 
 class UserModel {
     async getUserByID(userID) {
@@ -41,7 +42,6 @@ class UserModel {
         await db.close();
         return users[0].location;
     }
-
     //add location for pickup
     async addLocation(userLocation) {
         let db = new orm ("mylibrary");
@@ -49,15 +49,15 @@ class UserModel {
         await db.close();
     }
     // change location for pickup
-    async changeLocation(userLocation) {
+    async changeLocation(userLocation, auth_id) {
         let db = new orm ("mylibrary");
-        await db.updateOne("users", {location: userLocation});
+        await db.updateOne("users", {location: userLocation}, {auth_id: auth_id});
         await db.close();
     }
     //remove location for pickup
-    async removeLocation(userLocation) {
+    async removeLocation(userLocation, auth_id) {
         let db = new orm ("mylibrary");
-        await db.removeOne("users", {location: userLocation});
+        await db.removeOne("users", {location: userLocation}, {auth_id: auth_id});
         await db.close();
     }
 };

@@ -19,7 +19,8 @@ router.post("/location", secured(), async function (req, res, next) {
     const { _raw, _json, ...userProfile } = req.user;
     let location = await UserModel.getLocation(userProfile.user_id);
     if (!location) {
-        UserModel.addLocation(userLocation);
+        UserModel.addLocation(req.body.userLocation);
+        res.status(200);
     }
 });
 
@@ -29,7 +30,8 @@ router.put("/location", secured(), async function (req, res, next) {
     const { _raw, _json, ...userProfile } = req.user;
     let location = await UserModel.getLocation(userProfile.user_id);
     if (location) {
-    UserModel.changeLocation(userLocation);
+    UserModel.changeLocation(req.body.userLocation, userProfile.user_id);
+    res.status(200);
     }
 });
 
@@ -39,7 +41,8 @@ router.delete("/location", secured(), async function (req, res, next) {
     const { _raw, _json, ...userProfile } = req.user;
     let location = await UserModel.getLocation(userProfile.user_id);
     if (location) {
-    UserModel.removeLocation(userLocation);
+    UserModel.removeLocation(req.body.userLocation, userProfile.user_id);
+    res.status(200);
     }
 });
 
