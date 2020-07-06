@@ -28,7 +28,7 @@ class UserModel {
 
 
    //add credit
-    async function addCredits(userCredits){
+    async addCredits(userCredits){
         let db = new orm ("mylibrary")
         await db.insertOne ("users", {credits: userCredits})
         await db.close()
@@ -36,7 +36,7 @@ class UserModel {
     }
 
     //remove credit
-    async function removeCredits(userCredits){
+    async removeCredits(userCredits){
         let db = new orm ("mylibrary")
         await db.updateOne ("users", {credits: userCredits})
         await db.close()
@@ -44,7 +44,7 @@ class UserModel {
     }
 
     //get credits
-    async function checkCredits(userCredits){
+    async checkCredits(userCredits){
         let db = new orm ("mylibrary")
         await db.selectSome ("users", {credits: userCredits})
         await db.close()
