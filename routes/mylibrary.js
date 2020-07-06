@@ -22,7 +22,7 @@ router.get("/mylibrary", secured(), async function (req, res, next) {
     //we want to check if this is a new user, if it is we add the user to the db and present a different page to them to welcome them
     //and add books.  We could even create a new page and redirect them to a different page entirely
     let userID = userProfile.user_id;
-    UserModel.checkCredits(userID)
+    let usercheckCredits = await UserModel.checkCredits(userID)
     
 
     //everytime new login, catch user id, check if user id in db
@@ -44,6 +44,7 @@ router.get("/mylibrary", secured(), async function (req, res, next) {
             userProfile: JSON.stringify(userProfile, null, 2),
             userName: userName,
             title: "Welcome!",
+            credits: usercheckCredits
         });
 
 
