@@ -125,7 +125,7 @@
 
 <script>
     document.querySelector("#searchButton").addEventListener("click", async function () {
-        let searchType;
+        let searchType = "title";
         if (document.querySelector("#genre").checked){
             searchType = "genre"
         } else if (document.querySelector("#title").checked){
