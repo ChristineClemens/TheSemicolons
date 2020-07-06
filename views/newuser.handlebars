@@ -9,31 +9,37 @@
 {{credits}}
 <div id="displayName"></div>
 <div id="displayLocation"></div>
-
 <script>
     //On confirmation, send the information to the api/users route and add the user, then reload the page.  
     //The server will check on page reload for the presence of the required data and serve the mylibrary page
     //Use user input in the nameInput field as the value to be inserted into the database.
 
+document.querySelector("#saveBtn").addEventListener("click", function () {
+    submitName();
+    submitLocation();
+});
+
 async function submitName() {
     const nameInput = document.querySelector("#nameInput").value;
-    await fetch ("/api/users"), {
-        method: "POST",
+    await fetch ("/api/user", {
+        method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify ({
-            userName:nameInput
+            name:nameInput
         })
     })
+    console.log(nameInput);
 }
 
 async function submitLocation() {
     const locationInput = document.querySelector("#locationInput").value;
     await fetch("/api/location", {
-        method: "POST",
+        method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
             userLocation: locationInput
         })
     })
+    console.log(locationInput);
 }
 </script>
