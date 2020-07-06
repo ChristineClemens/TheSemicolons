@@ -27,11 +27,31 @@ class UserModel {
 
 
 
-    //add credit
+   //add credit
+    async addCredits(userCredits, auth_id){
+        let db = new orm ("mylibrary")
+        await db.updateOne ("users", {credits: userCredits},{auth_id: auth_id})
+        await db.close()
+
+    }
 
     //remove credit
+    async removeCredits(userCredits, auth_id){
+        let db = new orm ("mylibrary")
+        await db.updateOne ("users", {credits: userCredits}, {auth_id: auth_id})
+        await db.close()
+
+    }
 
     //get credits
+    async checkCredits(auth_id){
+        let db = new orm ("mylibrary")
+        let credits = await db.selectSome ("users","auth_id",auth_id)
+        console.log(credits)
+        await db.close()
+        return credits[0].credits
+    }
+
 
     //retrieve location for pickup from database
     async getLocation(auth_id) {
