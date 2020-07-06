@@ -36,7 +36,7 @@ router.get("/credits", secured(), async function (req, res){
 
 })
 
-router.put("/user", secured(), function(req, res){
+router.put("/user", secured(), async function(req, res){
     const { _raw, _json, ...userProfile } = req.user;
     await UserModel.updateName(req.body.name, userProfile.user_id)
     
@@ -61,10 +61,8 @@ router.post("/location", secured(), async function (req, res, next) {
 router.put("/location", secured(), async function (req, res, next) {
     const { _raw, _json, ...userProfile } = req.user;
     let location = await UserModel.getLocation(userProfile.user_id);
-    if (location) {
     UserModel.changeLocation(req.body.userLocation, userProfile.user_id);
-    res.status(200);
-    }
+    res.status(200).send("YAY!");
 });
 
 //Check database using auth_id to determine if a location exists.

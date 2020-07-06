@@ -15,17 +15,17 @@
     //Use user input in the nameInput field as the value to be inserted into the database.
 
 document.querySelector("#saveBtn").addEventListener("click", function () {
-    {{!-- submitName(); --}}
+    submitName();
     submitLocation();
 });
 
 async function submitName() {
     const nameInput = document.querySelector("#nameInput").value;
     await fetch ("/api/user", {
-        method: "POST",
+        method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify ({
-            userName:nameInput
+            name:nameInput
         })
     })
     console.log(nameInput);
@@ -34,7 +34,7 @@ async function submitName() {
 async function submitLocation() {
     const locationInput = document.querySelector("#locationInput").value;
     await fetch("/api/location", {
-        method: "POST",
+        method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
             userLocation: locationInput
