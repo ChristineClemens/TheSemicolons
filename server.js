@@ -59,6 +59,7 @@ const userInViews = require("./lib/middleware/userInViews");
 const authRouter = require("./routes/auth");
 
 //api calls
+
 const usersApiRouter = require("./routes/user_api");
 const bookApiRouter = require("./routes/book_api");
 const messagesAPIRouter = require("./routes/messages_api")
@@ -68,16 +69,17 @@ const indexRouter = require("./routes/index");
 const mylibrary = require("./routes/mylibrary");
 const browseRouter = require("./routes/browse")
 const bookRequest = require("./routes/bookRequest")
+const messages = require("./routes/messages")
+
+//TEMP
+const TEMPuserpage = require("./routes/TEMPnewuser")
 //initializing the routes we've created
 app.use(userInViews());
 app.use("/", authRouter);
-app.use("/", indexRouter);
-app.use("/api", usersApiRouter);
-app.use("/api", bookApiRouter);
-app.use("/api", messagesAPIRouter)
-app.use("/", mylibrary);
-app.use("/", browseRouter)
-app.use("/", bookRequest)
+// app.use("/api", usersApiRouter); 
+app.use("/api", bookApiRouter, messagesAPIRouter);
+app.use("/", indexRouter, mylibrary, browseRouter, bookRequest, messages, TEMPuserpage);
+
 app.listen(PORT, function () {
     console.log("App listening on PORT " + PORT);
 });
