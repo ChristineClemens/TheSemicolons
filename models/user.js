@@ -49,7 +49,7 @@ class UserModel {
         let credits = await db.selectSome ("users","auth_id",auth_id)
         console.log(credits)
         await db.close()
-        
+        return credits[0].credits
     }
 
 
