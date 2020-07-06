@@ -79,6 +79,7 @@ app.use("/", authRouter);
 
 app.use("/api", bookApiRouter, messagesAPIRouter, usersApiRouter);
 app.use("/", indexRouter, mylibrary, browseRouter, bookRequest, messages, TEMPuserpage, newBook);
+app.use(express.static('public'));
 
 app.listen(PORT, function () {
     console.log("App listening on PORT " + PORT);
