@@ -13,6 +13,11 @@
     //The server will check on page reload for the presence of the required data and serve the mylibrary page
     //Use user input in the nameInput field as the value to be inserted into the database.
 
+document.querySelector("#saveBtn").addEventListener("click", function () {
+    submitName();
+    submitLocation();
+}
+
 async function submitName() {
     const nameInput = document.querySelector("#nameInput").value;
     await fetch ("/api/users"), {
@@ -22,6 +27,7 @@ async function submitName() {
             userName:nameInput
         })
     })
+    console.log(nameInput);
 }
 
 async function submitLocation() {
@@ -33,5 +39,6 @@ async function submitLocation() {
             userLocation: locationInput
         })
     })
+    console.log(locationInput);
 }
 </script>

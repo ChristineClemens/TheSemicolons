@@ -70,7 +70,7 @@ const mylibrary = require("./routes/mylibrary");
 const browseRouter = require("./routes/browse")
 const bookRequest = require("./routes/bookRequest")
 const messages = require("./routes/messages")
-
+const newBook = require("./routes/newBook")
 //TEMP
 const TEMPuserpage = require("./routes/TEMPnewuser")
 //initializing the routes we've created
@@ -78,7 +78,7 @@ app.use(userInViews());
 app.use("/", authRouter);
 
 app.use("/api", bookApiRouter, messagesAPIRouter, usersApiRouter);
-app.use("/", indexRouter, mylibrary, browseRouter, bookRequest, messages, TEMPuserpage);
+app.use("/", indexRouter, mylibrary, browseRouter, bookRequest, messages, TEMPuserpage, newBook);
 
 app.listen(PORT, function () {
     console.log("App listening on PORT " + PORT);
