@@ -1,7 +1,161 @@
 <h1>Welcome to your library, {{userName}}</h1>
-<p>{{userProfile}}</p>
 
 <a href="./browse">Browse</a>
 
 
 <a href="./logout">Log me out</a>
+<style>
+    .coverPg {
+        position: relative;
+    }
+
+    #landing-welcome {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        display: flex;
+        align-items: center;
+    }
+
+    #img-container {
+        width: 100%;
+        margin: 0;
+        height: 500px !important;
+        opacity: 0.5 !important;
+        background-image: url(assets/bgimg.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    .welcome {
+        align-items: center;
+    }
+
+    #UseStory {
+        margin-left: 6px;
+        margin-right: 6px;
+    }
+
+    #tech-img {
+        width: 100%;
+        margin: 0;
+        height: 300px !important;
+        opacity: 0.7 !important;
+        background-image: url(assets/tech-bg.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+</style>
+
+<div id="header"></div>
+<!-- navigation bar -->
+<div id="navBar">
+    {{!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <h1 class="navbar-brand" href="#">PageExchange</h1>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+            <ul class="navbar-nav text-right">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Browse</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Dropdown
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+                <li>
+                    <form class="form-inline">
+                        <button class="btn btn-outline-success my-2 my-sm-0 mr-sm-2" type="">Sign Out</button>
+                    </form>
+                </li>
+            </ul>
+
+        </div>
+    </nav> --}}
+</div>
+<!-- welcome image -->
+<div id="main flex-md-row">
+    <div class="col-3">
+        <div class="userInfo">
+            <div class="card">
+                <div class="card-Img">
+                    <img src="assets/">
+                </div>
+                <div class="card-Content">
+                    <h6 class="name">Name</h6>
+                    <h6 class="credit">Credit</h6>
+                    <div class="button">
+                        links
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-8">
+        <div class="resultBox">
+            <div class="row no-gutters rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <div class="resultBoxContent col">
+                    <h3 class="mb-0" id="bookTitle">Book title</h3>
+                    <strong class="d-inline-block mb-2 textInfo" id="Genre">Novel</strong>
+                    <div class="mb-1 textMutedChange" id="date">1999</div>
+                    <p class="mb-auto" id="bookDescription">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+                        Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis
+                        parturient montes, nascetur ridiculus mus.
+                    </p>
+                    <a href="" class="stretched-link">Edit</a>
+                    <a href="" class="stretched-link">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-8">
+        <div class="resultBox">
+            <div class="row no-gutters rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <div class="resultBoxContent col">
+                    <h3 class="mb-0" id="bookTitle">Book title</h3>
+                    <strong class="d-inline-block mb-2 textInfo" id="Genre">Novel</strong>
+                    <div class="mb-1 textMutedChange" id="date">1999</div>
+                    <p class="mb-auto" id="bookDescription">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+                        Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis
+                        parturient montes, nascetur ridiculus mus.
+                    </p>
+                    <a href="" class="stretched-link">Edit</a>
+                    <a href="" class="stretched-link">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-8">
+        <div class="resultBox">
+            <div class="row no-gutters rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <div class="resultBoxContent col">
+                    <h3 class="mb-0" id="bookTitle">Book title</h3>
+                    <strong class="d-inline-block mb-2 textInfo" id="Genre">Novel</strong>
+                    <div class="mb-1 textMutedChange" id="date">1999</div>
+                    <p class="mb-auto" id="bookDescription">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+                        Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis
+                        parturient montes, nascetur ridiculus mus.
+                    </p>
+                    <a href="" class="stretched-link">Edit</a>
+                    <a href="" class="stretched-link">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="footer">
+
+</div>

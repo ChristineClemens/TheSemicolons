@@ -1,2 +1,188 @@
-<h2>This is the page before you've logged in</h2>
-<a href="./login">login</a>
+<style>
+
+        .coverPg {
+          position: relative;
+        }
+        #landing-welcome {
+          position: absolute;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          right: 0;
+          display: flex;
+          align-items: center;
+        }
+        #img-container {
+          width: 100%;
+          margin: 0;
+          height: 500px !important;
+          opacity: 0.5 !important;
+          background-image: url(assets/bgimg.jpg);
+          background-size: cover;
+          background-repeat: no-repeat;
+        }
+        .welcome {
+          align-items: center;
+        }
+        #UseStory{
+          margin-left: 6px;
+          margin-right: 6px;
+        }
+        #tech-img{
+          width: 100%;
+          margin: 0;
+          height: 300px !important;
+          opacity: 0.7 !important;
+          background-image: url(assets/tech-bg.jpg);
+          background-size: cover;
+          background-repeat: no-repeat;
+        }
+    </style>
+
+<div id="header"></div>
+    <!-- navigation bar -->
+    <div id="navBar">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <h1 class="navbar-brand" href="#">PageExchange</h1>
+            <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">About Us</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Dropdown
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                  </div>
+                </li>
+              </ul>
+             
+             
+            </div>
+            <form class="form-inline">
+              <!-- <button class="btn btn-outline-success my-2 my-sm-0 mr-sm-2" type="">Register</button> -->
+              <a class="btn btn-outline-secondary my-2 my-sm-0 mr-sm-2" id= "sign-in-button" href="/login" type="">Sign In</a>
+
+             </form>
+          </nav>
+    </div>
+    <!-- welcome image -->
+    <div id="main">
+            <!-- <img src="assets/bgimg.jpg" class="img-fluid" alt="background"> -->
+          <div class="coverPg">
+            <div id="img-container" class="landing-img"></div>
+            <div id="landing-welcome">
+              <div class="container welcome">
+                <div class="text-center">
+                  <h2 class="mb-3">Welcome our Website ...</h2>
+                  <button id="welcome-btn" class="btn btn btn-secondary btn-lg" type="">Sign Up Now</button>
+                </div>
+              </div>
+            </div>
+          
+          </div>  
+    </div>
+    <!-- User story (about Us) -->
+    <div id="UseStory" class="container-fluid">
+        <h2>Why PageExchange?</h2>
+        <p> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui.
+
+        </p>  
+    </div>
+    <!-- technologies -->
+    <div id="mainTech">
+      <div class="coverPg">
+        <div id="tech-img"></div>
+        <div id="landing-welcome">
+          <div class="container welcome">
+            <div class="text-center">
+              <h2 class="mb-3">Tech logos </h2>
+            </div>
+          </div>
+        </div>
+      </div>  
+    </div>
+    <!-- Developers -->
+    <div class="developers">
+      <div class="row container-fluid">
+        <div class="devInfo col-sm-3"><div class="card">
+          <div class="card-Img">
+            <img src="assets/">
+          </div>
+          <div class="card-Content">
+            <h6 class="name">Name</h6>
+            <ul>
+              <li>role1</li>
+              <li>role2</li>
+            </ul>
+            <div class="button">
+              links
+            </div>
+          </div>
+        </div>
+      </div>
+        <div class="devInfo col-sm-3"><div class="card">
+          <div class="card-Img">
+            <img src="assets/">
+          </div>
+          <div class="card-Content">
+            <h6 class="name">Name</h6>
+            <ul>
+              <li>role1</li>
+              <li>role2</li>
+            </ul>
+            <div class="button">
+              links
+            </div>
+          </div>
+        </div>
+      </div>
+        <div class="devInfo col-sm-3"><div class="card">
+          <div class="card-Img">
+            <img src="assets/">
+          </div>
+          <div class="card-Content">
+            <h6 class="name">Name</h6>
+            <ul>
+              <li>role1</li>
+              <li>role2</li>
+            </ul>
+            <div class="button">
+              links
+            </div>
+          </div>
+        </div>
+      </div>
+        <div class="devInfo col-sm-3"><div class="card">
+          <div class="card-Img">
+            <img src="assets/">
+          </div>
+          <div class="card-Content">
+            <h6 class="name">Name</h6>
+            <ul>
+              <li>role1</li>
+              <li>role2</li>
+            </ul>
+            <div class="button">
+              links
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+    <div id="footer">
+
+    </div>
