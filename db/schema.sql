@@ -36,3 +36,6 @@ FOREIGN KEY (sender_id) REFERENCES users(id),
 FOREIGN KEY (recipient_id) REFERENCES users(id),
 FOREIGN KEY (book_requested_id) REFERENCES books(id)
 );
+
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'dbgusco89';
+flush privileges;

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Indie+Flower|Overpass+Mono" rel="stylesheet">
+
+    <title>Document</title>
+    <style>
+        #wrapper {
+        width: 500px;
+        height: 50%;
+        overflow: hidden;
+        border: 0px solid #000;
+        margin: 50px auto;
+        padding: 10px;
+        }
+
+        .main-content {
+        width: 250px;
+        height: 40%;
+        margin: 10px auto;
+        background-color: #0fb9b1;
+        border: 2px solid #e6e6e6;
+        padding: 50px 80px;
+        }
+
+        .header {
+        border: 0px solid #000;
+        margin-bottom: 5px;
+        }
+
+        .header img {
+        width: 175px;
+        margin: auto;
+        position: relative;
+        left: 40px;
+        }
+
+        #nameInput{
+        width: 100%;
+        margin-bottom: 10px;
+        padding: 8px 12px;
+        border: 1px solid #dbdbdb;
+        box-sizing: border-box;
+        border-radius: 3px;
+        }
+
+        #locationInput {
+        width: 100%;
+        height: 48px;
+        margin-bottom: 10px;
+        padding: 8px 12px;
+        border: 1px solid #dbdbdb;
+        box-sizing: border-box;
+        border-radius: 3px;
+        }
+
+        .overlap-text {
+        position: relative;
+        }
+
+        .overlap-text a {
+        position: absolute;
+        top: 8px;
+        right: 10px;
+        color: #003569;
+        font-size: 14px;
+        text-decoration: none;
+        letter-spacing: -1px;
+        }
+
+        .btn {
+        width: 100%;
+        margin-top: 15px;
+        background-color: #3897f0;
+        border: 1px solid #3897f0;
+        padding: 5px 12px;
+        color: #fff;
+        font-weight: bold;
+        cursor: pointer;
+        border-radius: 3px;
+        }
+
+        .sub-content {
+        width: 250px;
+        height: 40%;
+        margin: 10px auto;
+        border: 1px solid #e6e6e6;
+        padding: 20px 80px;
+        background-color: #0fb9b1;
+        }
+
+        .s-part {
+        text-align: center;
+        font-size: 10px;
+        }
+
+        input:focus {
+            background-color: yellow;
+        }
+        /* tooltip  */
+        .tooltip {
+        position: relative;
+        display: inline-block;
+        border-bottom: 1px dotted black;
+        }
+
+        .tooltip .tooltiptext {
+        visibility: hidden;
+        width: 260px;
+        background-color: black;
+        color: #0fb9b1;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px 0;
+        bottom: 100%;
+        left: 50%;
+        margin-left: -60px;
+
+        /* Position the tooltip */
+        position: absolute;
+        z-index: 5;
+        }
+
+        .tooltip:hover .tooltiptext {
+        visibility: visible;
+        }
+    </style>
+</head>
+<body>
+    
+<div id="wrapper">
+  <div class="main-content">
+    <div class="header">
+      <img src="assets/logo.png"/>
+    </div>
+    <div class="l-part">
+      <input type="text" placeholder="Your Name" id="nameInput" name="name"/>
+      <div class="overlap-text">
+        <input type="text" placeholder="Preferred Location" id="locationInput" name="location"/>
+        <div class="tooltip">Preferred Location?
+            <span class="tooltiptext">Enter your preferred location to meet up (ex. Yonge and Eglinton)</span>
+        </div>
+      </div>
+      <input type="button" value="Save It" class="btn" />
+    </div>
+  </div>
+  <div class="sub-content">
+    <div class="s-part">
+      Yes, We need your details for future services</br>
+      © 2020 Copyright TheSemicolons
+    </div>
+  </div>
+</div>
+
+
+</body>
+</html>
