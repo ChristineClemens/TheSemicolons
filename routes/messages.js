@@ -73,3 +73,7 @@ router.get("/messagechain/:sender_id", secured(), async function (req, res) {
 });
 
 module.exports = router;
+
+
+//Retrieve all existing messages in the database between the two users and return these messages.
+//Render message chain.

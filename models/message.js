@@ -1,28 +1,74 @@
 const orm = require("../config/orm");
 
 class MessageModel{
-    async getMessages(userID){
+    // async getMessages(userID){
+    //     let db = new orm("mylibrary");
+    //     let messages = await db.leftJoinWhere('messages', 'users', 'messages.recipient_id', 'users.id', 'users.auth_id', userID)
+    //     await db.close()
+    //     return messages
+    // }
+
+    // async addMessage(senderID, recipientID, message, bookID){
+    //     let db = new orm("mylibrary");
+    //     await db.insertOne("messages", {sender_id: senderID, recipient_id: recipientID, message_text: message, book_requested_id: bookID})
+    //     await db.close()
+    // }
+
+    // async getMessageChain(userID, senderID){
+    //     //Gets all the messages, and then returns only the ones between the sender and the current user
+    //     let messages = await this.getMessages(userID)
+    //     messages = messages.filter((message) => message.sender_id == senderID)
+    //     return messages
+    // }
+
+
+
+
+    //models/message.js
+
+    //getSentMessages affiliated with your user id (selectSome).
+
+
+    async getSentMessages(senderID) {
         let db = new orm("mylibrary");
-        let messages = await db.leftJoinWhere('messages', 'users', 'messages.recipient_id', 'users.id', 'users.auth_id', userID)
-        await db.close()
-        return messages
+        let sentMessages = await db.selectSome("messages", "sender_id", senderID);
+        await db.close();
+        return sentMessages;
     }
 
-    async addMessage(senderID, recipientID, message, bookID){
+    //getReceivedMessages affiliated with each sender id (selectSome).
+    async getReceivedMessages(userID) {
         let db = new orm("mylibrary");
-        await db.insertOne("messages", {sender_id: senderID, recipient_id: recipientID, message_text: message, book_requested_id: bookID})
-        await db.close()
+        let receivedMessages = await db.selectSome("messages", "recipient_id", userID);
+        await db.close();
+        return receivedMessages;
     }
 
-    async getMessageChain(userID, senderID){
-        //Gets all the messages, and then returns only the ones between the sender and the current user
-        let messages = await this.getMessages(userID)
-        messages = messages.filter((message) => message.sender_id == senderID)
-        return messages
+    //getSharedMessages that filters messages that share a sender and recipient id (res.filter...?).
+    async getSharedMessages(userID, senderID) {   
+        let db = new orm("mylibrary");
+        let sharedMessages = await db.innerJoinSorted("users", "messages", "users.id", "messages.recipient_id", "date_added");
+        sharedMessages = sharedMessages.filter(function (message) {
+            return ((message.sender_id == senderID && message.recipient_id == userID) || (message.recipient_id == senderID && message.sender_id == userID));
+        })
+        await db.close();
     }
-}
+    //getSharedBookMessages that filters messages that share a book id.
+    async getSharedBookMessages(userID, senderID, bookID) {
+        let db = new orm("mylibrary");
+        let sharedBookMessages = await db.innerJoinSorted("users", "messages", "users.id", "messages.recipient_id", "date_added");
+        sharedBookMessages = sharedBookMessages.filter(function (bookMessage) {
+            return (((bookMessage.sender_id == senderID && bookMessage.recipient_id == userID) || (bookMessage.recipient_id == senderID && bookMessage.sender_id == userID)) && (bookMessage.book_requested_id == bookID));
+        })
+        console.log(sharedBookMessages);
+        await db.close();
+        return sharedBookMessages;
+    }
 
+    //
 
+    //addMessage that inserts message into the database with a date/timestamp (insertOne).
+};
 
 
 module.exports = MessageModel
