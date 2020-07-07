@@ -18,7 +18,11 @@
         const title = titleInp.value
 
         fetch(`/api/books/GBooks/${title}`).then(function(result){
-            console.log(result)
+            
+            result.json();
+            .then(function(data){
+                console.log("I want this to return something: ",data);
+            }
         }
         )
         //console.log("searchGBooks -> response", response)
