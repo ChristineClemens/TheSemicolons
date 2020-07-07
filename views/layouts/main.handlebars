@@ -39,44 +39,45 @@
             </div>
         </div>
     </div>
-    <div id="navBar">
-        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #0fb9b1;">
-            <a class="navbar-brand mb-0" href="#" style="font-family: 'Caveat', cursive; font-size: x-large;">
-              <img src="assets/logo/logo_small.png" width="35" height="35" class="d-inline-block align-top" alt="logo">
-              PageExchange</a>
-            <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
+    <nav class="navbar navbar-expand-sm navbar-light" style="background-color: #0fb9b1;">
+        <a class="navbar-brand mb-0" href="#" style="font-family: 'Caveat', cursive; font-size: x-large;">
+            <img src="assets/logo/logo_small.png" width="35" height="35" class="d-inline-block align-top" alt="logo">
+            PageExchange</a>
+        <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-                <ul class="navbar-nav text-right">
-                    {{#unless notLoggedIn}}
-                    <li class="nav-item">
-                        <a class="nav-link" href="/mylibrary">My Library</a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="/browse">Browse</a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="/messages">Inbox</a>
-                    </li>
-                    <li>
-                        <form class="form-inline">
-                            <a href="/logout" class="btn btn-outline-success my-2 my-sm-0 mr-sm-2" type="">Sign Out</a>
-                        </form>
-                    </li>
-                    {{/unless}}
-                    {{#if notLoggedIn}}
-                    <li>
-                        <form class="form-inline">
-                            <a href="/login" class="btn btn-outline-success my-2 my-sm-0 mr-sm-2" type="">Sign In</a>
-                        </form>
-                    </li>
-                    {{/if}}
+        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+            <ul class="navbar-nav text-right">
+                {{#unless notLoggedIn}}
+                <li class="nav-item">
+                    <a class="nav-link" href="/mylibrary">My Library</a>
+                </li>
+                <li>
+                    <a class="nav-link" href="/browse">Browse</a>
+                </li>
+                <li>
+                    <a class="nav-link" href="/messages">Inbox</a>
+                </li>
+                <li>
+                    <form class="form-inline">
+                        <a href="/logout" class="btn btn-outline-success my-2 my-sm-0 mr-sm-2" type="">Sign Out</a>
+                    </form>
+                </li>
+                {{/unless}}
+                {{#if notLoggedIn}}
+                <li>
+                    <form class="form-inline">
+                        <a href="/login" class="btn btn-outline-success my-2 my-sm-0 mr-sm-2" type="">Sign In</a>
+                    </form>
+                </li>
+                {{/if}}
 
 
 
-                    {{!-- <li class="nav-item dropdown">
+                {{!-- <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Dropdown
@@ -89,16 +90,15 @@
                         </div>
                     </li> --}}
 
-                </ul>
+            </ul>
 
-            </div>
-        </nav>
-    </div>
+        </div>
+    </nav>
     {{!-- <h1 class="text-center">{{title}}</h1> --}}
 
     {{{ body }}}
     <script>
-        
+
 
     </script>
 </body>
