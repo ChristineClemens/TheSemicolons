@@ -15,7 +15,6 @@ router.get("/books/GBooks/:title/", async function (req, res) {
     var inputBookTitle = req.params.title;
     var APIKey = process.env.API_KEY;
     var bookTitleSearch = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${inputBookTitle}&appid=${APIKey}`).then(resp => resp.json());
-    console.log("bookTitleSearch", bookTitleSearch)
     res.status(200).send(JSON.stringify(bookTitleSearch))
 });
 
@@ -24,7 +23,6 @@ router.post("/books", secured(), async function (req, res) {
     console.log("Posting book ", req.body.book);
     const { _raw, _json, ...userProfile } = req.user;
     const userID = (await UserModel.getUserByID(userProfile.user_id))[0].id;
-    console.log("userID", userID);
     if ("book" in req.body) {
         //JAMES, LOOK WHAT WE DID.
         var APIKey = process.env.API_KEY;
@@ -36,7 +34,6 @@ router.post("/books", secured(), async function (req, res) {
         let bookInfo = await fetch(bookTitleSearch)
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
 
                 //Collected and defined information as a result of the API call.
                 return {
@@ -66,7 +63,6 @@ router.post("/books", secured(), async function (req, res) {
 
 //get all the books in the db
 router.get("/books", async function (req, res) {
-    console.log(`getting all books to make sure this works please`);
     let books = await BookModel.getAllBooks();
     res.status(200).send(JSON.stringify(books));
 });

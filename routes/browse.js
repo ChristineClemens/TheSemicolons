@@ -10,8 +10,6 @@ router.get("/browse", secured(), async function (req, res, next) {
 
     //getting all the books in the db
     const allBooks = await BookModel.getAllBooks();
-    console.log("allBooks", allBooks);
-
     res.render("browse", {
         title: "Browse",
         books: allBooks,
