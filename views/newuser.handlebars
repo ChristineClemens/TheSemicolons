@@ -1,15 +1,5 @@
 <style>
-    #wrapper {
-        width: 500px;
-        height: 50%;
-        overflow: hidden;
-        border: 0px solid #000;
-        margin: 50px auto;
-        padding: 10px;
-    }
-
     .main-content {
-        width: 250px;
         height: 40%;
         margin: 10px auto;
         background-color: #0fb9b1;
@@ -18,15 +8,15 @@
     }
 
     .header {
-        border: 0px solid #000;
         margin-bottom: 5px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
 
     .header img {
         width: 175px;
         margin: auto;
-        position: relative;
-        left: 40px;
     }
 
     #nameInput {
@@ -75,12 +65,12 @@
     }
 
     .sub-content {
-        width: 250px;
         height: 40%;
         margin: 10px auto;
         border: 1px solid #e6e6e6;
         padding: 20px 80px;
         background-color: #0fb9b1;
+        
     }
 
     .s-part {
@@ -121,7 +111,7 @@
     }
 </style>
 
-<div id="wrapper">
+<div class="container">
     <div class="main-content">
         <div class="header">
             <img src="assets/logo/logo_small.png" weigth="40" />
@@ -134,16 +124,14 @@
                     <span class="tooltiptext">Enter your preferred location to meet up (ex. Yonge and Eglinton)</span>
                 </div>
             </div>
-            <input id="saveBtn" type="button" value="Save It" class="btnAddUserInfo" />
+            <button id="saveBtn" type="button" class="btnAddUserInfo">Save It</button>
         </div>
-      </div>
-      <input id= "saveBtn" type="button" value="Save It" class="btnAddUserInfo" />
     </div>
-    <div class="sub-content">
-        <div class="s-part">
-            Yes, We need your details for future services</br>
-            © 2020 Copyright TheSemicolons
-        </div>
+</div>
+<div class="sub-content">
+    <div class="s-part">
+        Yes, We need your details for future services</br>
+        © 2020 Copyright TheSemicolons
     </div>
 </div>
 

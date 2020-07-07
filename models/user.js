@@ -29,8 +29,6 @@ class UserModel {
         await db.close()
     }
 
-
-
    //add credit
     async addCredits(userCredits, auth_id){
         let db = new orm ("mylibrary")

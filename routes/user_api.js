@@ -39,7 +39,7 @@ router.get("/credits", secured(), async function (req, res){
 router.put("/user", secured(), async function(req, res){
     const { _raw, _json, ...userProfile } = req.user;
     await UserModel.updateName(req.body.name, userProfile.user_id)
-    
+    await UserModel.addCredits('0', userProfile.user_id)
     res.status(200).send("It worked, woohoo")
 })
 
