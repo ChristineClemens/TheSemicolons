@@ -1,74 +1,71 @@
 <style>
-        #search-welcome {
-            position: absolute;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            right: 0;
-            display: flex;
-            align-items: center;
-          }
-        #searchImg-container {
-          width: 100%;
-          margin: 0;
-          height: 500px !important;
-          opacity: 0.5 !important;
-          background-image: url(assets/bgimg.jpg);
-          background-size: cover;
-          background-repeat: no-repeat;
-        }
-        .welcome {
-          align-items: center;
-        }
-    </style>
+    .coverPg {
+        position: relative;
+    }
 
-<div id="header"></div>
-<div id="navBar">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <h1 class="navbar-brand" href="#">PageExchange</h1>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+    #search-welcome {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        display: flex;
+        align-items: center;
+        height: 300px;
+    }
 
-        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-            <ul class="navbar-nav text-right">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">My Page</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Dropdown
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </li>
-                <li>
-                    <form class="form-inline">
-                        <button class="btn btn-outline-success my-2 my-sm-0 mr-sm-2" type="">Sign Out</button>
-                    </form>
-                </li>
-            </ul>
+    #searchImg-container {
+        width: 100%;
+        margin: 0;
+        height: 300px !important;
+        opacity: 0.5 !important;
+        background-image: url(/assets/bgimg.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        position: relative;
+    }
 
-        </div>
-    </nav>
-</div>
-<div id="search-section">
-    <div class="coverPg">
+    .welcome {
+        align-items: center;
+    }
+
+    #searchBox {
+        {{!-- background: rgba(0, 0, 0, 0.2); --}}
+        padding: 0.1em;
+    }
+
+
+</style>
+<div class="coverPg">
+    <div id="search-section">
         <div id="searchImg-container" class="landing-img"></div>
         <div id="search-welcome">
             <div class="container welcome">
                 <div class="text-center">
                     <h2 class="mb-3">Search your book ...</h2>
+                </div>
+                <div id="searchBox">
                     <div class="form-inline">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search for books..."
-                            aria-label="Search">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                        <input id="searchField" class="form-control mr-sm-2" type="search"
+                            placeholder="Search for books..." aria-label="Search" style="width:90%;">
+                        <div class="input-append">
+                            <button id="searchButton" class="btn btn-success my-2" type="submit">Search</button>
+                            {{#if search}}
+                            <a href="/browse" class="btn btn-success ml-2 my-2" type="submit">Reset</a>
+                            {{/if}}
+                        </div>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="genre" value="option1">
+                        <label class="form-check-label" for="inlineRadio1">Genre</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="title" value="option2">
+                        <label class="form-check-label" for="inlineRadio2">Title</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="author" value="option3">
+                        <label class="form-check-label" for="inlineRadio3">Author</label>
                     </div>
                 </div>
             </div>
@@ -77,10 +74,10 @@
 </div>
 
 
-<div id="main">
+<div id="main" class="container">
 
     {{#each books}}
-    <div class="result-list row mt-4 ml-4">
+    <div class="result-list row mt-4 ml-0.8 mr-0.5">
         <div class="col-auto d-none d-lg-block">
             <img src="{{book_cover}}" alt="">
             {{!-- <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg"
@@ -95,7 +92,7 @@
             <div class="row no-gutters rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                 <div class="resultBoxContent col">
                     <h3 class="mb-0" id="bookTitle">{{title}}</h3>
-                    <strong class="d-inline-block mb-2 textInfo" id="Genre">Novel</strong>
+                    <strong class="d-inline-block mb-2 textInfo" id="Genre">{{genre}}</strong>
                     {{!-- <div class="mb-1 textMutedChange" id="date">1999</div> --}}
                     <p class="mb-auto" id="bookDescription">{{description}}
                     </p>
@@ -108,3 +105,24 @@
 </div>
 
 <div id="footer"></div>
+
+<script>
+    document.querySelector("#searchButton").addEventListener("click", async function () {
+        let searchType = "title";
+        if (document.querySelector("#genre").checked) {
+            searchType = "genre"
+        } else if (document.querySelector("#title").checked) {
+            searchType = "title"
+        } else if (document.querySelector("#author").checked) {
+            searchType = "author"
+        }
+
+        let searchText = (document.querySelector("#searchField").value).trim()
+
+        if (searchText !== "") {
+            window.location.href = `/browse/${searchType}/${searchText}`
+        }
+
+
+    })
+</script>

@@ -3,19 +3,28 @@ const express = require("express");
 const fetch = require("node-fetch");
 const book = require("../models/book");
 const BookModel = new book();
-const user = require("../models/user")
-const UserModel = new user()
+const user = require("../models/user");
+const UserModel = new user();
 const router = express.Router();
 const secured = require("../lib/middleware/secured");
 
 router.use(express.urlencoded({ extended: true }));
 router.use(express.json());
 
+router.get("/books/GBooks/:title/", async function (req, res) {
+    var inputBookTitle = req.params.title;
+    var APIKey = process.env.API_KEY;
+    var bookTitleSearch = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${inputBookTitle}&appid=${APIKey}`).then(resp => resp.json());
+    console.log("bookTitleSearch", bookTitleSearch)
+    res.status(200).send(JSON.stringify(bookTitleSearch))
+});
+
 //add book to db
 router.post("/books", secured(), async function (req, res) {
-    console.log("Posting book ", req.body);
+    console.log("Posting book ", req.body.book);
     const { _raw, _json, ...userProfile } = req.user;
     const userID = (await UserModel.getUserByID(userProfile.user_id))[0].id;
+    console.log("userID", userID);
     if ("book" in req.body) {
         //JAMES, LOOK WHAT WE DID.
         var APIKey = process.env.API_KEY;
@@ -46,7 +55,7 @@ router.post("/books", secured(), async function (req, res) {
             description: bookInfo.description,
             page_count: bookInfo.page_count,
             book_cover: bookInfo.book_cover,
-            possession_id: userID.id,
+            possession_id: userID,
         });
         res.status(200).send("Book added");
     } else {
@@ -74,9 +83,9 @@ router.get("/booksearch/:condition/:query", async function (req, res) {
 //getting user's books
 
 //delete the book
-router.delete("/books", async function (req, res) {
-    console.log(`removing book`, req.body);
-    await BookModel.deleteOne(req.body.bookID);
+router.delete("/books/:id", async function (req, res) {
+    console.log(`removing book`, req.params.id);
+    await BookModel.removeBook(req.params.id);
     res.status(200).send("Book deleted");
 });
 

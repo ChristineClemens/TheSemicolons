@@ -9,13 +9,21 @@ class UserModel {
         return user;
     }
 
+    async getUsernameByID(userID){
+        let db = new orm("mylibrary");
+        let user = await db.selectSome("users", "auth_id", userID);
+        await db.close();
+        if (user.length > 0){
+            return user[0].name;
+        } else {
+            console.log("When trying to get the name using getUsernameByID no result was returned")
+        }
+    }
+
     async getUsernameByDBID(db_id){
         let db = new orm("mylibrary");
         let user = await db.selectSome("users", "id", db_id);
         await db.close();
-        //RIGHT NOW THERE IS NO NAME
-        //TODO ADD NAME TO DB FROM USER SETTINGS PAGE?
-        // return user[0].name;
         return user[0].name;
     }
 
@@ -31,8 +39,6 @@ class UserModel {
         await db.updateOne ("users", {name: name},{auth_id: userID})
         await db.close()
     }
-
-
 
    //add credit
     async addCredits(userCredits, auth_id){
@@ -54,7 +60,6 @@ class UserModel {
     async checkCredits(auth_id){
         let db = new orm ("mylibrary")
         let credits = await db.selectSome ("users","auth_id",auth_id)
-        console.log(credits)
         await db.close()
         return credits[0].credits
     }
@@ -64,7 +69,6 @@ class UserModel {
     async getLocation(auth_id) {
         let db = new orm ("mylibrary");
         let users = await db.selectSome("users", "auth_id", auth_id);
-        console.log(auth_id);
         await db.close();
         return users[0].location;
     }

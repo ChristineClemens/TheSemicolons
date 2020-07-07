@@ -38,6 +38,18 @@ class DB {
             });
         });
     }
+    
+    selectSomeFuzzy(tableName, columnName, searchValue) {
+        return new Promise((resolve, reject) => {
+            this.connection.query("SELECT * FROM ?? WHERE ?? LIKE CONCAT('%', ?, '%')", [tableName, columnName, searchValue], function (
+                err,
+                rows
+            ) {
+                if (err) reject(err);
+                resolve(rows);
+            });
+        });
+    }
 
     insertOne(tableName, value) {
         return new Promise((resolve, reject) => {
@@ -60,7 +72,7 @@ class DB {
 
     removeOne(tableName, condition) {
         return new Promise((resolve, reject) => {
-            this.connection.query("DELETE FROM ? WHERE ?", [tableName, condition]);
+            this.connection.query("DELETE FROM ?? WHERE ?", [tableName, condition]);
         });
     }
 

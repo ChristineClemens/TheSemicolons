@@ -1,31 +1,29 @@
 <label for="title">Book Title</label>
 <input type="text" id="title" name="title">
-<label for="author">Book Author</label>
-<input type="text" id="author" name="author">
-<button id="submitButton">Submit New Book</button>
 
+<button onclick="searchGBooks()" id="submitButton">Submit New Book</button>
+<div class="bookresults">
+
+</div>
 <script>
 
-
-    document.querySelector("#submitButton").addEventListener("click", function () {
+    async function searchGBooks() {
         titleInp = document.querySelector("#title")
-        authorInp = document.querySelector("#author")
         const title = titleInp.value
-        console.log('title', title)
-        titleInp.value = ''
-        const author = authorInp.value
-        authorInp.value = ''
-        fetch("/api/books", {
-            method: "POST",
-            headers: { 'Content-Type': "application/json" },
-            body: JSON.stringify({
-                book: {
-                    title: title,
-                    author: author
-                }
-            })
-        })
-    })
+
+        let response = await fetch(`/api/books/GBooks/${title}`).then(resp => resp.json())
+        console.log("searchGBooks -> response", response)
+
+        //Performed a fetch request to retrieve information about an individual volume.
+        
+
+        //RENDER THE BOOKS
+            //IN A LOOP, CREATE NEW ELEMENTS AND ADD THEM TO THE PAGE FOR EACH OF THE TEN RESULTS
+            //WHEN ONE OF THE RESULTS IS CLICKED, WE SEND A FETCH POST REQUEST TO THE SERVER TO ADD THAT BOOK TO THE DATABASE
+
+    }
+
+
 
 
 

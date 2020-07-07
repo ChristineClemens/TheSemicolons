@@ -1,3 +1,142 @@
+<style>
+    .main-content {
+        height: 40%;
+        margin: 10px auto;
+        background-color: #0fb9b1;
+        border: 2px solid #e6e6e6;
+        padding: 50px 80px;
+    }
+
+    .header {
+        margin-bottom: 5px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .header img {
+        width: 175px;
+        margin: auto;
+    }
+
+    #nameInput {
+        width: 100%;
+        margin-bottom: 10px;
+        padding: 8px 12px;
+        border: 1px solid #dbdbdb;
+        box-sizing: border-box;
+        border-radius: 3px;
+    }
+
+    #locationInput {
+        width: 100%;
+        height: 48px;
+        margin-bottom: 10px;
+        padding: 8px 12px;
+        border: 1px solid #dbdbdb;
+        box-sizing: border-box;
+        border-radius: 3px;
+    }
+
+    .overlap-text {
+        position: relative;
+    }
+
+    .overlap-text a {
+        position: absolute;
+        top: 8px;
+        right: 10px;
+        color: #003569;
+        font-size: 14px;
+        text-decoration: none;
+        letter-spacing: -1px;
+    }
+
+    .btnAddUserInfo {
+        width: 100%;
+        margin-top: 15px;
+        background-color: #3897f0;
+        border: 1px solid #3897f0;
+        padding: 5px 12px;
+        color: #fff;
+        font-weight: bold;
+        cursor: pointer;
+        border-radius: 3px;
+    }
+
+    .sub-content {
+        height: 40%;
+        margin: 10px auto;
+        border: 1px solid #e6e6e6;
+        padding: 20px 80px;
+        background-color: #0fb9b1;
+        
+    }
+
+    .s-part {
+        text-align: center;
+        font-size: 10px;
+    }
+
+    input:focus {
+        background-color: yellow;
+    }
+
+    /* tooltip  */
+    .tooltip {
+        position: relative;
+        display: inline-block;
+        border-bottom: 1px dotted black;
+    }
+
+    .tooltip .tooltiptext {
+        visibility: hidden;
+        width: 260px;
+        background-color: black;
+        color: #0fb9b1;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px 0;
+        bottom: 100%;
+        left: 50%;
+        margin-left: -60px;
+
+        /* Position the tooltip */
+        position: absolute;
+        z-index: 5;
+    }
+
+    .tooltip:hover .tooltiptext {
+        visibility: visible;
+    }
+</style>
+
+<div class="container">
+    <div class="main-content">
+        <div class="header">
+            <img src="assets/logo/logo_small.png" weigth="40" />
+        </div>
+        <div class="l-part">
+            <input type="text" placeholder="Your Name" id="nameInput" name="name" />
+            <div class="overlap-text">
+                <input type="text" placeholder="Preferred Location" id="locationInput" name="location" />
+                <div class="tooltip">Preferred Location?
+                    <span class="tooltiptext">Enter your preferred location to meet up (ex. Yonge and Eglinton)</span>
+                </div>
+            </div>
+            <button id="saveBtn" type="button" class="btnAddUserInfo">Save It</button>
+        </div>
+    </div>
+</div>
+<div class="sub-content">
+    <div class="s-part">
+        Yes, We need your details for future services</br>
+        © 2020 Copyright TheSemicolons
+    </div>
+</div>
+
+{{!-- 
+
 <h2>Welcome to PageExchange!</h2>
 <p>Enter some details about yourself</p>
 <label for="name">Your Name</label>
@@ -8,38 +147,39 @@
 <button id="saveBtn">Save</button>
 {{credits}}
 <div id="displayName"></div>
-<div id="displayLocation"></div>
+<div id="displayLocation"></div> --}}
 <script>
     //On confirmation, send the information to the api/users route and add the user, then reload the page.  
     //The server will check on page reload for the presence of the required data and serve the mylibrary page
     //Use user input in the nameInput field as the value to be inserted into the database.
 
-document.querySelector("#saveBtn").addEventListener("click", function () {
-    submitName();
-    submitLocation();
-});
+    document.querySelector("#saveBtn").addEventListener("click", async function () {
+        await submitName();
+        await submitLocation();
+        window.location.href = "/mylibrary"
+    });
 
-async function submitName() {
-    const nameInput = document.querySelector("#nameInput").value;
-    await fetch ("/api/user", {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify ({
-            name:nameInput
+    async function submitName() {
+        const nameInput = document.querySelector("#nameInput").value;
+        await fetch("/api/user", {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                name: nameInput
+            })
         })
-    })
-    console.log(nameInput);
-}
+        console.log(nameInput);
+    }
 
-async function submitLocation() {
-    const locationInput = document.querySelector("#locationInput").value;
-    await fetch("/api/location", {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-            userLocation: locationInput
+    async function submitLocation() {
+        const locationInput = document.querySelector("#locationInput").value;
+        await fetch("/api/location", {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                userLocation: locationInput
+            })
         })
-    })
-    console.log(locationInput);
-}
+        console.log(locationInput);
+    }
 </script>

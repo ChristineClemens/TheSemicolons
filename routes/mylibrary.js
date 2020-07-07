@@ -17,48 +17,44 @@ const MessageModel = new message();
 router.get("/mylibrary", secured(), async function (req, res, next) {
     console.log("MyLibrary Page opened");
     const { _raw, _json, ...userProfile } = req.user;
-    let userName = userProfile.name.givenName || userProfile.displayName;
 
     //we want to check if this is a new user, if it is we add the user to the db and present a different page to them to welcome them
     //and add books.  We could even create a new page and redirect them to a different page entirely
     let userID = userProfile.user_id;
-    let usercheckCredits = await UserModel.checkCredits(userID)
-    
 
     //everytime new login, catch user id, check if user id in db
     let userInDB = await UserModel.getUserByID(userID);
-    console.log('name', userInDB.name)
     if (userInDB.length === 0 || !userInDB[0].name) {
         //add the user to the db
-        let dbID = await UserModel.getUserByID(userID);
-        console.log(dbID[0].id);
-        await MessageModel.getReceivedMessages(dbID[0].id);
-        console.log("New user detected")
-        if (userInDB.length == 0){
-            UserModel.addUser({auth_id: userID});
+        console.log("New user detected");
+        if (userInDB.length == 0) {
+            UserModel.addUser({ auth_id: userID });
         }
 
         //check needed for location added before book entry or here
 
         //present user with some pretty page welcoming them and enabling them to add their first book?
-        
+
         //or view books if that's the primary use case
         res.render("newuser", {
             userProfile: JSON.stringify(userProfile, null, 2),
             userName: userName,
             title: "Welcome!",
-            credits: usercheckCredits
         });
-
-
     } else {
-        let messages = await MessageModel.getMessages(userID)
-        console.log("messages ", messages)
-        
+        let userName = await UserModel.getUsernameByID(userProfile.user_id);
+        if (!userName) {
+            userName = userProfile.name.givenName || userProfile.displayName;
+        }
+        let usersBooks = await BookModel.getBooks("possession_id", userInDB[0].id);
+        let usercheckCredits = await UserModel.checkCredits(userID);
+
         res.render("mylibrary", {
             userProfile: JSON.stringify(userProfile, null, 2),
             userName: userName,
             title: "My Library",
+            books: usersBooks,
+            credits: usercheckCredits,
         });
     }
 
@@ -71,5 +67,3 @@ router.get("/mylibrary", secured(), async function (req, res, next) {
 });
 
 module.exports = router;
-
-

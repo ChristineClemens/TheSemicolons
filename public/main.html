@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet">
     <title>Landing Page</title>
     <style>
 
@@ -44,14 +45,22 @@
           background-size: cover;
           background-repeat: no-repeat;
         }
+        .card-Img img{
+          display: block;
+          position: relative;
+          width: 100%;
+          border-radius: 0.5rem;
+        }
     </style>
 </head>
 <body>
     <div id="header"></div>
     <!-- navigation bar -->
     <div id="navBar">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <h1 class="navbar-brand" href="#">PageExchange</h1>
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #0fb9b1;">
+            <a class="navbar-brand mb-0" href="#" style="font-family: 'Caveat', cursive; font-size: x-large;">
+              <img src="assets/logo/logo_small.png" width="35" height="35" class="d-inline-block align-top" alt="logo">
+              PageExchange</a>
             <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
@@ -102,7 +111,7 @@
           </div>  
     </div>
     <!-- User story (about Us) -->
-    <div id="UseStory" class="container-fluid">
+    <div id="UseStory" class="container">
         <h2>Why PageExchange?</h2>
         <p> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui.
 
@@ -115,7 +124,35 @@
         <div id="landing-welcome">
           <div class="container welcome">
             <div class="text-center">
-              <h2 class="mb-3">Tech logos </h2>
+              <h2 class="mb-5">Key Technologies</h2>
+              <div class="row text-center">
+                <div class="col p-1 pb-3">
+                <img src="assets/logo/html.png"  height="40" class="d-inline-block align-top" alt="logo">
+              </div>
+                <div class="col p-1 pb-3">
+                <img src="assets/logo/css.png"  height="40" class="d-inline-block align-top" alt="logo">
+              </div>
+                <div class="col p-1 pb-3">
+                <img src="assets/logo/javascript.png"  height="40" class="d-inline-block align-top" alt="logo">
+              </div>
+                <div class="col p-1 pb-3">
+                <img src="assets/logo/sql.png"  height="40" class="d-inline-block align-top" alt="logo">
+              </div>
+              </div>
+              <div class="row text-center">
+                <div class="col p-1 pb-3">
+                  <img src="assets/logo/nodejs.png"  height="40" class="d-inline-block align-top" alt="logo">
+                </div>
+                <div class="col p-1 pb-3">
+                <img src="assets/logo/bootstrap.png"  height="40" class="d-inline-block align-top" alt="logo">
+              </div>
+                <div class="col p-1 pb-3">
+                <img src="assets/logo/handlebars.png"  height="40" class="d-inline-block align-top" alt="logo">
+              </div>
+                <div class="col p-1 pb-3">
+                <img src="assets/logo/passportjs.png"  height="40" class="d-inline-block align-top" alt="logo">
+              </div>
+              </div>
             </div>
           </div>
         </div>
@@ -126,7 +163,7 @@
       <div class="row container-fluid">
         <div class="devInfo col-sm-3"><div class="card">
           <div class="card-Img">
-            <img src="assets/">
+            <img src="assets/Headshots/Shayanne.png">
           </div>
           <div class="card-Content">
             <h6 class="name">Name</h6>
