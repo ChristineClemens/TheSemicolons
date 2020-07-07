@@ -38,7 +38,6 @@ router.get("/mylibrary", secured(), async function (req, res, next) {
         //or view books if that's the primary use case
         res.render("newuser", {
             userProfile: JSON.stringify(userProfile, null, 2),
-            // userName: userName,
             title: "Welcome!",
         });
     } else {
