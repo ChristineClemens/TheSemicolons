@@ -48,8 +48,6 @@ router.get("/mylibrary", secured(), async function (req, res, next) {
         let usersBooks = await BookModel.getBooks("possession_id", userInDB[0].id);
         let usercheckCredits = await UserModel.checkCredits(userID);
 
-        console.log("usersBooks", usersBooks);
-        console.log("messages ", messages);
 
         res.render("mylibrary", {
             userProfile: JSON.stringify(userProfile, null, 2),
