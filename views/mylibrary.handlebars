@@ -1,9 +1,5 @@
 <h1>Welcome to your library, {{userName}}</h1>
 
-<a href="./browse">Browse</a>
-
-
-<a href="./logout">Log me out</a>
 <style>
     .coverPg {
         position: relative;
@@ -104,25 +100,26 @@
             </div>
         </div>
     </div> --}}
-    
+
     {{#each books}}
-        <div class="col-8">
-            <div class="resultBox">
-                <div class="row no-gutters rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                    <div class="resultBoxContent col">
-                        <h3 class="mb-0" id="bookTitle">{{title}}</h3>
-                        <strong class="d-inline-block mb-2 textInfo" id="Genre">Novel</strong>
-                        <div class="mb-1 textMutedChange" id="date">1999</div>
-                        <p class="mb-auto" id="bookDescription">
-                            {{description}}
-                        </p>
-                        {{!-- <a href="" class="stretched-link">Edit</a> --}}
-                        <a href="">Delete</a>
-                    </div>
+    <div class="col-8">
+        <div class="resultBox">
+            <div class="row no-gutters rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <div class="resultBoxContent col">
+                    <h3 class="mb-0" id="bookTitle">{{title}}</h3>
+                    <strong class="d-inline-block mb-2 textInfo" id="Genre">Novel</strong>
+                    <div class="mb-1 textMutedChange" id="date">1999</div>
+                    <p class="mb-auto" id="bookDescription">
+                        {{description}}
+                    </p>
+                    {{!-- <a href="" class="stretched-link">Edit</a> --}}
+                    <a href="">Delete</a>
                 </div>
             </div>
         </div>
+    </div>
     {{/each}}
+    <a href="/newbook">Add A Book</a>
 </div>
 <div id="footer">
 
