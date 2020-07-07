@@ -19,10 +19,10 @@
 
         fetch(`/api/books/GBooks/${title}`).then(function(result){
             
-            result.json();
+            result.json()
             .then(function(data){
-                console.log("I want this to return something: ",data);
-            }
+                console.log("I want this to return something: ", data.items[0].volumeInfo.title);
+            })
         }
         )
         //console.log("searchGBooks -> response", response)
