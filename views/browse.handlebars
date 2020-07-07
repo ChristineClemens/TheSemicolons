@@ -1,7 +1,7 @@
 <style>
     #search-welcome {
         position: absolute;
-        top: 0;
+        top: -40%;
         left: 0;
         bottom: 0;
         right: 0;
@@ -13,7 +13,7 @@
     #searchImg-container {
         width: 100%;
         margin: 0;
-        height: 500px !important;
+        height: 300px !important;
         opacity: 0.5 !important;
         background-image: url(/assets/bgimg.jpg);
         background-size: cover;
@@ -42,11 +42,12 @@
 
 
 <div id="main" class="container">
-    <div class="form-inline">
-        <input id="searchField" class="form-control w-75 mr-sm-2" type="search" placeholder="Search for books..." aria-label="Search">
-        <button id="searchButton" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        <a href="/browse" class="btn btn-outline-success ml-2 my-2 my-sm-0" type="submit">Reset</a>
-
+    <div class="form-inline row container" style="margin-top: 15px;">
+        <input id="searchField" class="form-control w-100 mr-sm-2" type="search" placeholder="Search for books..." aria-label="Search">
+        <div class="button mr-sm-2">
+        <button id="searchButton" class="btn btn-outline-success my-2" type="submit">Search</button>
+        <a href="/browse" class="btn btn-outline-success ml-2 my-2" type="submit">Reset</a>
+        </div>
     </div>
     <div class="form-check form-check-inline">
         <input class="form-check-input" type="radio" name="inlineRadioOptions" id="genre" value="option1">
@@ -61,7 +62,7 @@
         <label class="form-check-label" for="inlineRadio3">Author</label>
     </div>
     {{#each books}}
-    <div class="result-list row mt-4 ml-4">
+    <div class="result-list row mt-4 ml-0.8 mr-0.5">
         <div class="col-auto d-none d-lg-block">
             <img src="{{book_cover}}" alt="">
             {{!-- <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg"
