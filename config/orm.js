@@ -72,7 +72,7 @@ class DB {
 
     removeOne(tableName, condition) {
         return new Promise((resolve, reject) => {
-            this.connection.query("DELETE FROM ? WHERE ?", [tableName, condition]);
+            this.connection.query("DELETE FROM ?? WHERE ?", [tableName, condition]);
         });
     }
 
