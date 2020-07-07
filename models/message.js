@@ -20,7 +20,6 @@ class MessageModel{
         messages = messages.filter((message) => message.sender_id == senderID)
         return messages
     }
-
 }
 
 

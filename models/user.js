@@ -13,10 +13,7 @@ class UserModel {
         let db = new orm("mylibrary");
         let user = await db.selectSome("users", "id", db_id);
         await db.close();
-        //RIGHT NOW THERE IS NO NAME
-        //TODO ADD NAME TO DB FROM USER SETTINGS PAGE?
-        // return user[0].name;
-        return "Ted"
+        return user[0].name;
     }
 
     async addUser(user) {
