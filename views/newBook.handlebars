@@ -3,28 +3,24 @@
 
 <button onclick="searchGBooks()" id="submitButton">Submit New Book</button>
 <div class="bookresults">
-
+    <ul>
+        {{#each book}}
+        <li>{{book}}</li>
+        <li>{{title}}</li>
+        {{/each}}
+    </ul>
 </div>
+
 <script>
 
-    async function searchGBooks() {
+     function searchGBooks() {
         titleInp = document.querySelector("#title")
         const title = titleInp.value
 
-        let response = await fetch(`/api/books/GBooks/${title}`).then(resp => resp.json())
-        console.log("searchGBooks -> response", response)
-
-        //Performed a fetch request to retrieve information about an individual volume.
-        
-
-        //RENDER THE BOOKS
-            //IN A LOOP, CREATE NEW ELEMENTS AND ADD THEM TO THE PAGE FOR EACH OF THE TEN RESULTS
-            //WHEN ONE OF THE RESULTS IS CLICKED, WE SEND A FETCH POST REQUEST TO THE SERVER TO ADD THAT BOOK TO THE DATABASE
-
+        fetch(`/api/books/GBooks/${title}`).then(function(result){
+            console.log(result)
+        }
+        )
+        //console.log("searchGBooks -> response", response)
     }
-
-
-
-
-
 </script>

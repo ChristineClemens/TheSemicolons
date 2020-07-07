@@ -16,7 +16,13 @@ router.get("/books/GBooks/:title/", async function (req, res) {
     var APIKey = process.env.API_KEY;
     var bookTitleSearch = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${inputBookTitle}&appid=${APIKey}`).then(resp => resp.json());
     console.log("bookTitleSearch", bookTitleSearch)
+    var obj={
+        book: bookTitleSearch.items // [] this is an array of books
+    }
+    console.log("OBJ: ", obj)
     res.status(200).send(JSON.stringify(bookTitleSearch))
+    // render the page and pass the result from obj
+    res.render("newBook", obj)
 });
 
 //add book to db
