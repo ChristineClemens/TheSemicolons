@@ -26,6 +26,7 @@ router.get("/browse/:condition/:query", async function (req, res) {
     res.render("browse", {
         title: "Browse",
         books: books,
+        search: true,
     });
 });
 

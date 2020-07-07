@@ -17,7 +17,6 @@ const MessageModel = new message();
 router.get("/mylibrary", secured(), async function (req, res, next) {
     console.log("MyLibrary Page opened");
     const { _raw, _json, ...userProfile } = req.user;
-    let userName = userProfile.name.givenName || userProfile.displayName;
 
     //we want to check if this is a new user, if it is we add the user to the db and present a different page to them to welcome them
     //and add books.  We could even create a new page and redirect them to a different page entirely
@@ -25,7 +24,6 @@ router.get("/mylibrary", secured(), async function (req, res, next) {
 
     //everytime new login, catch user id, check if user id in db
     let userInDB = await UserModel.getUserByID(userID);
-    console.log("userInDB", userInDB)
     if (userInDB.length === 0 || !userInDB[0].name) {
         //add the user to the db
         console.log("New user detected");
@@ -44,10 +42,12 @@ router.get("/mylibrary", secured(), async function (req, res, next) {
             title: "Welcome!",
         });
     } else {
-        let messages = await MessageModel.getMessages(userID);
+        let userName = await UserModel.getUsernameByID(userProfile.user_id);
+        if (!userName) {
+            userName = userProfile.name.givenName || userProfile.displayName;
+        }
         let usersBooks = await BookModel.getBooks("possession_id", userInDB[0].id);
         let usercheckCredits = await UserModel.checkCredits(userID);
-
 
         res.render("mylibrary", {
             userProfile: JSON.stringify(userProfile, null, 2),
