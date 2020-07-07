@@ -1,3 +1,5 @@
+use mylibrary;
+
 INSERT INTO users (auth_id, location, credits) 
 VALUES ('auth0|5efe8a69a15b7b001361ce52', 'St. Clair and Yonge, Toronto', 2),
     ('google-oauth2|107478579241719314235', 'St. Clair and Yonge, Toronto', 4),

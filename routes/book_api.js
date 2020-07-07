@@ -13,9 +13,10 @@ router.use(express.json());
 
 //add book to db
 router.post("/books", secured(), async function (req, res) {
-    console.log("Posting book ", req.body);
+    console.log("Posting book ", req.body.book);
     const { _raw, _json, ...userProfile } = req.user;
     const userID = (await UserModel.getUserByID(userProfile.user_id))[0].id;
+    console.log("userID", userID)
     if ("book" in req.body) {
         //JAMES, LOOK WHAT WE DID.
         var APIKey = process.env.API_KEY;
@@ -46,7 +47,7 @@ router.post("/books", secured(), async function (req, res) {
             description: bookInfo.description,
             page_count: bookInfo.page_count,
             book_cover: bookInfo.book_cover,
-            possession_id: userID.id,
+            possession_id: userID,
         });
         res.status(200).send("Book added");
     } else {

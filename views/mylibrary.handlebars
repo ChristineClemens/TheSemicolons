@@ -1,9 +1,5 @@
 <h1>Welcome to your library, {{userName}}</h1>
 
-<a href="./browse">Browse</a>
-
-
-<a href="./logout">Log me out</a>
 <style>
     .coverPg {
         position: relative;
@@ -104,8 +100,9 @@
             </div>
         </div>
     </div> --}}
-    
+
     {{#each books}}
+
         <div class="col-8">
             <div class="resultBox">
                 <div class="row no-gutters rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
@@ -120,10 +117,13 @@
                         <button onclick="deleteBook({{id}})">Delete</button>
                         <button onclick="deleteBook({{id}})">Donated</button>
                     </div>
+
                 </div>
             </div>
         </div>
+    </div>
     {{/each}}
+    <a href="/newbook">Add A Book</a>
 </div>
 <div id="footer">
 <script>

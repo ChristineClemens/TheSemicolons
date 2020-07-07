@@ -1,44 +1,44 @@
 <style>
-        #wrapper {
+    #wrapper {
         width: 500px;
         height: 50%;
         overflow: hidden;
         border: 0px solid #000;
         margin: 50px auto;
         padding: 10px;
-        }
+    }
 
-        .main-content {
+    .main-content {
         width: 250px;
         height: 40%;
         margin: 10px auto;
         background-color: #0fb9b1;
         border: 2px solid #e6e6e6;
         padding: 50px 80px;
-        }
+    }
 
-        .header {
+    .header {
         border: 0px solid #000;
         margin-bottom: 5px;
-        }
+    }
 
-        .header img {
+    .header img {
         width: 175px;
         margin: auto;
         position: relative;
         left: 40px;
-        }
+    }
 
-        #nameInput{
+    #nameInput {
         width: 100%;
         margin-bottom: 10px;
         padding: 8px 12px;
         border: 1px solid #dbdbdb;
         box-sizing: border-box;
         border-radius: 3px;
-        }
+    }
 
-        #locationInput {
+    #locationInput {
         width: 100%;
         height: 48px;
         margin-bottom: 10px;
@@ -46,13 +46,13 @@
         border: 1px solid #dbdbdb;
         box-sizing: border-box;
         border-radius: 3px;
-        }
+    }
 
-        .overlap-text {
+    .overlap-text {
         position: relative;
-        }
+    }
 
-        .overlap-text a {
+    .overlap-text a {
         position: absolute;
         top: 8px;
         right: 10px;
@@ -60,9 +60,9 @@
         font-size: 14px;
         text-decoration: none;
         letter-spacing: -1px;
-        }
+    }
 
-        .btnAddUserInfo {
+    .btnAddUserInfo {
         width: 100%;
         margin-top: 15px;
         background-color: #3897f0;
@@ -72,33 +72,34 @@
         font-weight: bold;
         cursor: pointer;
         border-radius: 3px;
-        }
+    }
 
-        .sub-content {
+    .sub-content {
         width: 250px;
         height: 40%;
         margin: 10px auto;
         border: 1px solid #e6e6e6;
         padding: 20px 80px;
         background-color: #0fb9b1;
-        }
+    }
 
-        .s-part {
+    .s-part {
         text-align: center;
         font-size: 10px;
-        }
+    }
 
-        input:focus {
-            background-color: yellow;
-        }
-        /* tooltip  */
-        .tooltip {
+    input:focus {
+        background-color: yellow;
+    }
+
+    /* tooltip  */
+    .tooltip {
         position: relative;
         display: inline-block;
         border-bottom: 1px dotted black;
-        }
+    }
 
-        .tooltip .tooltiptext {
+    .tooltip .tooltiptext {
         visibility: hidden;
         width: 260px;
         background-color: black;
@@ -113,39 +114,44 @@
         /* Position the tooltip */
         position: absolute;
         z-index: 5;
-        }
+    }
 
-        .tooltip:hover .tooltiptext {
+    .tooltip:hover .tooltiptext {
         visibility: visible;
-        }
-    </style>
+    }
+</style>
 
 <div id="wrapper">
-  <div class="main-content">
-    <div class="header">
-      <img src="assets/logo/logo_small.png" weigth="40" />
-    </div>
-    <div class="l-part">
-      <input type="text" placeholder="Your Name" id="nameInput" name="name"/>
-      <div class="overlap-text">
-        <input type="text" placeholder="Preferred Location" id="locationInput" name="location"/>
-        <div class="tooltip">Preferred Location?
-            <span class="tooltiptext">Enter your preferred location to meet up (ex. Yonge and Eglinton)</span>
+    <div class="main-content">
+        <div class="header">
+            <img src="assets/logo/logo_small.png" weigth="40" />
         </div>
+        <div class="l-part">
+            <input type="text" placeholder="Your Name" id="nameInput" name="name" />
+            <div class="overlap-text">
+                <input type="text" placeholder="Preferred Location" id="locationInput" name="location" />
+                <div class="tooltip">Preferred Location?
+                    <span class="tooltiptext">Enter your preferred location to meet up (ex. Yonge and Eglinton)</span>
+                </div>
+            </div>
+            <input id="saveBtn" type="button" value="Save It" class="btnAddUserInfo" />
+        </div>
+<<<<<<< HEAD
       </div>
-      <input type="button" value="Save It" class="btnAddUserInfo" />
+      <input id= "saveBtn" type="button" value="Save It" class="btnAddUserInfo" />
+=======
+>>>>>>> fixingMyLibrary
     </div>
-  </div>
-  <div class="sub-content">
-    <div class="s-part">
-      Yes, We need your details for future services</br>
-      © 2020 Copyright TheSemicolons
+    <div class="sub-content">
+        <div class="s-part">
+            Yes, We need your details for future services</br>
+            © 2020 Copyright TheSemicolons
+        </div>
     </div>
-  </div>
 </div>
 
-
 {{!-- 
+
 <h2>Welcome to PageExchange!</h2>
 <p>Enter some details about yourself</p>
 <label for="name">Your Name</label>
@@ -162,33 +168,33 @@
     //The server will check on page reload for the presence of the required data and serve the mylibrary page
     //Use user input in the nameInput field as the value to be inserted into the database.
 
-document.querySelector("#saveBtn").addEventListener("click", function () {
-    submitName();
-    submitLocation();
-    window.location.href = "/mylibrary"    
-});
+    document.querySelector("#saveBtn").addEventListener("click", async function () {
+        await submitName();
+        await submitLocation();
+        window.location.href = "/mylibrary"
+    });
 
-async function submitName() {
-    const nameInput = document.querySelector("#nameInput").value;
-    await fetch ("/api/user", {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify ({
-            name:nameInput
+    async function submitName() {
+        const nameInput = document.querySelector("#nameInput").value;
+        await fetch("/api/user", {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                name: nameInput
+            })
         })
-    })
-    console.log(nameInput);
-}
+        console.log(nameInput);
+    }
 
-async function submitLocation() {
-    const locationInput = document.querySelector("#locationInput").value;
-    await fetch("/api/location", {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-            userLocation: locationInput
+    async function submitLocation() {
+        const locationInput = document.querySelector("#locationInput").value;
+        await fetch("/api/location", {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                userLocation: locationInput
+            })
         })
-    })
-    console.log(locationInput);
-}
+        console.log(locationInput);
+    }
 </script>
