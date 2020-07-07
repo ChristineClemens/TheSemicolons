@@ -30,6 +30,9 @@ router.get("/mylibrary", secured(), async function (req, res, next) {
     console.log('name', userInDB.name)
     if (userInDB.length === 0 || !userInDB[0].name) {
         //add the user to the db
+        let dbID = await UserModel.getUserByID(userID);
+        console.log(dbID[0].id);
+        await MessageModel.getReceivedMessages(dbID[0].id);
         console.log("New user detected")
         if (userInDB.length == 0){
             UserModel.addUser({auth_id: userID});

@@ -16,33 +16,30 @@ const MessageModel = new message();
 
 
 
-// updating value  
+//update credit value  
 router.put("/credits", secured(), async function (req, res){
     // const { _raw, _json, ...userProfile } = req.user;
     let currentCredits = await UserModel.checkCredits(userProfile.user_id)
     let credits = checkCredits(req.body.credChange) 
     await UserModel.addCredits(credits, userProfile.user_id)
-    res.status(200)
-  
-
+    res.status(200);
 })
-
 //check credits
 router.get("/credits", secured(), async function (req, res){
     const { _raw, _json, ...userProfile } = req.user;
     let currentCredits =  await UserModel.checkCredits(userProfile.user_id)
     console.log(currentCredits)
     res.status(200).send(JSON.stringify(currentCredits))
-
 })
 
+
+//Update name
 router.put("/user", secured(), async function(req, res){
     const { _raw, _json, ...userProfile } = req.user;
     await UserModel.updateName(req.body.name, userProfile.user_id)
     
     res.status(200).send("It worked, woohoo")
 })
-
 
 
 //Check database using auth_id to determine if a location exists.

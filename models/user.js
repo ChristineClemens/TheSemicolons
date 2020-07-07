@@ -16,7 +16,7 @@ class UserModel {
         //RIGHT NOW THERE IS NO NAME
         //TODO ADD NAME TO DB FROM USER SETTINGS PAGE?
         // return user[0].name;
-        return "Ted"
+        return user[0].name;
     }
 
     async addUser(user) {
