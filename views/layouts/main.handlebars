@@ -39,49 +39,70 @@
         </div>
     </div>
     <div id="navBar">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <h1 class="navbar-brand" href="#">PageExchange</h1>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <h1 class="navbar-brand" href="#">PageExchange</h1>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-            <ul class="navbar-nav text-right">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">My Library</a>
-                    <a class="nav-link" href="#">Browse</a>
-                    <a class="nav-link" href="#">Inbox</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Dropdown
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </li>
-                <li>
-                    <form class="form-inline">
-                        <a href="/logout" class="btn btn-outline-success my-2 my-sm-0 mr-sm-2" type="">Sign Out</a>
-                    </form>
-                </li>
-            </ul>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                <ul class="navbar-nav text-right">
+                    {{#unless notLoggedIn}}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/mylibrary">My Library</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="/browse">Browse</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="/messages">Inbox</a>
+                    </li>
+                    <li>
+                        <form class="form-inline">
+                            <a href="/logout" class="btn btn-outline-success my-2 my-sm-0 mr-sm-2" type="">Sign Out</a>
+                        </form>
+                    </li>
+                    {{/unless}}
+                    {{#if notLoggedIn}}
+                    <li>
+                        <form class="form-inline">
+                            <a href="/login" class="btn btn-outline-success my-2 my-sm-0 mr-sm-2" type="">Sign In</a>
+                        </form>
+                    </li>
+                    {{/if}}
 
-        </div>
-    </nav>
-</div>
+
+
+                    {{!-- <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Dropdown
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </li> --}}
+
+                </ul>
+
+            </div>
+        </nav>
+    </div>
     <h1>{{title}}</h1>
 
     {{{ body }}}
     <script>
-        {{!-- document.querySelector("#modal-text")
-        document.querySelector("#modal-title")
-        $('#myModal').modal() --}}
+        {
+            {
+                !--document.querySelector("#modal-text")
+                document.querySelector("#modal-title")
+                $('#myModal').modal()--
+            }
+        }
 
     </script>
 </body>

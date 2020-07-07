@@ -17,6 +17,7 @@
 document.querySelector("#saveBtn").addEventListener("click", function () {
     submitName();
     submitLocation();
+    window.location.reload(false)
 });
 
 async function submitName() {
