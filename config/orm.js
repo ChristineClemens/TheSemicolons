@@ -85,6 +85,15 @@ class DB {
         });
     }
 
+    innerJoinSorted(leftTable, rightTable, leftKey, rightKey, orderMethod) {
+        return new Promise((resolve, reject) => {
+            this.connection.query("SELECT * FROM ?? INNER JOIN ?? ON ?? = ?? ORDER BY ??", [leftTable, rightTable, leftKey, rightKey, orderMethod], function (err, rows) {
+                if (err) reject(err);
+                resolve(rows);
+            });
+        });
+    }
+
 }
 
 module.exports = DB;
