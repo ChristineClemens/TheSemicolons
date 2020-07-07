@@ -117,7 +117,8 @@
                             {{description}}
                         </p>
                         {{!-- <a href="" class="stretched-link">Edit</a> --}}
-                        <a href="">Delete</a>
+                        <button onclick="deleteBook({{id}})">Delete</button>
+                        <button onclick="deleteBook({{id}})">Donated</button>
                     </div>
                 </div>
             </div>
@@ -125,5 +126,11 @@
     {{/each}}
 </div>
 <div id="footer">
+<script>
+    async function deleteBook(id){
+        const response = await fetch(`/api/books/${id}`, {method:"DELETE"})
+        console.log (response)
+    }
 
+</script>
 </div>

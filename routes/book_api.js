@@ -74,9 +74,9 @@ router.get("/booksearch/:condition/:query", async function (req, res) {
 //getting user's books
 
 //delete the book
-router.delete("/books", async function (req, res) {
-    console.log(`removing book`, req.body);
-    await BookModel.deleteOne(req.body.bookID);
+router.delete("/books/:id", async function (req, res) {
+    console.log(`removing book`, req.params.id);
+    await BookModel.removeBook(req.params.id);
     res.status(200).send("Book deleted");
 });
 
