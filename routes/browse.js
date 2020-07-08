@@ -31,10 +31,10 @@ router.get("/browse/:condition/:query", async function (req, res) {
 });
 
 router.get("/view_book/:id", async function (req, res) {
-    console.log("Book information page loaded", req.params.id)
+    console.log("Book information page loaded", req.params.id);
     let bookID = req.params.id;
     let bookInformation = await BookModel.getBookFromDBID(bookID);
-    console.log('book info', bookInformation)
+    console.log("book info", bookInformation);
     if (bookInformation) {
         res.render("bookInformation", { book: bookInformation });
     } else {
