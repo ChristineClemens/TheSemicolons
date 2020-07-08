@@ -18,8 +18,9 @@ const fetch = require("node-fetch")
 router.get("/newbook", secured(), async function (req, res, next) {
     console.log("New Book Page opened");
     const { _raw, _json, ...userProfile } = req.user;
+    let userCredits = await UserModel.checkCredits(userProfile.user_id)
 
-    res.render("newBook", {title: "Add a book"})
+    res.render("newBook", {title: "Add a book", credits: userCredits})
     
 });
 

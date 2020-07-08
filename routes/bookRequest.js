@@ -14,6 +14,7 @@ const MessageModel = new message();
 /* GET home page. */
 router.get("/request_book/:bookID", secured(), async function (req, res, next) {
     console.log("request page loaded");
+    const { _raw, _json, ...userProfile } = req.user;
 
     const bookInformation = (await BookModel.getBookAndUser(req.params.bookID))[0]
 
@@ -22,13 +23,16 @@ router.get("/request_book/:bookID", secured(), async function (req, res, next) {
         return
     }
 
+    let userCredits = await UserModel.checkCredits(userProfile.user_id)
+
     res.render("bookRequest", {
         title: "Request Page",
         bookTitle: bookInformation.title,
         meetupLocation: bookInformation.location,
         recipient: bookInformation.possession_id,
         bookID: req.params.bookID,
-        bookCover: bookInformation.book_cover
+        bookCover: bookInformation.book_cover,
+        credits: userCredits
     });
 });
 

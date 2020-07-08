@@ -21,11 +21,14 @@ router.get("/books/GBooks/:title/", async function (req, res) {
 router.post("/books", secured(), async function (req, res) {
     console.log("Posting book ", req.body.originalSearch);
     const { _raw, _json, ...userProfile } = req.user;
+    const userID = (await UserModel.getUserByID(userProfile.user_id))[0].id;
 
-    const userID = (await UserModel.getUserByID(userProfile.user_id))[0].id; //This checks the database and gets the ID in our SQL database of the current user, so we can define the book as being "theirs"
+    
     if ("id" in req.body) {
-        //We might need to rerun the google books API search, because we don't have it "saved" or anything
-        //Then we can use the index of the result inside that to choose it
+        //adding a credit
+        let userCredits = await UserModel.checkCredits(userProfile.user_id)
+        await UserModel.addCredits(userCredits + 1, userProfile.user_id)
+
         let bookTitle = req.body.originalSearch
         let bookID = req.body.id
         let APIKey = process.env.API_KEY
@@ -45,7 +48,7 @@ router.post("/books", secured(), async function (req, res) {
     } else {
         res.status(400).send("failed to post book");
         console.log("There wasn't a book in the request body, so it wasn't added");
-    }  //I MADE A TYPO SOMEWHERE
+    }
 
 });
 
