@@ -1,0 +1,52 @@
+<style>
+body {
+  margin: 0 auto;
+  max-width: 800px;
+  padding: 0 20px;
+}
+
+.container {
+  border: 2px solid #dedede;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.darker {
+  border-color: ##002366;
+  background-color: rgb(15, 185, 177);
+}
+
+
+.userName, .userText {
+  text-align: right;
+  }
+
+</style>
+</head>
+<body>
+
+<h2>Messages {{user}} and {{sender}}</h2>
+
+<div class="container">
+  <h3 class="senderName">{{sender}}<h3>
+  <h5 class="senderText">{{Message Text}}</h5>
+</div>
+  <h3>
+<div class="container darker">
+  <h3 class="userName">{{user}}<h3>
+  <h5 class="userText">{{Message Text}}</h5>
+</div>
+
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <button class="btn btn-outline-secondary" type="button">Send</button>
+    <button class="btn btn-outline-secondary" type="button">Send Confirmation of Pickup</button>
+  </div>
+  <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+</div>
+
+
+</body>
+</html>
