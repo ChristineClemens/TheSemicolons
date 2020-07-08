@@ -1,15 +1,21 @@
-<h3>Messages</h3>
+<div class="container">
+    <h3>Messages</h3>
 
-<div id="messageContainer">
-    {{#if messages}}
-    {{#each messages}}
-    <hr>
-    <p>From: {{sender}}</p>
-    <p>Regarding book: {{bookTitle}}</p>
-    <p>{{message}}</p>
-    <a href="/messagechain/{{senderID}}">Reply</a>
-    {{/each}}
-    {{else}}
-    <p>You have no messages</p>
-    {{/if}}
-</div>
+    <div id="messageContainer">
+        {{#if messages}}
+        {{#each messages}}
+        <div class="list-group">
+            <div class="list-group-item list-group-item-action active">
+                <a href="/inbox" class="stretched-link"></a>
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">You have a new message from {{name}}</h5>
+                    <small>{{date}}</small>
+                </div>
+            </div>
+        </div>
+            {{/each}}
+            {{else}}
+            <p>You have no messages</p>
+            {{/if}}
+        
+    </div>
