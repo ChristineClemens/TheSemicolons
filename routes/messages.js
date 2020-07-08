@@ -1,4 +1,4 @@
-v").config();
+require("dotenv").config();
 
 const express = require("express");
 const secured = require("../lib/middleware/secured");
@@ -77,12 +77,24 @@ const MessageModel = new message();
 router.get("/inbox", secured(), async function (req, res) {
     const { _raw, _json, ...userProfile } = req.user;
     let messages = await MessageModel.getReceivedMessages(2);
-    messages = messages.map(message => ({sender: message.sender_id}));
-    console.log(messages);
+    messages = messages.map(message => (message.sender_id));
+    uniqueSenders = messages.filter(onlyUniqueSenders)
+    uniqueSenderNames = []
+    for (let index = 0; index < uniqueSenders.length; index++) {
+        const sender = uniqueSenders[index];
+        const senderName = await UserModel.getUsernameByDBID(sender)
+        uniqueSenderNames.push({id: sender, name: (senderName) ? senderName : "Unnamed User"})
+        
+    }
+    console.log(uniqueSenderNames);
     res.render("messages", {
         messages: messages
     })
 });
+
+function onlyUniqueSenders(value, index, self) { 
+    return self.indexOf(value) === index;
+}
 
 //get("/inbox/:bookID") --> Get every message about that book (req.params.bookID).
 router.get("/inbox/:messageChain", secured(), async function (req, res) {
