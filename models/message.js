@@ -27,7 +27,7 @@ class MessageModel{
         await db.close();
     }
 
-    //getSharedBookMessages that filters messages that share a book id.
+    //getSharedBookMessages that filters messages between users that share a book id.
     async getSharedBookMessages(userID, senderID, bookID) {
         let db = new orm("mylibrary");
         let sharedBookMessages = await db.innerJoinSorted("users", "messages", "users.id", "messages.recipient_id", "date_added");
@@ -40,17 +40,13 @@ class MessageModel{
     }
 
     //addMessage that inserts message into the database with a date/timestamp (insertOne).
-    async addMessage(senderID, userID, message, bookID) {
+    async addMessage(recipientID, userID, message, bookID) {
         let db = new orm("mylibrary");
-        let newMessage = await db.insertOne("messages", {recipient_id: userID, sender_id: senderID, message_text: message, book_requested_id: bookID});
+        let newMessage = await db.insertOne("messages", {recipient_id: recipientID, sender_id: userID, message_text: message, book_requested_id: bookID});
         console.log(newMessage);
         await db.close();
         return newMessage;
     }
 };
-
-//get("/inbox") -> Get every book that has a message in the table about it
-//get("/inbox/:bookID") --> get every message about that book (req.params.bookID)
-//get(/inbox/:bookID/:senderID") --> get every message about the book, and from a person
 
 module.exports = MessageModel

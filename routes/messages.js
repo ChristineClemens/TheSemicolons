@@ -74,6 +74,23 @@ router.get("/messagechain/:sender_id", secured(), async function (req, res) {
 
 module.exports = router;
 
+//get("/inbox") -> Get every book that has a message about it in the table.
+router.get("/inbox", secured(), async function (req, res) {
+    const { _raw, _json, ...userProfile } = req.user;
+    //
 
-//Retrieve all existing messages in the database between the two users and return these messages.
-//Render message chain.
+});
+
+//get("/inbox/:bookID") --> Get every message about that book (req.params.bookID).
+router.get("/inbox/:bookID", secured(), async function (req, res) {
+    const { _raw, _json, ...userProfile } = req.user;
+
+});
+
+//get(/inbox/:bookID/:senderID") --> Get every message about the book from an individual person.
+router.get("/inbox/:bookID/:senderID", secured(), async function (req, res) {
+    const { _raw, _json, ...userProfile } = req.user;
+    let sharedBookMessages = await MessageModel.getSharedBookMessages(userID, senderID, bookID) {
+
+    }
+});
