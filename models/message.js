@@ -52,6 +52,7 @@ class MessageModel{
     async addMessage(recipientID, userID, message, bookID) {
         let db = new orm("mylibrary");
         let newMessage = await db.insertOne("messages", {recipient_id: recipientID, sender_id: userID, message_text: message, book_requested_id: bookID});
+        
         console.log(newMessage);
         await db.close();
         return newMessage;
