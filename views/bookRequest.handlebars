@@ -1,10 +1,24 @@
-<h3>Request to borrow {{bookTitle}}</h3>
-<p>This is the page we'll end up at after a user clicks a request button on a book they like.</p>
-<img src="{{bookCover}}" alt="{{bookTitle}}">
-<p>The person who has {{bookTitle}} has selected {{meetupLocation}} as their meetup spot. Send them a message requesting
-    a meetup time.</p>
-<textarea name="messageText" id="messageText" cols="30" rows="10"></textarea>
-<button id="send-button" data-recipient={{recipient}} data-book={{bookID}}>Send Request</button>
+<div class="container">
+    <h3 class="text-center">Request to borrow {{bookTitle}}</h3>
+    <div class="row">
+        <div class="col-auto">
+            <img src="{{bookCover}}" alt="{{bookTitle}}">
+        </div>
+        <div class="col-8 shadow-sm">
+            <p>The person who has {{bookTitle}} has selected {{meetupLocation}} as their meetup spot. Send them a
+                message requesting
+                a meetup time.</p>
+            <hr>
+            <div class="form-group mt-4 w-100 d-flex flex-column align-items-center">
+                <textarea class="w-100" name="messageText" id="messageText" cols="30" rows="10"></textarea>
+                <button id="send-button" class="btn btn-primary mt-3" data-recipient={{recipient}} data-book={{bookID}}
+                    data-bookTitle={{bookTitle}}>Send
+                    Request</button>
+            </div>
+        </div>
+
+    </div>
+</div>
 
 <script>
     const sendButton = document.querySelector("#send-button")
@@ -12,10 +26,19 @@
 
     sendButton.addEventListener("click", async function () {
         const messageText = document.querySelector("#messageText").value
-        console.log(messageText)
+        const bookTitle = sendButton.dataset.bookTitle
         document.querySelector("#messageText").value = ''
         //send the message to the server, then send the user back to the browse page
-        await fetch("/api/send_request", {
+        await fetch("/api/send_message", {
+            method: "POST",
+            headers: { 'Content-Type': "application/json" },
+            body: JSON.stringify({
+                bookID: sendButton.dataset.book,
+                messageText: `A PageExchange User has requested your book ${bookTitle}, you can now message them to arrange a time to meet up to exchange the book!`
+                serverMessage: true;
+            })
+        })
+        await fetch("/api/send_message", {
             method: "POST",
             headers: { 'Content-Type': "application/json" },
             body: JSON.stringify({
