@@ -22,10 +22,6 @@ router.get("/request_book/:bookID", secured(), async function (req, res, next) {
         return
     }
 
-    console.log("bookInformation", bookInformation)
-    console.log(bookInformation.title)
-
-
     res.render("bookRequest", {
         title: "Request Page",
         bookTitle: bookInformation.title,
