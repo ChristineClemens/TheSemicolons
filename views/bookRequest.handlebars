@@ -12,7 +12,7 @@
             <div class="form-group mt-4 w-100 d-flex flex-column align-items-center">
                 <textarea class="w-100" name="messageText" id="messageText" cols="30" rows="10"></textarea>
                 <button id="send-button" class="btn btn-primary mt-3" data-recipient={{recipient}} data-book={{bookID}}
-                    data-bookTitle={{bookTitle}}>Send
+                    data-booktitle="{{bookTitle}}">Send
                     Request</button>
             </div>
         </div>
@@ -26,7 +26,8 @@
 
     sendButton.addEventListener("click", async function () {
         const messageText = document.querySelector("#messageText").value
-        const bookTitle = sendButton.dataset.bookTitle
+        const bookTitle = sendButton.dataset.booktitle
+        console.log("title", bookTitle)
         document.querySelector("#messageText").value = ''
         //send the message to the server, then send the user back to the browse page
         await fetch("/api/send_message", {
@@ -34,10 +35,11 @@
             headers: { 'Content-Type': "application/json" },
             body: JSON.stringify({
                 bookID: sendButton.dataset.book,
-                messageText: `A PageExchange User has requested your book ${bookTitle}, you can now message them to arrange a time to meet up to exchange the book!`
-                serverMessage: true;
+                messageText: `A PageExchange User has requested your book ${bookTitle}, you can now message them to arrange a time to meet up to exchange the book!`,
+                serverMessage: true,
             })
         })
+
         await fetch("/api/send_message", {
             method: "POST",
             headers: { 'Content-Type': "application/json" },
