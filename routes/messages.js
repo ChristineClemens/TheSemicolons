@@ -1,4 +1,4 @@
-require("dotenv").config();
+v").config();
 
 const express = require("express");
 const secured = require("../lib/middleware/secured");
@@ -73,18 +73,19 @@ const MessageModel = new message();
 // });
 
 
-
 //get("/inbox") -> Get every book that has a message about it in the table.
 router.get("/inbox", secured(), async function (req, res) {
     const { _raw, _json, ...userProfile } = req.user;
-    let requestedBooks = await BookModel.getBooksFromAuthID(userProfile.user_id);
-    // console.log(userProfile.user_id);
-    // console.log(requestedBooks);
-    res.status(200).send("WOOT! I didn't fail!");
+    let messages = await MessageModel.getReceivedMessages(2);
+    messages = messages.map(message => ({sender: message.sender_id}));
+    console.log(messages);
+    res.render("messages", {
+        messages: messages
+    })
 });
 
 //get("/inbox/:bookID") --> Get every message about that book (req.params.bookID).
-router.get("/inbox/:bookID", secured(), async function (req, res) {
+router.get("/inbox/:messageChain", secured(), async function (req, res) {
     const { _raw, _json, ...userProfile } = req.user;
     let userDBID = (await UserModel.getUserByID(userProfile.user_id))[0].id;
     let messageBookChain = await MessageModel.getAllBookMessages(userDBID, req.params.bookID);
@@ -92,6 +93,7 @@ router.get("/inbox/:bookID", secured(), async function (req, res) {
     // console.log(userDBID);
     // console.log(messageBookChain);
     res.status(200).send("Success! Sweet success!");
+    // let messages = await MessageModel.getReceivedMessages(userID);
 });
 
 //get(/inbox/:bookID/:senderID") --> Get every message about the book from an individual person.
