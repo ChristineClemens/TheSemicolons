@@ -92,13 +92,18 @@ router.get("/inbox/:bookID", secured(), async function (req, res) {
     // console.log(userDBID);
     // console.log(messageBookChain);
     res.status(200).send("Success! Sweet success!");
-
 });
 
-// //get(/inbox/:bookID/:senderID") --> Get every message about the book from an individual person.
-// router.get("/inbox/:bookID/:senderID", secured(), async function (req, res) {
-//     const { _raw, _json, ...userProfile } = req.user;
-//     let sharedBookMessages = await MessageModel.getSharedBookMessages(userID, senderID, bookID);
-// });
+//get(/inbox/:bookID/:senderID") --> Get every message about the book from an individual person.
+router.get("/inbox/:bookID/:senderID", secured(), async function (req, res) {
+    const { _raw, _json, ...userProfile } = req.user;
+    let userDBID = (await UserModel.getUserByID(userProfile.user_id))[0].id;
+    let sharedBookMessages = await MessageModel.getSharedBookMessages(userDBID, req.params.senderID, req.params.bookID);
+    console.log(userDBID);
+    console.log(req.params.senderID);
+    console.log(req.params.bookID);
+    console.log(sharedBookMessages);
+    res.status(200).send("I hath risen to glory!");
+});
 
 module.exports = router;
