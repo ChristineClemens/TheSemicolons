@@ -11,17 +11,23 @@ const secured = require("../lib/middleware/secured");
 router.use(express.urlencoded({ extended: true }));
 router.use(express.json());
 
-router.post("/send_request", secured(), async function (req, res) {
-    console.log("New post request to send_request", req.body);
+router.post("/send_message", secured(), async function (req, res) {
+    console.log("New post request to send_request for initial request of the book", req.body);
     const { _raw, _json, ...userProfile } = req.user;
     const userID = (await UserModel.getUserByID(userProfile.user_id))[0].id
-
-    //Information about the owner of the book
     const bookInformation = (await BookModel.getBookAndUser(req.body.bookID))[0]
     const ownerID = bookInformation.possession_id
 
+    //If this is a message from us, we can maybe render it differently
+    //We could add a new column to messages with a boolean, for now I'm just adding something to watch for in the form of ***
+    if (req.body.serverMessage){
+        await MessageModel.addMessage(ownerID, userID, "***\n" + req.body.messageText + "\n***", req.body.bookID);
+        res.status(200).send("message sent successfully")
+        return
+    }
+
     //adding the message to the database
-    await MessageModel.addMessage(userID, ownerID, req.body.messageText, req.body.bookID);
+    await MessageModel.addMessage(ownerID, userID, req.body.messageText, req.body.bookID);
     res.status(200).send("message sent successfully")
     console.log("Message successfully saved")
 
