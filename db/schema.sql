@@ -36,6 +36,7 @@ message_text VARCHAR(5000),
 book_requested_id INT NOT NULL,
 date_added TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
 createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
+date_added TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
 FOREIGN KEY (sender_id) REFERENCES users(id),
 FOREIGN KEY (recipient_id) REFERENCES users(id),
 FOREIGN KEY (book_requested_id) REFERENCES books(id)
