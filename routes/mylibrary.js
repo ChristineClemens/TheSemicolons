@@ -11,6 +11,7 @@ const user = require("../models/user");
 const UserModel = new user();
 
 const message = require("../models/message");
+const { unsubscribe } = require("./browse");
 const MessageModel = new message();
 
 /* GET user profile page for my library. */
@@ -46,8 +47,10 @@ router.get("/mylibrary", secured(), async function (req, res, next) {
             userName = userProfile.name.givenName || userProfile.displayName;
         }
         let usersBooks = await BookModel.getBooks("possession_id", userInDB[0].id);
-        usersBooks = parseBooks(usersBooks)
+        usersBooks = parseBooks(usersBooks);
         let usercheckCredits = await UserModel.checkCredits(userID);
+
+        let messages = MessageModel.getReceivedMessages(userInDB[0].id);
 
         res.render("mylibrary", {
             userProfile: JSON.stringify(userProfile, null, 2),
@@ -55,6 +58,7 @@ router.get("/mylibrary", secured(), async function (req, res, next) {
             title: "My Library",
             books: usersBooks,
             credits: usercheckCredits,
+            messages: messages,
         });
     }
 
@@ -66,8 +70,7 @@ router.get("/mylibrary", secured(), async function (req, res, next) {
     // let userBooks = BookModel.getBooks("user_id", userID)
 });
 
-
-function parseBooks(bookList){
+function parseBooks(bookList) {
     return bookList.map((book) => ({
         title: book.title,
         genre: book.genre,
@@ -76,18 +79,15 @@ function parseBooks(bookList){
         possession_id: book.possession_id,
         date_added: book.date_added,
         id: book.id,
-        description: conditionalTruncate(book.description)
+        description: conditionalTruncate(book.description),
     }));
 }
 
-function conditionalTruncate(string){
-    if (string.length > 300){
-        return string.trim().substring(0, 300) + "..."
+function conditionalTruncate(string) {
+    if (string.length > 300) {
+        return string.trim().substring(0, 300) + "...";
     }
-    return string
+    return string;
 }
-
-
-
 
 module.exports = router;
