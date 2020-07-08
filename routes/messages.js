@@ -83,7 +83,7 @@ router.get("/inbox", secured(), async function (req, res) {
     for (let index = 0; index < uniqueSenders.length; index++) {
         const sender = uniqueSenders[index];
         const senderName = await UserModel.getUsernameByDBID(sender)
-        uniqueSenderNames.push({id: sender, name: (senderName) ? senderName : "Unnamed User"}
+        uniqueSenderNames.push({id: sender, name: ((senderName) ? senderName : "Unnamed User")})
     }
     console.log(uniqueSenderNames);
     res.render("messages", {
