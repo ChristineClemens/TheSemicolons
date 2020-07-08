@@ -40,21 +40,20 @@
 
     <script>
  
-        
         async function addBook(id) {
             let originalSearch = window.location.href.split("/")
             originalSearch = originalSearch[originalSearch.length - 1]
 
-            await fetch("/api/books", { //found it, it was a comma
+            await fetch("/api/books", {
                 method: "POST",
                 headers: { 'Content-Type': "application/json" },
                 body: JSON.stringify({
-                    bookID: sendButton.dataset.book,
+                    bookID: id,
                     originalSearch: originalSearch
                 })
             })
             window.location.href = "/mylibrary"
-        } //in here I guess ^
+        } 
 
         document.querySelector("#searchButton").addEventListener("click", async function () {
             console.log("Search function ran")
