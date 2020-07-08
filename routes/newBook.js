@@ -24,10 +24,12 @@ router.get("/newbook", secured(), async function (req, res, next) {
 });
 
 router.get("/newBook/:bookTitle", secured(), async function(req, res) {
+
     let bookTitle = req.params.bookTitle; 
     var APIKey = process.env.API_KEY;
     var bookTitleSearch = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${bookTitle}&appid=${APIKey}`).then(resp => resp.json());
     bookTitleSearch = bookTitleSearch.items
+
     bookTitleSearch = bookTitleSearch.map((book, index )=> ({
         title: book.volumeInfo.title,
         book_cover: book.volumeInfo.imageLinks.thumbnail,
