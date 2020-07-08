@@ -24,29 +24,51 @@ body {
   }
 
 </style>
-</head>
-<body>
 
-<h2>Messages between {{name}} and {{sender}}</h2>
 
+
+<h2>Messages between {{name}} and {{sender}} about {{bookTitle}}</h2>
+{{#each messages}}
 <div class="container">
   <h3 class="senderName">{{sender}}<h3>
-  <h5 class="senderText">{{Message Text}}</h5>
+  <h5 class="senderText">{{message_text}}</h5>
 </div>
   <h3>
+{{#if something }}
 <div class="container darker">
-  <h3 class="userName">{{user}}<h3>
-  <h5 class="userText">{{Message Text}}</h5>
+  <h3 class="userName">{{name}}<h3>
+  <h5 class="userText">{{message_text}}</h5>
 </div>
-
+{{/if}}
+{{/each}}
 <div class="input-group mb-3">
   <div class="input-group-prepend">
-    <button class="btn btn-outline-secondary" type="button">Send</button>
+    <button class="btn btn-outline-secondary" id="send-button"  data-book={{bookID}} type="button">Send</button>
     <button class="btn btn-outline-secondary" type="button">Send Confirmation of Pickup</button>
   </div>
-  <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+  <input type="text" class="form-control" id="messageText" placeholder="" aria-label="" aria-describedby="basic-addon1">
 </div>
 
+<script>
+    
+    const sendButton = document.querySelector("#send-button")
 
-</body>
-</html>
+    sendButton.addEventListener("click", async function() {
+        const messageText = document.querySelector("#messageText").value
+        document.querySelector("#messageText").value = ''
+     
+        await fetch("/api/send_message", {
+            method: "POST",
+            headers: { 'Content-Type': "application/json" },
+            body: JSON.stringify({
+                bookID: sendButton.dataset.book,
+                messageText: messageText
+            })
+        })
+
+       window.location.reload()
+
+    })
+
+</script>
+
