@@ -9,8 +9,8 @@ id INTEGER AUTO_INCREMENT PRIMARY KEY,
 name VARCHAR(255),
 auth_id VARCHAR (255) NOT NULL,
 location VARCHAR (255),
-credits INTEGER
-createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
+credits INTEGER,
+createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP()
 );
 
 CREATE TABLE books (
@@ -23,6 +23,7 @@ page_count INTEGER,
 book_cover VARCHAR (255),
 possession_id INTEGER,
 createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
+date_added TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
 FOREIGN KEY (possession_id) REFERENCES users(id)
 );
 
@@ -33,6 +34,7 @@ sender_id INT NOT NULL,
 recipient_id INT NOT NULL,
 message_text VARCHAR(5000),
 book_requested_id INT NOT NULL,
+date_added TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
 createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
 FOREIGN KEY (sender_id) REFERENCES users(id),
 FOREIGN KEY (recipient_id) REFERENCES users(id),
