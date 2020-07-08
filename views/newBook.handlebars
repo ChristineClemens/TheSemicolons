@@ -1,19 +1,24 @@
 <label for="title">Book Title</label>
 <input type="text" id="title" name="title">
 
-<button onclick="searchGBooks()" id="submitButton">Submit New Book</button>
+<a onclick="searchGBooks()" id="submitButton">Submit New Book</a>
 <div class="bookresults">
     <ul>
+        {{#if books}}
         {{#each books}}
         <li>{{title}}</li>
         <img src="{{book_cover}}" alt="">
         <li><button onclick="addBook({{id}})">Choose Book</button></li>
         {{/each}} //using router.post("/add_book/:index")
+        {{/if}}
     </ul>
 </div>
 
 <script>
-
+    function searcGBooks(){
+        const title = document.querySelector("#title").value.trim()
+        window.location.href = "/newbook/" + title
+    }
     async function addBook(id){
         //The original search is going to be part of the URL here, so if we want
         //the exact same results we could grab it there

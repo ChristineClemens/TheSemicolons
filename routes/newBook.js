@@ -52,6 +52,8 @@ router.get("/newBook/:bookTitle", secured(), async function(req, res) {
     bookTitleSearch = bookTitleSearch.map((book, index )=> ({
         title: book.volumeInfo.title,
         book_cover: book.volumeInfo.imageLinks.thumbnail, //Because this will loop each item in the array
+        genre: book.volumeInfo.categories,
+        author: book.volumeInfo.authors,
         id: index
     }))
 
