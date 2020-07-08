@@ -11,55 +11,47 @@ const secured = require("../lib/middleware/secured");
 router.use(express.urlencoded({ extended: true }));
 router.use(express.json());
 
+
 router.get("/books/GBooks/:title/", async function (req, res) {
     var inputBookTitle = req.params.title;
     var APIKey = process.env.API_KEY;
     var bookTitleSearch = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${inputBookTitle}&appid=${APIKey}`).then(resp => resp.json());
     res.status(200).send(JSON.stringify(bookTitleSearch))
 });
-
 //add book to db
 router.post("/books", secured(), async function (req, res) {
     console.log("Posting book ", req.body.book);
     const { _raw, _json, ...userProfile } = req.user;
-    const userID = (await UserModel.getUserByID(userProfile.user_id))[0].id;
-    if ("book" in req.body) {
-        //JAMES, LOOK WHAT WE DID.
-        var APIKey = process.env.API_KEY;
 
-        var inputBookTitle = req.body.book.title;
-        var bookTitleSearch = `https://www.googleapis.com/books/v1/volumes?q=${inputBookTitle}&appid=${APIKey}`;
+    const userID = (await UserModel.getUserByID(userProfile.user_id))[0].id; //This checks the database and gets the ID in our SQL database of the current user, so we can define the book as being "theirs"
+    if ("id" in req.body) {
+        //We might need to rerun the google books API search, because we don't have it "saved" or anything
+        //Then we can use the index of the result inside that to choose it
+        let bookTitle = req.body.originalSearch
+        let bookID = req.body.id
+        let APIKey = process.env.API_KEY
+        var bookTitleSearch = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${bookTitle}&appid=${APIKey}`).then(resp => resp.json());
+        let bookInfo = bookTitleSearch.items[bookID]
 
-        //Performed a fetch request to retrieve information about an individual volume.
-        let bookInfo = await fetch(bookTitleSearch)
-            .then((response) => response.json())
-            .then((data) => {
 
-                //Collected and defined information as a result of the API call.
-                return {
-                    title: `${data.items[0].volumeInfo.title}`,
-                    author: `${data.items[0].volumeInfo.authors}`,
-                    genre: `${data.items[0].volumeInfo.categories}`,
-                    description: `${data.items[0].volumeInfo.description}`,
-                    page_count: `${data.items[0].volumeInfo.pageCount}`,
-                    book_cover: `${data.items[0].volumeInfo.imageLinks.thumbnail}`,
-                };
-            });
         await BookModel.addBook({
-            title: bookInfo.title,
-            author: bookInfo.author,
-            genre: bookInfo.genre,
-            description: bookInfo.description,
-            page_count: bookInfo.page_count,
-            book_cover: bookInfo.book_cover,
+            title: bookInfo.volumeInfo.title,
+            author: bookInfo.volumeInfo.authors,
+            genre: bookInfo.volumeInfo.categories,
+            description: bookInfo.volumeInfo.description,
+            page_count: bookInfo.volumeInfo.pageCount,
+            book_cover: bookInfo.volumeInfo.imageLinks.thumbnail,
             possession_id: userID,
         });
         res.status(200).send("Book added");
     } else {
         res.status(400).send("failed to post book");
         console.log("There wasn't a book in the request body, so it wasn't added");
-    }
+    }  //I MADE A TYPO SOMEWHERE
+
 });
+
+
 
 //get all the books in the db
 router.get("/books", async function (req, res) {

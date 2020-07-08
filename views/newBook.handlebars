@@ -1,30 +1,44 @@
 <label for="title">Book Title</label>
 <input type="text" id="title" name="title">
 
-<button onclick="searchGBooks()" id="submitButton">Submit New Book</button>
+<a onclick="searchGBooks()" id="submitButton">Submit New Book</a>
 <div class="bookresults">
-
+    <ul>
+        {{#if books}}
+        {{#each books}}
+        <li>{{title}}</li>
+        <img src="{{book_cover}}" alt="">
+        <li><button onclick="addBook({{id}})">Choose Book</button></li>
+        {{/each}} //using router.post("/add_book/:index")
+        {{/if}}
+    </ul>
 </div>
+
 <script>
-
-    async function searchGBooks() {
-        titleInp = document.querySelector("#title")
-        const title = titleInp.value
-
-        let response = await fetch(`/api/books/GBooks/${title}`).then(resp => resp.json())
-        console.log("searchGBooks -> response", response)
-
-        //Performed a fetch request to retrieve information about an individual volume.
+    function searcGBooks(){
+        const title = document.querySelector("#title").value.trim()
+        window.location.href = "/newbook/" + title
+    }
+    async function addBook(id){
+        //The original search is going to be part of the URL here, so if we want
+        //the exact same results we could grab it there
+        let originalSearch = window.location.href.split("/")
+        originalSearch = originalSearch[originalSearch.length - 1]
         
+        //then we want to send a fetch post request to /api/books
+        //with the book originalSearch and the id
+        
+        
+        //We don't need to assign a vari able, because we're sending something to the server
+        //not asking for something
 
-        //RENDER THE BOOKS
-            //IN A LOOP, CREATE NEW ELEMENTS AND ADD THEM TO THE PAGE FOR EACH OF THE TEN RESULTS
-            //WHEN ONE OF THE RESULTS IS CLICKED, WE SEND A FETCH POST REQUEST TO THE SERVER TO ADD THAT BOOK TO THE DATABASE
+
+        await fetch("/api/books" {
+                method: "POST", //Post request, instead of the default which is get
+                headers: { 'Content-Type': "application/json" }, //telling the server we're sending JSON
+                body: JSON.stringify({
+                    bookID: id
+                })
 
     }
-
-
-
-
-
 </script>

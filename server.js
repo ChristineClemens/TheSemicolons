@@ -33,7 +33,7 @@ const PORT = process.env.PORT || 3000;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
-app.set("views", path.join(__dirname, "views"));
+//app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "handlebars");
 
 if (app.get("env") === "production") {
@@ -80,7 +80,9 @@ app.use("/", authRouter);
 app.use("/api", bookApiRouter, messagesAPIRouter, usersApiRouter);
 app.use("/", indexRouter, mylibrary, browseRouter, bookRequest, messages, TEMPuserpage, newBook);
 app.use(express.static('public'));
-
+app.use(function(req, res) {
+    res.render("404");
+  });
 app.listen(PORT, function () {
     console.log("App listening on PORT " + PORT);
 });
