@@ -17,10 +17,15 @@ router.get("/browse", secured(), async function (req, res, next) {
     allBooks = parseBooks(allBooks);
     let userInDB = await UserModel.getUserByID(userProfile.user_id);
     let messages =  await MessageModel.getReceivedMessages(userInDB[0].id)
+
+    let userCredits = await UserModel.checkCredits(userProfile.user_id)
+
+
     res.render("browse", {
         title: "Browse",
         books: allBooks,
-        messages: messages
+        messages: messages,
+        credits: userCredits
     });
 });
 
@@ -32,13 +37,15 @@ router.get("/browse/:condition/:query", async function (req, res) {
     console.log(`getting books based on search for browse page `, condition, query);
     let allBooks = await BookModel.getBooksFuzzy(condition, query);
     allBooks = parseBooks(allBooks);
-    let messages = MessageModel.getReceivedMessages(userInDB[0].id)
+    let messages = await MessageModel.getReceivedMessages(userInDB[0].id)
+    let userCredits = await UserModel.checkCredits(userProfile.user_id)
 
     res.render("browse", {
         title: "Browse",
         books: allBooks,
         search: true,
         messages: messages,
+        credits: userCredits
     });
 });
 
