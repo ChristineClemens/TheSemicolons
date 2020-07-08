@@ -22,8 +22,8 @@ router.get("/inbox", secured(), async function (req, res) {
     messages = messages.map(message => (message.sender_id));
     uniqueSenders = messages.filter(onlyUniqueSenders);
     uniqueSenderNames = []
-    for (let index = 0; index < uniqueSenders.length; index++) {
-        const sender = uniqueSenders[index];
+    for (let i = 0; i < uniqueSenders.length; i++) {
+        const sender = uniqueSenders[i];
         const senderName = await UserModel.getUsernameByDBID(sender)
         uniqueSenderNames.push({id: sender, name: ((senderName) ? senderName : "Unnamed User")})
     }
@@ -42,15 +42,29 @@ function onlyUniqueSenders(value, index, self) {
 //Here, you can send and receive messages.
 router.get("/inbox/:sender_id", secured(), async function (req, res) {
     const { _raw, _json, ...userProfile } = req.user;
-    let user = await UserModel.getUserDBIDByAuthID(userProfile.user_id);
-    let messageChain = await MessageModel.getSharedMessages(user, req.params.sender_id);
+    let user = await UserModel.getUserDBIDByAuthID(userProfile.user_id); 
+    let messageChain = await MessageModel.getSharedMessages(user, req.params.sender_id); 
+    const recipientName = await UserModel.getUsernameByDBID(messageChain[0].recipient_id);
+    const senderName = await UserModel.getUsernameByDBID(messageChain[0].sender_id);
+    let messageArray = []; 
+    for (let i = 0; i < messageChain.length; i++) {
+        const message = messageChain[i]; 
+        const senderName = await UserModel.getUsernameByDBID(message.sender_id);
+        messageArray.push({
+            message: message.message_text,
+            youReply: (message.sender_id == user),
+            name: ((senderName) ? senderName : "Unnamed User")
+        }); 
+    }
     let bookRequested = await BookModel.getBookFromDBID(messageChain[0].book_requested_id);
     console.log(messageChain);
     res.render("innerchat", {
+        recipientName: recipientName,
+        senderName: senderName,
         bookCover: bookRequested.book_cover,
         bookTitle: bookRequested.title,
         bookAuthor: bookRequested.author,
-        messageChain: messageChain
+        messageChain: messageArray
     }) 
 });
 
