@@ -16,6 +16,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
         integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/d8e179be37.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.4/gsap.min.js"></script>
     <link rel="stylesheet" href="/assets/style.css">
 
     <title>{{title}}</title>
@@ -60,18 +62,26 @@
                     <a class="nav-link" href="/browse">Browse</a>
                 </li>
                 <li>
-                    <a class="nav-link" href="/messages">Inbox</a>
+                    {{#if messages}}
+                    <a href="/messages" class="nav-link"><i id="mail" class="fa fa-envelope" aria-hidden="true"></i></a>
+                    {{else}}
+                    <a class="nav-link" href="/messages"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>
+                    {{/if}}
                 </li>
+                {{#if credits}}
+                {{!-- WE CAN RENDER THE NUMBER OF CREDITS HERE --}}
+
+                {{/if}}
                 <li>
                     <form class="form-inline">
-                        <a href="/logout" class="btn btn-outline-success my-2 my-sm-0 mr-sm-2" type="">Sign Out</a>
+                        <a href="/logout" class="btn btn-success my-2 my-sm-0 mr-sm-2 ml-4" type="">Sign Out</a>
                     </form>
                 </li>
                 {{/unless}}
                 {{#if notLoggedIn}}
                 <li>
                     <form class="form-inline">
-                        <a href="/login" class="btn btn-outline-success my-2 my-sm-0 mr-sm-2" type="">Sign In</a>
+                        <a href="/login" class="btn btn-success my-2 my-sm-0 mr-sm-2" type="">Sign In</a>
                     </form>
                 </li>
                 {{/if}}
@@ -98,5 +108,15 @@
     {{{ body }}}
 
 </body>
+<script>
+    if (document.querySelector("#mail")) {
+        let tl = gsap.timeline({repeat: -1});
+
+        tl.to("#mail", { delay: 2, duration: 2, css: { color: "red" }, ease: "sine.in"});
+        tl.to("#mail", { delay: 2, duration: 2, css: { color: "black" }, ease: "sine.in"});
+
+    }
+
+</script>
 
 </html>
