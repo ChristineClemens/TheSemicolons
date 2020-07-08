@@ -46,6 +46,7 @@ router.get("/mylibrary", secured(), async function (req, res, next) {
             userName = userProfile.name.givenName || userProfile.displayName;
         }
         let usersBooks = await BookModel.getBooks("possession_id", userInDB[0].id);
+        usersBooks = parseBooks(usersBooks)
         let usercheckCredits = await UserModel.checkCredits(userID);
 
         res.render("mylibrary", {
@@ -64,5 +65,29 @@ router.get("/mylibrary", secured(), async function (req, res, next) {
     //we want a list of all their books to pass into the page
     // let userBooks = BookModel.getBooks("user_id", userID)
 });
+
+
+function parseBooks(bookList){
+    return bookList.map((book) => ({
+        title: book.title,
+        genre: book.genre,
+        page_count: book.page_count,
+        book_cover: book.book_cover,
+        possession_id: book.possession_id,
+        date_added: book.date_added,
+        id: book.id,
+        description: conditionalTruncate(book.description)
+    }));
+}
+
+function conditionalTruncate(string){
+    if (string.length > 300){
+        return string.trim().substring(0, 300) + "..."
+    }
+    return string
+}
+
+
+
 
 module.exports = router;

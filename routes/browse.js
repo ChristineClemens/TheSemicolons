@@ -9,7 +9,8 @@ router.get("/browse", secured(), async function (req, res, next) {
     console.log("browse page loaded");
 
     //getting all the books in the db
-    const allBooks = await BookModel.getAllBooks();
+    let allBooks = await BookModel.getAllBooks();
+    allBooks = parseBooks(allBooks)
     res.render("browse", {
         title: "Browse",
         books: allBooks,
@@ -20,12 +21,34 @@ router.get("/browse/:condition/:query", async function (req, res) {
     let condition = req.params.condition;
     let query = req.params.query;
     console.log(`getting books based on search for browse page `, condition, query);
-    let books = await BookModel.getBooksFuzzy(condition, query);
+    let allBooks = await BookModel.getBooksFuzzy(condition, query);
+    allBooks = parseBooks(allBooks)
     res.render("browse", {
         title: "Browse",
-        books: books,
+        books: allBooks,
         search: true,
     });
 });
+
+function parseBooks(bookList){
+    return bookList.map((book) => ({
+        title: book.title,
+        genre: book.genre,
+        page_count: book.page_count,
+        book_cover: book.book_cover,
+        possession_id: book.possession_id,
+        date_added: book.date_added,
+        id: book.id,
+        description: conditionalTruncate(book.description)
+    }));
+}
+
+function conditionalTruncate(string){
+    if (string.length > 300){
+        return string.trim().substring(0, 300) + "..."
+    }
+    return string
+}
+
 
 module.exports = router;
