@@ -66,40 +66,14 @@
     </div> --}}
 
     {{#each books}}
-    <div class="result-list row mt-4 ml-0.8 mr-0.5">
-        <div class="col-auto d-none d-lg-block">
-            <img src="{{book_cover}}" alt="">
-            {{!-- <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg"
-
-                preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
-                <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#55595c"></rect>
-                <text x="50%" y="50%" fill="#eceeef" dy=".3em">bookPhoto</text>
-            </svg> --}}
-        </div>
-        <div class="resultBox col-md-8">
-            <div class="row no-gutters rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                <div class="resultBoxContent col">
-                    <h3 class="mb-0" id="bookTitle">{{title}}</h3>
-                    <strong class="d-inline-block mb-2 textInfo" id="Genre">{{genre}}</strong>
-                    {{!-- <div class="mb-1 textMutedChange" id="date">1999</div> --}}
-                    <p class="mb-auto" id="bookDescription">{{description}}
-                    </p>
-                    <button class="btn btn-danger" onclick="deleteBook({{id}})">Delete</button>
-                    <button class="btn btn-warning" onclick="deleteBook({{id}})">Donated</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-</div>
-{{/each}}
+    {{> personalbook}}
+    {{/each}}
 </div>
 <div id="footer">
     <script>
         async function deleteBook(id) {
             const response = await fetch(`/api/books/${id}`, { method: "DELETE" })
-            console.log(response)
+            window.location.href = "/mylibrary"
         }
 
     </script>
