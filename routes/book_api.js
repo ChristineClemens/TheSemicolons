@@ -10,6 +10,11 @@ const secured = require("../lib/middleware/secured");
 
 router.use(express.urlencoded({ extended: true }));
 router.use(express.json());
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> master
 router.get("/books/GBooks/:title/", async function (req, res) {
     var inputBookTitle = req.params.title;
     var APIKey = process.env.API_KEY;
