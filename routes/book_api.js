@@ -19,7 +19,7 @@ router.get("/books/GBooks/:title/", async function (req, res) {
 });
 //add book to db
 router.post("/books", secured(), async function (req, res) {
-    console.log("Posting book ", req.body.book);
+    console.log("Posting book ", req.body.originalSearch);
     const { _raw, _json, ...userProfile } = req.user;
 
     const userID = (await UserModel.getUserByID(userProfile.user_id))[0].id; //This checks the database and gets the ID in our SQL database of the current user, so we can define the book as being "theirs"
@@ -32,13 +32,12 @@ router.post("/books", secured(), async function (req, res) {
         var bookTitleSearch = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${bookTitle}&appid=${APIKey}`).then(resp => resp.json());
         let bookInfo = bookTitleSearch.items[bookID]
 
-
         await BookModel.addBook({
-            title: bookInfo.volumeInfo.title,
-            author: bookInfo.volumeInfo.authors,
-            genre: bookInfo.volumeInfo.categories,
-            description: bookInfo.volumeInfo.description,
-            page_count: bookInfo.volumeInfo.pageCount,
+            title: String(bookInfo.volumeInfo.title),
+            author: String(bookInfo.volumeInfo.authors),
+            genre: String(bookInfo.volumeInfo.categories),
+            description: String(bookInfo.volumeInfo.description),
+            page_count: String(bookInfo.volumeInfo.pageCount),
             book_cover: bookInfo.volumeInfo.imageLinks.thumbnail,
             possession_id: userID,
         });

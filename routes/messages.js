@@ -13,76 +13,17 @@ const UserModel = new user();
 const message = require("../models/message");
 const MessageModel = new message();
 
-// router.get("/messages", secured(), async function (req, res) {
-//     console.log("Message page loaded");
-//     const { _raw, _json, ...userProfile } = req.user;
-//     // let userID = (await UserModel.getUserByID(userProfile.user_id))[0].id;
-//     let messages = await MessageModel.getMessages(userProfile.user_id);
-//     messages = await Promise.all(
-//         messages.map(async function (message) {
-//             let sender = await UserModel.getUsernameByDBID(message.sender_id);
-//             let book = await BookModel.getBookFromDBID(message.book_requested_id);
-//             return {
-//                 sender: sender,
-//                 senderID: message.sender_id,
-//                 bookTitle: book.title,
-//                 message: message.message_text,
-//             };
-//         })
-//     );
-//     console.log(messages);
-//     res.render("messages", {
-//         title: "Your Messages",
-//         messages: messages,
-//     });
-// });
-
-// router.get("/messagechain/:sender_id", secured(), async function (req, res) {
-//     const { _raw, _json, ...userProfile } = req.user;
-//     //return all messages
-//     //show in order of time created (need to add that column to the table)
-//     //have a text box that can add a message to the chain at the bottom,
-//     //then the page is reloaded
-//     console.log("Message chain loaded");
-//     let messages = await MessageModel.getMessageChain(userProfile.user_id, req.params.sender_id);
-//     console.log("messages", messages);
-//     const bookInformation = (await BookModel.getBookAndUser(messages[0].book_requested_id))[0]
-//     const bookRequestedID = messages[0].book_requested_id
-//     messages = await Promise.all(
-//         messages.map(async function (message) {
-//             let sender = await UserModel.getUsernameByDBID(message.sender_id);
-//             let book = await BookModel.getBookFromDBID(message.book_requested_id);
-//             return {
-//                 sender: sender,
-//                 senderID: message.sender_id,
-//                 bookTitle: book.title,
-//                 message: message.message_text,
-//             };
-//         })
-//     );
-    
-//     res.render("messagechain", {
-//         title: `Your messages with ${messages[0].sender} regarding ${messages[0].bookTitle}`,
-//         messages: messages,
-//         bookTitle: messages[0].bookTitle,
-//         meetupLocation: bookInformation.location,
-//         recipient: bookInformation.possession_id,
-//         bookID: bookRequestedID,
-//         bookCover: bookInformation.book_cover
-//     });
-// });
-
-
-//get("/inbox") -> Get every book that has a message about it in the table.
+//Retrieve information from the database to be organized and rendered in your Inbox.
+//Using this information, you can open your collection of messages chains.
 router.get("/inbox", secured(), async function (req, res) {
     const { _raw, _json, ...userProfile } = req.user;
     let user = await UserModel.getUserDBIDByAuthID(userProfile.user_id);
     let messages = await MessageModel.getReceivedMessages(user);
     messages = messages.map(message => (message.sender_id));
-    uniqueSenders = messages.filter(onlyUniqueSenders)
+    uniqueSenders = messages.filter(onlyUniqueSenders);
     uniqueSenderNames = []
-    for (let index = 0; index < uniqueSenders.length; index++) {
-        const sender = uniqueSenders[index];
+    for (let i = 0; i < uniqueSenders.length; i++) {
+        const sender = uniqueSenders[i];
         const senderName = await UserModel.getUsernameByDBID(sender)
         uniqueSenderNames.push({id: sender, name: ((senderName) ? senderName : "Unnamed User")})
     }
@@ -96,36 +37,35 @@ function onlyUniqueSenders(value, index, self) {
     return self.indexOf(value) === index;
 }
 
-//get("/inbox/:bookID") --> Get every message about that book (req.params.bookID).
+//Retrieve information from the database with one individual that will be rendered as a message chain.
+//Using this information, you can open and view a single message chain.
+//Here, you can send and receive messages.
 router.get("/inbox/:sender_id", secured(), async function (req, res) {
     const { _raw, _json, ...userProfile } = req.user;
-    let user = await UserModel.getUserDBIDByAuthID(userProfile.user_id);
-    let messageChain = await MessageModel.getSharedMessages(user, req.params.sender_id);
-    // console.log(messageChain);
-    res.render("messagechain", {
-        messageChain: messageChain
-    })
-    
-
-    // let userDBID = (await UserModel.getUserByID(userProfile.user_id))[0].id;
-    // let messageBookChain = await MessageModel.getAllBookMessages(userDBID, req.params.bookID);
-    // console.log(req.params.bookID);
-    // console.log(userDBID);
-    // console.log(messageBookChain);
-    // res.status(200).send("Success! Sweet success!");
-    // let messages = await MessageModel.getReceivedMessages(userID);
-});
-
-//get(/inbox/:bookID/:senderID") --> Get every message about the book from an individual person.
-router.get("/inbox/:bookID/:recipientID", secured(), async function (req, res) {
-    const { _raw, _json, ...userProfile } = req.user;
-    let userDBID = (await UserModel.getUserByID(userProfile.user_id))[0].id;
-    let sharedBookMessages = await MessageModel.getSharedBookMessages(userDBID, req.params.recipientID, req.params.bookID);
-    // console.log(userDBID);
-    // console.log(req.params.recipientID);
-    // console.log(req.params.bookID);
-    // console.log(sharedBookMessages);
-    res.status(200).send("I hath risen to glory!");
+    let user = await UserModel.getUserDBIDByAuthID(userProfile.user_id); 
+    let messageChain = await MessageModel.getSharedMessages(user, req.params.sender_id); 
+    const recipientName = await UserModel.getUsernameByDBID(messageChain[0].recipient_id);
+    const senderName = await UserModel.getUsernameByDBID(messageChain[0].sender_id);
+    let messageArray = []; 
+    for (let i = 0; i < messageChain.length; i++) {
+        const message = messageChain[i]; 
+        const senderName = await UserModel.getUsernameByDBID(message.sender_id);
+        messageArray.push({
+            message: message.message_text,
+            youReply: (message.sender_id == user),
+            name: ((senderName) ? senderName : "Unnamed User")
+        }); 
+    }
+    let bookRequested = await BookModel.getBookFromDBID(messageChain[0].book_requested_id);
+    console.log(messageChain);
+    res.render("innerchat", {
+        recipientName: recipientName,
+        senderName: senderName,
+        bookCover: bookRequested.book_cover,
+        bookTitle: bookRequested.title,
+        bookAuthor: bookRequested.author,
+        messageChain: messageArray
+    }) 
 });
 
 module.exports = router;

@@ -1,3 +1,4 @@
+<div class="container mt-2">
 <label for="title">Book Title</label>
 <input type="text" id="title" name="title">
 
@@ -37,7 +38,7 @@
         {{/each}}
         {{/if}}
     </div>
-
+</div>
     <script>
  
         async function addBook(id) {
@@ -48,12 +49,13 @@
                 method: "POST",
                 headers: { 'Content-Type': "application/json" },
                 body: JSON.stringify({
-                    bookID: id,
+
+                    id: id,
                     originalSearch: originalSearch
                 })
             })
             window.location.href = "/mylibrary"
-        } 
+        }
 
         document.querySelector("#searchButton").addEventListener("click", async function () {
             console.log("Search function ran")
