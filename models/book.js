@@ -22,6 +22,13 @@ class BookModel {
         return book;
     }
 
+    async getBooksFromAuthID(auth_id) {
+        let db = new orm("mylibrary");
+        let book = await db.leftJoinWhere("books", "users", "books.possession_id", "users.id", "users.auth_id", auth_id);
+        await db.close();
+        return book;
+    }
+
     async getAllBooks() {
         //conditions is an object with column to search : value to find
         let db = new orm("mylibrary");

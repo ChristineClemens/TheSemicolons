@@ -1,34 +1,7 @@
 const orm = require("../config/orm");
 
 class MessageModel{
-    // async getMessages(userID){
-    //     let db = new orm("mylibrary");
-    //     let messages = await db.leftJoinWhere('messages', 'users', 'messages.recipient_id', 'users.id', 'users.auth_id', userID)
-    //     await db.close()
-    //     return messages
-    // }
-
-    // async addMessage(senderID, recipientID, message, bookID){
-    //     let db = new orm("mylibrary");
-    //     await db.insertOne("messages", {sender_id: senderID, recipient_id: recipientID, message_text: message, book_requested_id: bookID})
-    //     await db.close()
-    // }
-
-    // async getMessageChain(userID, senderID){
-    //     //Gets all the messages, and then returns only the ones between the sender and the current user
-    //     let messages = await this.getMessages(userID)
-    //     messages = messages.filter((message) => message.sender_id == senderID)
-    //     return messages
-    // }
-
-
-
-
-    //models/message.js
-
-    //getSentMessages affiliated with your user id (selectSome).
-
-
+    
     async getSentMessages(senderID) {
         let db = new orm("mylibrary");
         let sentMessages = await db.selectSome("messages", "sender_id", senderID);
@@ -53,7 +26,17 @@ class MessageModel{
         })
         await db.close();
     }
-    //getSharedBookMessages that filters messages that share a book id.
+
+    //getAllBookMessages that retrieves all messages about a specific book.
+    async getAllBookMessages(userID, bookID) {
+        let db = new orm("mylibrary");
+        let bookMessages = await db.selectSomeBetter("messages", "recipient_id", userID, "book_requested_id", bookID);
+        console.log(bookMessages);
+        await db.close();
+        return bookMessages;
+    }
+
+    //getSharedBookMessages that filters messages between users that share a book id.
     async getSharedBookMessages(userID, senderID, bookID) {
         let db = new orm("mylibrary");
         let sharedBookMessages = await db.innerJoinSorted("users", "messages", "users.id", "messages.recipient_id", "date_added");
@@ -65,10 +48,14 @@ class MessageModel{
         return sharedBookMessages;
     }
 
-    //
-
     //addMessage that inserts message into the database with a date/timestamp (insertOne).
+    async addMessage(recipientID, userID, message, bookID) {
+        let db = new orm("mylibrary");
+        let newMessage = await db.insertOne("messages", {recipient_id: recipientID, sender_id: userID, message_text: message, book_requested_id: bookID});
+        console.log(newMessage);
+        await db.close();
+        return newMessage;
+    }
 };
-
 
 module.exports = MessageModel
