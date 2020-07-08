@@ -54,7 +54,8 @@ router.get("/newBook/:bookTitle", secured(), async function(req, res) {
         book_cover: book.volumeInfo.imageLinks.thumbnail, //Because this will loop each item in the array
         genre: book.volumeInfo.categories,
         author: book.volumeInfo.authors,
-        id: index
+        id: index,
+        description: book.volumeInfo.description
     }))
 
     console.log("Just to see if we grabbed the right data", bookTitleSearch)

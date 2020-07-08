@@ -11,7 +11,6 @@ const secured = require("../lib/middleware/secured");
 router.use(express.urlencoded({ extended: true }));
 router.use(express.json());
 
-
 router.get("/books/GBooks/:title/", async function (req, res) {
     var inputBookTitle = req.params.title;
     var APIKey = process.env.API_KEY;
@@ -53,8 +52,10 @@ router.post("/books", secured(), async function (req, res) {
 
 
 
+
 //get all the books in the db
 router.get("/books", async function (req, res) {
+    console.log(`getting all books to make sure this works please`);
     let books = await BookModel.getAllBooks();
     res.status(200).send(JSON.stringify(books));
 });
