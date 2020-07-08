@@ -22,7 +22,7 @@ const strategy = new Auth0Strategy(
 );
 
 const sess = {
-    secret: "CHANGE THIS TO A RANDOM SECRET",
+    secret: "weProbablyMissedASemicolonSomewhereAndYetWeMadeSomethingCool",
     cookie: {},
     resave: false,
     saveUninitialized: true,
@@ -33,7 +33,6 @@ const PORT = process.env.PORT || 3000;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
-//app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "handlebars");
 
 if (app.get("env") === "production") {
@@ -71,14 +70,12 @@ const browseRouter = require("./routes/browse")
 const bookRequest = require("./routes/bookRequest")
 const messages = require("./routes/messages")
 const newBook = require("./routes/newBook")
-//TEMP
-const TEMPuserpage = require("./routes/TEMPnewuser")
-//initializing the routes we've created
+
 app.use(userInViews());
 app.use("/", authRouter);
 
 app.use("/api", bookApiRouter, messagesAPIRouter, usersApiRouter);
-app.use("/", indexRouter, mylibrary, browseRouter, bookRequest, messages, TEMPuserpage, newBook);
+app.use("/", indexRouter, mylibrary, browseRouter, bookRequest, messages, newBook);
 app.use(express.static('public'));
 app.use(function(req, res) {
     res.render("404");

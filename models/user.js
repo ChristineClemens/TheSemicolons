@@ -9,6 +9,13 @@ class UserModel {
         return user;
     }
 
+    async getUserDBIDByAuthID(userID) {
+        let db = new orm("mylibrary");
+        let user = await db.selectSome("users", "auth_id", userID);
+        await db.close();
+        return user[0].id;
+    }
+
     async getUsernameByID(userID){
         let db = new orm("mylibrary");
         let user = await db.selectSome("users", "auth_id", userID);

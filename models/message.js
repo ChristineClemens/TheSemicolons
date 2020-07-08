@@ -25,6 +25,7 @@ class MessageModel{
             return ((message.sender_id == senderID && message.recipient_id == userID) || (message.recipient_id == senderID && message.sender_id == userID));
         })
         await db.close();
+        return sharedMessages;
     }
 
     //getAllBookMessages that retrieves all messages about a specific book.
