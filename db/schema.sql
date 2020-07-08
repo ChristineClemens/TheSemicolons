@@ -21,7 +21,7 @@ description VARCHAR (5000),
 page_count INTEGER,
 book_cover VARCHAR (255),
 possession_id INTEGER,
-date_added INTEGER,
+date_added TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
 FOREIGN KEY (possession_id) REFERENCES users(id)
 );
 
@@ -32,6 +32,7 @@ sender_id INT NOT NULL,
 recipient_id INT NOT NULL,
 message_text VARCHAR(5000),
 book_requested_id INT NOT NULL,
+date_added TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
 FOREIGN KEY (sender_id) REFERENCES users(id),
 FOREIGN KEY (recipient_id) REFERENCES users(id),
 FOREIGN KEY (book_requested_id) REFERENCES books(id)

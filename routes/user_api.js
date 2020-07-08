@@ -31,7 +31,6 @@ router.put("/credits", secured(), async function (req, res){
 router.get("/credits", secured(), async function (req, res){
     const { _raw, _json, ...userProfile } = req.user;
     let currentCredits =  await UserModel.checkCredits(userProfile.user_id)
-    console.log(currentCredits)
     res.status(200).send(JSON.stringify(currentCredits))
 
 })

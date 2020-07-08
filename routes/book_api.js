@@ -47,7 +47,6 @@ router.post("/books", secured(), async function (req, res) {
 
 //get all the books in the db
 router.get("/books", async function (req, res) {
-    console.log(`getting all books to make sure this works please`);
     let books = await BookModel.getAllBooks();
     res.status(200).send(JSON.stringify(books));
 });
