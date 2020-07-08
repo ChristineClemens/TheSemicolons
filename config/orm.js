@@ -38,6 +38,18 @@ class DB {
             });
         });
     }
+
+    selectSomeBetter(tableName, columnName1, searchValue1, columnName2, searchValue2) {
+        return new Promise((resolve, reject) => {
+            this.connection.query("SELECT * FROM ?? WHERE ?? = ? AND ?? = ?", [tableName, columnName1, searchValue1, columnName2, searchValue2], function (
+                err,
+                rows
+            ) {
+                if (err) reject(err);
+                resolve(rows);
+            });
+        });
+    }
     
     selectSomeFuzzy(tableName, columnName, searchValue) {
         return new Promise((resolve, reject) => {

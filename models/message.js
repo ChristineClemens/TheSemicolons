@@ -27,6 +27,15 @@ class MessageModel{
         await db.close();
     }
 
+    //getAllBookMessages that retrieves all messages about a specific book.
+    async getAllBookMessages(userID, bookID) {
+        let db = new orm("mylibrary");
+        let bookMessages = await db.selectSomeBetter("messages", "recipient_id", userID, "book_requested_id", bookID);
+        console.log(bookMessages);
+        await db.close();
+        return bookMessages;
+    }
+
     //getSharedBookMessages that filters messages between users that share a book id.
     async getSharedBookMessages(userID, senderID, bookID) {
         let db = new orm("mylibrary");
