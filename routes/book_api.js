@@ -11,11 +11,21 @@ const secured = require("../lib/middleware/secured");
 router.use(express.urlencoded({ extended: true }));
 router.use(express.json());
 
+<<<<<<< HEAD
+=======
+router.get("/books/GBooks/:title/", async function (req, res) {
+    var inputBookTitle = req.params.title;
+    var APIKey = process.env.API_KEY;
+    var bookTitleSearch = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${inputBookTitle}&appid=${APIKey}`).then(resp => resp.json());
+    res.status(200).send(JSON.stringify(bookTitleSearch))
+});
+>>>>>>> master
 
 //add book to db
 router.post("/books", secured(), async function (req, res) {
     console.log("Posting book ", req.body.book);
     const { _raw, _json, ...userProfile } = req.user;
+<<<<<<< HEAD
     const userID = (await UserModel.getUserByID(userProfile.user_id))[0].id; //This checks the database and gets the ID in our SQL database of the current user, so we can define the book as being "theirs"
     if ("id" in req.body) {
         //We might need to rerun the google books API search, because we don't have it "saved" or anything
@@ -25,6 +35,20 @@ router.post("/books", secured(), async function (req, res) {
         let APIKey = process.env.API_KEY
         var bookTitleSearch = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${bookTitle}&appid=${APIKey}`).then(resp => resp.json());
         let bookInfo = bookTitleSearch.items[bookID]
+=======
+    const userID = (await UserModel.getUserByID(userProfile.user_id))[0].id;
+    if ("book" in req.body) {
+        //JAMES, LOOK WHAT WE DID.
+        var APIKey = process.env.API_KEY;
+
+        var inputBookTitle = req.body.book.title;
+        var bookTitleSearch = `https://www.googleapis.com/books/v1/volumes?q=${inputBookTitle}&appid=${APIKey}`;
+
+        //Performed a fetch request to retrieve information about an individual volume.
+        let bookInfo = await fetch(bookTitleSearch)
+            .then((response) => response.json())
+            .then((data) => {
+>>>>>>> master
 
         await BookModel.addBook({
             title: bookInfo.volumeInfo.title,
@@ -47,7 +71,6 @@ router.post("/books", secured(), async function (req, res) {
 
 //get all the books in the db
 router.get("/books", async function (req, res) {
-    console.log(`getting all books to make sure this works please`);
     let books = await BookModel.getAllBooks();
     res.status(200).send(JSON.stringify(books));
 });
