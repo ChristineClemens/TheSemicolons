@@ -76,6 +76,7 @@
     function deleteBook(id) {
         const response = fetch(`/api/books/${id}`, { method: "DELETE" })
         window.location.href = "/mylibrary"
+        window.location.reload(false);
     }
 
 </script>
