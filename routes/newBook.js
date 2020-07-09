@@ -30,20 +30,27 @@ router.get("/newBook/:bookTitle", secured(), async function(req, res) {
     var APIKey = process.env.API_KEY;
     var bookTitleSearch = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${bookTitle}&appid=${APIKey}`).then(resp => resp.json());
     bookTitleSearch = bookTitleSearch.items
+    console.log(book.volumeInfo)
 
     bookTitleSearch = bookTitleSearch.map((book, index )=> ({
         title: book.volumeInfo.title,
-        book_cover: book.volumeInfo.imageLinks.thumbnail,
+        book_cover: (book.volumeInfo.imageLinks.thumbnail) ? book.volumeInfo.imageLinks.thumbnail : '',
         genre: book.volumeInfo.categories,
         author: book.volumeInfo.authors,
         id: index,
-        description: book.volumeInfo.description
+        description: conditionalTruncate(book.volumeInfo.description)
     }))
 
     res.render("newBook",{books: bookTitleSearch})
 });
 
-
+function conditionalTruncate(string) {
+    string = String(string)
+    if (string.length > 300) {
+        return string.trim().substring(0, 300) + "...";
+    }
+    return string
+}
 
 
 module.exports = router;
