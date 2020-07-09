@@ -5,7 +5,7 @@ const book = require("../models/book");
 const BookModel = new book();
 const user = require("../models/user");
 const UserModel = new user();
-const message = require("../models/message")
+const message = require("../models/message");
 const MessageModel = new message();
 const router = express.Router();
 const secured = require("../lib/middleware/secured");
@@ -16,8 +16,10 @@ router.use(express.json());
 router.get("/books/GBooks/:title/", async function (req, res) {
     var inputBookTitle = req.params.title;
     var APIKey = process.env.API_KEY;
-    var bookTitleSearch = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${inputBookTitle}&appid=${APIKey}`).then(resp => resp.json());
-    res.status(200).send(JSON.stringify(bookTitleSearch))
+    var bookTitleSearch = await fetch(
+        `https://www.googleapis.com/books/v1/volumes?q=${inputBookTitle}&appid=${APIKey}`
+    ).then((resp) => resp.json());
+    res.status(200).send(JSON.stringify(bookTitleSearch));
 });
 //add book to db
 router.post("/books", secured(), async function (req, res) {
@@ -25,17 +27,18 @@ router.post("/books", secured(), async function (req, res) {
     const { _raw, _json, ...userProfile } = req.user;
     const userID = (await UserModel.getUserByID(userProfile.user_id))[0].id;
 
-    
     if ("id" in req.body) {
         //adding a credit
-        
-        await UserModel.addCredits(userProfile.user_id)
 
-        let bookTitle = req.body.originalSearch
-        let bookID = req.body.id
-        let APIKey = process.env.API_KEY
-        var bookTitleSearch = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${bookTitle}&appid=${APIKey}`).then(resp => resp.json());
-        let bookInfo = bookTitleSearch.items[bookID]
+        await UserModel.addCredits(userProfile.user_id);
+
+        let bookTitle = req.body.originalSearch;
+        let bookID = req.body.id;
+        let APIKey = process.env.API_KEY;
+        var bookTitleSearch = await fetch(
+            `https://www.googleapis.com/books/v1/volumes?q=${bookTitle}&appid=${APIKey}`
+        ).then((resp) => resp.json());
+        let bookInfo = bookTitleSearch.items[bookID];
 
         await BookModel.addBook({
             title: String(bookInfo.volumeInfo.title),
@@ -51,11 +54,7 @@ router.post("/books", secured(), async function (req, res) {
         res.status(400).send("failed to post book");
         console.log("There wasn't a book in the request body, so it wasn't added");
     }
-
 });
-
-
-
 
 //get all the books in the db
 router.get("/books", async function (req, res) {
@@ -80,17 +79,12 @@ router.delete("/books/:id", async function (req, res) {
     console.log(`removing book`, req.params.id);
 
     //grab all the messages
-    let allMessages = Array(MessageModel.getAllMessages())
+    let allMessages = await MessageModel.getAllMessages();
     //check all the book_requested_id
-    allMessages = allMessages.filter(message => message.book_requested_id == req.params.id)
-    //delete each message with matching
     for (let i = 0; i < allMessages.length; i++) {
         const message = allMessages[i];
-        if (message.id){
-            await MessageModel.removeMessage(message.id)
-
-        } else {
-            console.log("this shouldn't log")
+        if (message.book_requested_id == req.params.id) {
+            await MessageModel.removeMessage(message.id);
         }
     }
 
