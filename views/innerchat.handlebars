@@ -1,5 +1,5 @@
 <style>
-body {
+.messages {
   margin: 0 auto;
   max-width: 800px;
   padding: 0 20px;
@@ -26,50 +26,49 @@ body {
 </style>
 
 
+<div class="messages">
+  <h2>Messages between {{recipientName}} and {{senderName}} about {{bookTitle}}</h2>
+  {{#each messageChain}}
+  {{#if youReply }}
+  <div class="container darker">
+    <h3 class="userName">{{name}}<h3>
+    <h5 class="userText">{{message}}</h5>
 
-<h2>Messages between {{recipientName}} and {{senderName}} about {{bookTitle}}</h2>
-{{#each messageChain}}
-{{#if youReply }}
-<div class="container darker">
-  <h3 class="userName">{{name}}<h3>
-  <h5 class="userText">{{message}}</h5>
-
-</div>
-{{else}}
-<div class="container">
-  <h3 class="senderName">{{name}}<h3>
-  <h5 class="senderText">{{message}}</h5>
-
-</div>
-{{/if}}
-{{/each}}
-<div class="input-group mb-3">
-  <div class="input-group-prepend">
-    <button class="btn btn-outline-secondary" id="send-button"  data-book={{bookID}} type="button">Send</button>
   </div>
-  <input type="text" class="form-control" id="messageText" placeholder="" aria-label="" aria-describedby="basic-addon1">
+  {{else}}
+  <div class="container">
+    <h3 class="senderName">{{name}}<h3>
+    <h5 class="senderText">{{message}}</h5>
+
+  </div>
+  {{/if}}
+  {{/each}}
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <button class="btn btn-outline-secondary" id="send-button"  data-book={{bookID}} type="button">Send</button>
+    </div>
+    <input type="text" class="form-control" id="messageText" placeholder="" aria-label="" aria-describedby="basic-addon1">
+  </div>
+
+  <script>
+        
+      const sendButton = document.querySelector("#send-button")
+      sendButton.addEventListener("click", async function() {
+          const messageText = document.querySelector("#messageText").value
+          document.querySelector("#messageText").value = ''
+      
+          await fetch("/api/send_message", {
+              method: "POST",
+              headers: { 'Content-Type': "application/json" },
+              body: JSON.stringify({
+                  bookID: sendButton.dataset.book,
+                  messageText: messageText
+              })
+          })
+
+        window.location.reload(false)
+
+      })
+  
+  </script>
 </div>
-
-<script>
-    
-    const sendButton = document.querySelector("#send-button")
-
-    sendButton.addEventListener("click", async function() {
-        const messageText = document.querySelector("#messageText").value
-        document.querySelector("#messageText").value = ''
-     
-        await fetch("/api/send_message", {
-            method: "POST",
-            headers: { 'Content-Type': "application/json" },
-            body: JSON.stringify({
-                bookID: sendButton.dataset.book,
-                messageText: messageText
-            })
-        })
-
-       window.location.reload(false)
-
-    })
-
-</script>
-
