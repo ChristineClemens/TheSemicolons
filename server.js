@@ -73,6 +73,7 @@ const newBook = require("./routes/newBook")
 
 app.use(userInViews());
 app.use("/", authRouter);
+app.set("trust proxy", 1)
 
 app.use("/api", bookApiRouter, messagesAPIRouter, usersApiRouter);
 app.use("/", indexRouter, mylibrary, browseRouter, bookRequest, messages, newBook);
