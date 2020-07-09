@@ -58,7 +58,6 @@ router.get("/newBook/:bookTitle", secured(), async function (req, res) {
 });
 
 function conditionalTruncate(string) {
-    console.log("The string should be here", string);
     if (string) {
         if (string.length > 170) {
             return string.trim().substring(0, 170) + "...";

@@ -29,8 +29,8 @@ router.post("/books", secured(), async function (req, res) {
 
     if ("id" in req.body) {
         //adding a credit
-
-        await UserModel.addCredits(userProfile.user_id);
+        let currentCredits = await UserModel.checkCredits(userProfile.user_id)
+        await UserModel.addCredits(currentCredits + 1, userProfile.user_id);
 
         let bookTitle = req.body.originalSearch;
         let bookID = req.body.id;
@@ -58,7 +58,6 @@ router.post("/books", secured(), async function (req, res) {
 
 //get all the books in the db
 router.get("/books", async function (req, res) {
-    console.log(`getting all books to make sure this works please`);
     let books = await BookModel.getAllBooks();
     res.status(200).send(JSON.stringify(books));
 });
