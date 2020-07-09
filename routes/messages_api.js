@@ -12,26 +12,38 @@ router.use(express.urlencoded({ extended: true }));
 router.use(express.json());
 
 router.post("/send_message", secured(), async function (req, res) {
-    console.log("New post request to send_request for initial request of the book", req.body);
+    console.log("New post request to send_message", req.body);
     const { _raw, _json, ...userProfile } = req.user;
     const userID = (await UserModel.getUserByID(userProfile.user_id))[0].id;
     const bookInformation = (await BookModel.getBookAndUser(req.body.bookID))[0];
-    const ownerID = bookInformation.possession_id;
 
     //If this is a message from us, we can maybe render it differently
     //We could add a new column to messages with a boolean, for now I'm just adding something to watch for in the form of ***
     if (req.body.serverMessage) {
+        console.log(`Server message`)
+        const ownerID = bookInformation.possession_id;
         await MessageModel.addMessage(ownerID, userID, "***\n" + req.body.messageText + "\n***", req.body.bookID);
         res.status(200).send("message sent successfully");
 
         //removing a credit because they've made a request
-        UserModel.addCredits(userProfile.user_id);
+        
+        let userCredits = await UserModel.checkCredits(userProfile.user_id);
+       
+        await UserModel.addCredits(userCredits - 1, userProfile.user_id);
 
+        return;
+    }
+    if (req.body.initialMessage) {
+        console.log(`book request message`)
+        const ownerID = bookInformation.possession_id;
+        await MessageModel.addMessage(ownerID, userID, req.body.messageText, req.body.bookID);
+        res.status(200).send("message sent successfully");
+        console.log("Message successfully saved");
         return;
     }
 
     //adding the message to the database
-    await MessageModel.addMessage(ownerID, userID, req.body.messageText, req.body.bookID);
+    await MessageModel.addMessage(req.body.recipientID, userID, req.body.messageText, req.body.bookID);
     res.status(200).send("message sent successfully");
     console.log("Message successfully saved");
 });
