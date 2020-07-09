@@ -1,8 +1,8 @@
 <div class="container mt-2">
-<label for="title">Book Title</label>
-<input type="text" id="title" name="title">
+    <label for="title">Book Title</label>
+    <input type="text" id="title" name="title">
 
-{{!-- <a onclick="searchGBooks()" id="submitButton">Submit New Book</ a> --}}
+    {{!-- <a onclick="searchGBooks()" id="submitButton">Submit New Book</ a> --}}
 
 
     <div class="input-append">
@@ -20,7 +20,8 @@
                 <img src="{{book_cover}}" alt="bookCover">
             </div>
             <div class="resultBox col-md-8">
-                <div class="row no-gutters rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <div
+                    class="row no-gutters rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                     <div class="resultBoxContent col">
                         <h3 class="mb-0" id="bookTitle">{{title}}</h3>
                         <strong class="d-inline-block mb-2 textInfo" id="Genre">{{genre}}</strong>
@@ -37,29 +38,29 @@
         {{/if}}
     </div>
 </div>
-    <script>
- 
-        async function addBook(id) {
-            let originalSearch = window.location.href.split("/")
-            originalSearch = originalSearch[originalSearch.length - 1]
+<script>
 
-            await fetch("/api/books", {
-                method: "POST",
-                headers: { 'Content-Type': "application/json" },
-                body: JSON.stringify({
-                    id: id,
-                    originalSearch: originalSearch
-                })
+    async function addBook(id) {
+        let originalSearch = window.location.href.split("/")
+        originalSearch = originalSearch[originalSearch.length - 1]
+
+        await fetch("/api/books", {
+            method: "POST",
+            headers: { 'Content-Type': "application/json" },
+            body: JSON.stringify({
+                id: id,
+                originalSearch: originalSearch
             })
-            window.location.href = "/mylibrary"
-        }
-
-        document.querySelector("#searchButton").addEventListener("click", async function () {
-            console.log("Search function ran")
-            let searchText = (document.querySelector("#title").value).trim()
-            if (searchText !== "") {
-                window.location.href = `/newbook/${searchText.split(" ").join("+")}`
-            }
         })
-        
-    </script>
+        window.location.href = "/mylibrary"
+    }
+
+    document.querySelector("#searchButton").addEventListener("click", async function () {
+        console.log("Search function ran")
+        let searchText = (document.querySelector("#title").value).trim()
+        if (searchText !== "") {
+            window.location.href = `/newbook/${searchText.split(" ").join("+")}`
+        }
+    })
+
+</script>
