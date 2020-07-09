@@ -45,7 +45,7 @@ body {
 {{/each}}
 <div class="input-group mb-3">
   <div class="input-group-prepend">
-    <button class="btn btn-outline-secondary" id="send-button"  data-book={{bookID}} type="button">Send</button>
+    <button class="btn btn-outline-secondary" id="send-button"  data-book={{bookID}} data-sender={{recipientID}} type="button">Send</button>
   </div>
   <input type="text" class="form-control" id="messageText" placeholder="" aria-label="" aria-describedby="basic-addon1">
 </div>
@@ -57,16 +57,17 @@ body {
     sendButton.addEventListener("click", async function() {
         const messageText = document.querySelector("#messageText").value
         document.querySelector("#messageText").value = ''
-     
+        console.log(sendButton.dataset.sender)
         await fetch("/api/send_message", {
             method: "POST",
             headers: { 'Content-Type': "application/json" },
             body: JSON.stringify({
                 bookID: sendButton.dataset.book,
-                messageText: messageText
+                messageText: messageText,
+                recipientID: sendButton.dataset.sender
             })
         })
-
+      
        window.location.reload(false)
 
     })

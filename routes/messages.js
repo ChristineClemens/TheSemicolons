@@ -64,11 +64,11 @@ router.get("/inbox/:sender_id", secured(), async function (req, res) {
     let bookRequested = await BookModel.getBookFromDBID(messageChain[0].book_requested_id);
     
     let userCredits = await UserModel.checkCredits(userProfile.user_id)
-    
 
     res.render("innerchat", {
         recipientName: recipientName,
         senderName: senderName,
+        recipientID: messageChain[0].recipient_id,
         bookCover: bookRequested.book_cover,
         bookTitle: bookRequested.title,
         bookAuthor: bookRequested.author,
