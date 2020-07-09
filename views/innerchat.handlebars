@@ -1,9 +1,4 @@
 <style>
-body {
-  margin: 0 auto;
-  max-width: 800px;
-  padding: 0 20px;
-}
 
 .container {
   border: 2px solid #dedede;
@@ -25,9 +20,9 @@ body {
 
 </style>
 
-
-
-<h2>Messages between {{recipientName}} and {{senderName}} about {{bookTitle}}</h2>
+<div class="container">
+  
+<h2>Messages between {{recipientName}} and {{senderName}}</h2>
 {{#each messageChain}}
 {{#if youReply }}
 <div class="container darker">
@@ -48,6 +43,8 @@ body {
     <button class="btn btn-outline-secondary" id="send-button"  data-book={{bookID}} data-sender={{recipientID}} type="button">Send</button>
   </div>
   <input type="text" class="form-control" id="messageText" placeholder="" aria-label="" aria-describedby="basic-addon1">
+</div>
+
 </div>
 
 <script>
