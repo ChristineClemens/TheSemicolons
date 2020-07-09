@@ -1,7 +1,19 @@
 const orm = require("../config/orm");
 
-class MessageModel{
+class MessageModel {
+    async getAllMessages() {
+        let db = new orm("mylibrary");
+        let allmessages = await db.selectAll("messages");
+        await db.close();
+        return allmessages;
+    }
+    async removeMessage(messageID) {
+        let db = new orm("mylibrary");
+        await db.removeOne("messages", { id: messageID });
+        await db.close();
+    }
     
+
     async getSentMessages(senderID) {
         let db = new orm("mylibrary");
         let sentMessages = await db.selectSome("messages", "sender_id", senderID);
@@ -18,12 +30,21 @@ class MessageModel{
     }
 
     //getSharedMessages that filters messages that share a sender and recipient id (res.filter...?).
-    async getSharedMessages(userID, senderID) {   
+    async getSharedMessages(userID, senderID) {
         let db = new orm("mylibrary");
-        let sharedMessages = await db.innerJoinSorted("users", "messages", "users.id", "messages.recipient_id", "date_added");
+        let sharedMessages = await db.innerJoinSorted(
+            "users",
+            "messages",
+            "users.id",
+            "messages.recipient_id",
+            "date_added"
+        );
         sharedMessages = sharedMessages.filter(function (message) {
-            return ((message.sender_id == senderID && message.recipient_id == userID) || (message.recipient_id == senderID && message.sender_id == userID));
-        })
+            return (
+                (message.sender_id == senderID && message.recipient_id == userID) ||
+                (message.recipient_id == senderID && message.sender_id == userID)
+            );
+        });
         await db.close();
         return sharedMessages;
     }
@@ -40,10 +61,20 @@ class MessageModel{
     //getSharedBookMessages that filters messages between users that share a book id.
     async getSharedBookMessages(userID, senderID, bookID) {
         let db = new orm("mylibrary");
-        let sharedBookMessages = await db.innerJoinSorted("users", "messages", "users.id", "messages.recipient_id", "date_added");
+        let sharedBookMessages = await db.innerJoinSorted(
+            "users",
+            "messages",
+            "users.id",
+            "messages.recipient_id",
+            "date_added"
+        );
         sharedBookMessages = sharedBookMessages.filter(function (bookMessage) {
-            return (((bookMessage.sender_id == senderID && bookMessage.recipient_id == userID) || (bookMessage.recipient_id == senderID && bookMessage.sender_id == userID)) && (bookMessage.book_requested_id == bookID));
-        })
+            return (
+                ((bookMessage.sender_id == senderID && bookMessage.recipient_id == userID) ||
+                    (bookMessage.recipient_id == senderID && bookMessage.sender_id == userID)) &&
+                bookMessage.book_requested_id == bookID
+            );
+        });
         console.log(sharedBookMessages);
         await db.close();
         return sharedBookMessages;
@@ -52,12 +83,17 @@ class MessageModel{
     //addMessage that inserts message into the database with a date/timestamp (insertOne).
     async addMessage(recipientID, userID, message, bookID) {
         let db = new orm("mylibrary");
-        let newMessage = await db.insertOne("messages", {recipient_id: recipientID, sender_id: userID, message_text: message, book_requested_id: bookID});
-        
+        let newMessage = await db.insertOne("messages", {
+            recipient_id: recipientID,
+            sender_id: userID,
+            message_text: message,
+            book_requested_id: bookID,
+        });
+
         console.log(newMessage);
         await db.close();
         return newMessage;
     }
-};
+}
 
-module.exports = MessageModel
+module.exports = MessageModel;

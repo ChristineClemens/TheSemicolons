@@ -5,6 +5,8 @@ const book = require("../models/book");
 const BookModel = new book();
 const user = require("../models/user");
 const UserModel = new user();
+const message = require("../models/message")
+const MessageModel = new message();
 const router = express.Router();
 const secured = require("../lib/middleware/secured");
 
@@ -76,6 +78,22 @@ router.get("/booksearch/:condition/:query", async function (req, res) {
 //delete the book
 router.delete("/books/:id", async function (req, res) {
     console.log(`removing book`, req.params.id);
+
+    //grab all the messages
+    let allMessages = Array(MessageModel.getAllMessages())
+    //check all the book_requested_id
+    allMessages = allMessages.filter(message => message.book_requested_id == req.params.id)
+    //delete each message with matching
+    for (let i = 0; i < allMessages.length; i++) {
+        const message = allMessages[i];
+        if (message.id){
+            await MessageModel.removeMessage(message.id)
+
+        } else {
+            console.log("this shouldn't log")
+        }
+    }
+
     await BookModel.removeBook(req.params.id);
     res.status(200).send("Book deleted");
 });
