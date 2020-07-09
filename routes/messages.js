@@ -57,7 +57,7 @@ router.get("/inbox/:sender_id", secured(), async function (req, res) {
         const senderName = await UserModel.getUsernameByDBID(message.sender_id);
         messageArray.push({
             message: message.message_text,
-            youReply: (message.sender_id == user),
+            youReply: (message.sender_id === user),
             name: ((senderName) ? senderName : "Unnamed User")
         }); 
     }
@@ -73,7 +73,9 @@ router.get("/inbox/:sender_id", secured(), async function (req, res) {
         bookTitle: bookRequested.title,
         bookAuthor: bookRequested.author,
         messageChain: messageArray,
-        credits: userCredits
+        credits: userCredits,
+        bookID: messageChain[0].book_requested_id,
+        
     }) 
 });
 
