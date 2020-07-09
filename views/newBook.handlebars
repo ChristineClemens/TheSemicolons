@@ -4,7 +4,8 @@
 <div class="card text-center">
   <div class="card-body">
     <h5 class="card-title d-flex flex-column align-content-center">Search Book Title</h5>
-    <input type="text" id="title" name="title">
+    <input type="text" class="w-50" id="title" name="title">
+    <br>
     <button id="searchButton" class="btn btn-success my-2" type="submit">Search</button>
     {{#if search}}
     <a href="/newBook" class="btn btn-success ml-2 my-2" type="submit">Reset</a>
@@ -12,7 +13,7 @@
   </div>
 </div>
 
-    <div class="bookresults container">
+    <div class="bookresults container"> 
         {{#if books}}
         {{#each books}}
         <div class="book row mt-4 ml-0.8 mr-0.5 mb-5">
@@ -29,7 +30,7 @@
                         <div class="description">
                             <p class="mb-auto" id="bookDescription">{{description}}</p>
                         </div>
-                        <a class="stretched-link" role="button" onclick="addBook({{id}})">Add This Book</a>
+                        <a class="stretched-link btn btn-primary mt-4" role="button" onclick="addBook({{id}})">Add This Book</a>
                     </div>
                 </div>
             </div>
