@@ -36,7 +36,7 @@ New users will be required to "Sign Up", and will be prompted to input a name an
 
 
 ## Demonstration
-### video(youtube)
+### Video(Youtube)
 [![Watch the video](https://img.youtube.com/vi/IxbFA8j9CGw/0.jpg)](https://youtu.be/IxbFA8j9CGw)
 
 
@@ -60,15 +60,16 @@ New users will be required to "Sign Up", and will be prompted to input a name an
     * github
 
 ## Development
+In the future, we would like to implement the following changes and additions:
 * Transfer books between user libraries.
 * Allow exchanged books to appear in library with the option of putting them back into circulation or removing them from circulation.
 * Add book exchange confirmation functionality.
 * Employ the PageExchange model to build other share community applications that focus on the exchange of other products._Ex. tools, electronics, clothing, etc._
 
 
-### Contributers
+## Contributers
 
-The links to github accounts of contributers on this project:
+The links to the GitHub accounts of contributers on this project:
 
 [Shayanne](https://github.com/ShayanneSamarasinghe)
 
@@ -79,7 +80,7 @@ The links to github accounts of contributers on this project:
 [James](https://github.com/titanian229)
 
 
-### Licence
+## Licence
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 MIT License
 
