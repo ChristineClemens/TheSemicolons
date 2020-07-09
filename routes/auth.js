@@ -13,6 +13,7 @@ router.get(
         scope: "openid email profile",
     }),
     function (req, res) {
+        console.log("Login attempted")
         res.redirect("/");
     }
 );
@@ -21,13 +22,17 @@ router.get(
 router.get("/callback", function (req, res, next) {
     passport.authenticate("auth0", function (err, user, info) {
         if (err) {
+            console.log("there was an error inside the authentication")
             return next(err);
         }
         if (!user) {
+            console.log(user)
+            console.log("No user detected")
             return res.redirect("/login");
         }
         req.logIn(user, function (err) {
             if (err) {
+                console.log("Inner auth error")
                 return next(err);
             }
             const returnTo = req.session.returnTo;

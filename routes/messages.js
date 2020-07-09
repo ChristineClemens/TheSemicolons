@@ -51,6 +51,12 @@ router.get("/inbox/:sender_id", secured(), async function (req, res) {
     let messageChain = await MessageModel.getSharedMessages(user, req.params.sender_id); 
     const recipientName = await UserModel.getUsernameByDBID(messageChain[0].recipient_id);
     const senderName = await UserModel.getUsernameByDBID(messageChain[0].sender_id);
+
+
+    let conversationMembers = [messageChain[0].sender_id, messageChain[0].recipient_id]
+    let personYouAreTalkingTo = conversationMembers.filter(item => item != user)[0]
+
+
     let messageArray = []; 
     for (let i = 0; i < messageChain.length; i++) {
         const message = messageChain[i]; 
@@ -64,11 +70,11 @@ router.get("/inbox/:sender_id", secured(), async function (req, res) {
     let bookRequested = await BookModel.getBookFromDBID(messageChain[0].book_requested_id);
     
     let userCredits = await UserModel.checkCredits(userProfile.user_id)
-    
 
     res.render("innerchat", {
         recipientName: recipientName,
         senderName: senderName,
+        recipientID: personYouAreTalkingTo,
         bookCover: bookRequested.book_cover,
         bookTitle: bookRequested.title,
         bookAuthor: bookRequested.author,
