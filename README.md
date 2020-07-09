@@ -48,6 +48,9 @@ New users will be required to "Sign Up", and will be prompted to input a name an
     * javaScript
     * SQL
 * Tools (or lib)
+    * MySQL Workbench
+    * Postman
+    * GreenSocks Animation Library
     * node.js
     * handelbars.js
     * passport.js
