@@ -26,6 +26,7 @@ router.get("/callback", function (req, res, next) {
             return next(err);
         }
         if (!user) {
+            console.log(user)
             console.log("No user detected")
             return res.redirect("/login");
         }
