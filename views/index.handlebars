@@ -1,209 +1,244 @@
 <style>
+  .coverPg {
+    position: relative;
+  }
 
-        .coverPg {
-          position: relative;
-        }
-        #landing-welcome {
-          position: absolute;
-          top: 0;
-          left: 0;
-          bottom: 0;
-          right: 0;
-          display: flex;
-          align-items: center;
-        }
-        #img-container {
-          width: 100%;
-          margin: 0;
-          height: 500px !important;
-          opacity: 0.5 !important;
-          background-image: url(assets/bgimg.jpg);
-          background-size: cover;
-          background-repeat: no-repeat;
-        }
-        .welcome {
-          align-items: center;
-        }
-        #UseStory{
-          margin-left: 6px;
-          margin-right: 6px;
-        }
-        #tech-img{
-          width: 100%;
-          margin: 0;
-          border-radius: 20px;
-          height: 300px !important;
-          opacity: 0.5 !important;
-          background-image: url(assets/BooksBackground.jpg);
-          background-size: cover;
-          background-repeat: no-repeat;
-        }
-        .card-Img img{
-          display: block;
-          position: relative;
-          width: 100%;
-          border-radius: 0.5rem;
-        }
-    </style>
+  #landing-welcome {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+  }
+
+  #img-container {
+    width: 100%;
+    margin: 0;
+    height: 500px !important;
+    opacity: 0.5 !important;
+    background-image: url(assets/bgimg.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .welcome {
+    align-items: center;
+  }
+
+  #UseStory {
+    margin-left: 6px;
+    margin-right: 6px;
+  }
+
+  #tech-img {
+    width: 100%;
+    margin: 0;
+    border-radius: 20px;
+    height: 300px !important;
+    opacity: 0.5 !important;
+    background-image: url(assets/BooksBackground.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .card-Img img {
+    display: block;
+    position: relative;
+    width: 100%;
+    border-radius: 0.5rem;
+  }
+</style>
 
 <div id="header"></div>
-    <!-- welcome image -->
-    <div id="main">
-            <!-- <img src="assets/bgimg.jpg" class="img-fluid" alt="background"> -->
-          <div class="coverPg">
-            <div id="img-container" class="landing-img"></div>
-            <div id="landing-welcome">
-              <div class="container welcome">
-                <div class="text-center">
-                  <h1 class="mb-3">Welcome to PageExchange!</h1>
-                  <a href="/login" id="welcome-btn" class="btn btn btn-secondary btn-lg" type="">Sign Up Now</a>
-                </div>
-              </div>
-            </div>
-          
-          </div>  
-    </div>
-    <!-- User story (about Us) -->
-    <div id="UseStory" class="container">
-        <h2 style="margin: 30px">Why PageExchange?</h2>
-        <p style="text-indent: 30px;"> 
-          Unlike popular online marketplace platforms that require a financial investment, and library communities that operate on the basis of borrowing, 
-          PageExchange seeks to fill the niche that exists in between in order to promote an inclusive, charitable community. As a new member of the sharing 
-          economy, this online platform aims to bridge gaps by replacing the system of monetary exchange, and dismantle the barriers that impose a sense of 
-          exclusion. In order to accomplish this, PageExchange has implemented a credit system that encourages participants to contribute, as well as 
-          participate, in the circulation of books shared amongst individuals. Likewise, this platform does not require a permanent address or subscription, 
-          opening the doors of inclusion to those passing through who wish to be a part of a community founded upon the spirit of sharing and a love for 
-          literature.
-        </p>  
-        <h2 style="margin: 30px">How Does it Work?</h2>
-        <p style="text-indent: 30px;">
-          In order to gain credits, users can access their “MyLibrary” page and select the “Add Book” option, allowing them to make books they’d like to 
-          donate available to other users. These books can be added by inputting the book title and selecting the correct book option provided. Once a book 
-          has been made available for request, the user will gain a credit. To spend this credit, the user may navigate to the “Browse” page, exploring newly 
-          added titles, or searching for a specific title, author, or genre and “requesting” a book of interest. In doing so, a line of communication between 
-          the user and the owner of the requested book will be opened so that a meetup time can be arranged. Once the exchange has been made between the users 
-          a confirmation message will be sent to both parties. A credit will be used up once confirmation has been sent.
-        </p>
-        <h2 style="margin: 30px">The Benefits of Using PageExchange:</h2>
-        <ul>
-          <li>In order to get, you must give, promoting sharing and ensuring that books will continue to be available.</li>
-          <li>There is no financial obligation involved in taking part as PageExchange functions on a credit system.</li>
-          <li>Exchanges can be made in a public space to ensure the safety of our community members.</li>
-          <li>Unlike libraries, the user is given the opportunity to keep their acquisitions rather than return them.</li>
-          <li>Books dodge their unnecessary fate in the recycling bin and are given a second life in which they can continue to entertain and educate.</li>
-        </ul>
+<!-- welcome image -->
+<div id="main">
+  <!-- <img src="assets/bgimg.jpg" class="img-fluid" alt="background"> -->
+  <div class="coverPg">
+    <div id="img-container" class="landing-img"></div>
+    <div id="landing-welcome">
+      <div class="container welcome">
+        <div class="text-center">
+          <h1 class="mb-3">Welcome to PageExchange!</h1>
+          <a href="/login" id="welcome-btn" class="btn btn btn-secondary btn-lg" type="">Sign Up Now</a>
+        </div>
+      </div>
     </div>
 
-    <!-- Developers -->
-    <div class="developers">
-      <div class="row container-fluid">
-        <div class="devInfo col-sm-3 shadow p-3 mb-5 bg-white rounded" style="margin-top: 20px; margin-bottom: 20px; height: 700px;"><div class="card h-100 d-inline-block">
-          <div class="card-Img pb-3">
-            <img src="/assets/Headshots/Shayanne.png">
-          </div>
-          <div class="card-Content">
-            <h5 style="margin-left: 20px;">Shayanne</h5>
-            <p style="text-align: center; text-indent: 20px; margin: 10px">
-              Shayanne is a junior developer based in the Toronto area. He’s also an avid reader. His three favourite books are “The Godfather” by Mario Puzo, 
-              “Life after God” by Douglas Coupland and “Men without Women” by Haruki Murakami.
-            </p>
-            <div class="card-footer" style="text-align: center; position: absolute; bottom: 0; width: 100%">
-              <a href="https://github.com/ShayanneSamarasinghe" target="_blank"><img class="btn" src="/assets/logo/GitHubMark.png"></img></a>
-            </div>
-          </div>
-        </div>
-      </div>
-        <div class="devInfo col-sm-3 shadow p-3 mb-5 bg-white rounded" style="margin-top: 20px; margin-bottom: 20px; height: 700px"><div class="card h-100 d-inline-block">
-          <div class="card-Img pb-3">
-            <img src="/assets/Headshots/james.jpg">
-          </div>
-          <div class="card-Content">
-            <h5 style="margin-left: 20px">James</h5>
-            <p style="text-align: center; text-indent: 20px; margin: 10px">
-              Shayanne is a junior developer based in the Toronto area. He’s also an avid reader. His three favourite books are “The Godfather” by Mario Puzo, 
-              “Life after God” by Douglas Coupland and “Men without Women” by Haruki Murakami.
-            </p>
-            <div class="card-footer" style="text-align: center; position: absolute; bottom: 0; width: 100%">
-              <a href="https://github.com/titanian229" target="_blank"><img class="btn" src="/assets/logo/GitHubMark.png"></img></a>
-            </div>
-          </div>
-        </div>
-      </div>
-        <div class="devInfo col-sm-3 shadow p-3 mb-5 bg-white rounded" style="margin-top: 20px; margin-bottom: 20px; height: 700px"><div class="card h-100 d-inline-block">
-          <div class="card-Img pb-3">
-            <img src="/assets/Headshots/Samuel.png">
-          </div>
-          <div class="card-Content">
-            <h5 style="margin-left: 20px">Samuel</h5>
-            <p style="text-align: center; text-indent: 20px; margin: 10px">
-              Samuel is a fullstack developer with a mechanical engineering background. He does not enjoy reading books, but his favourite books are, “Harry Potter” 
-              by  J. K. Rowling, “Kafka on the Shore” by Haruki Murakami, and “One Piece” by Eiichiro Oda (yes, this is Manga).
-            </p>
-            <div class="card-footer" style="text-align: center; position: absolute; bottom: 0; width: 100%">
-              <a href="https://github.com/samuelyoo" target="_blank"><img class="btn" src="/assets/logo/GitHubMark.png"></img></a>
-            </div>
-          </div>
-        </div>
-      </div>
-        <div class="devInfo col-sm-3 shadow p-3 mb-5 bg-white rounded" style="margin-top: 20px; margin-bottom: 20px; height: 700px"><div class="card h-100 d-inline-block">
-          <div class="card-Img pb-3">
-            <img src="/assets/Headshots/Christine.png">
-          </div>
-          <div class="card-Content">
-            <h5 style="margin-left: 20px">Christine</h5>
-            <p style="text-align: center; text-indent: 20px; margin: 10px">
-              Christine is a front-end developer galvanizing a background in aesthetic design and education. Her three favourite books are, “A Tale for the Time Being” 
-              by Ruth Ozeki, “Lullabies for Little Criminals”, by Heather O’Neill, and “Lust for Life” by Irving Stone.
-            </p>
-            <div class="card-footer" style="text-align: center; position: absolute; bottom: 0; width: 100%">
-              <a href="https://github.com/ChristineClemens" target="_blank"><img class="btn" src="/assets/logo/GitHubMark.png"></img></a>
-            </div>
-          </div>
-        </div>
-      </div>
-      </div>
-    </div>
-        <!-- technologies -->
-    <div id="mainTech" style="margin: 30px; box-shadow: 10px 10px 5px lightgray; border-radius: 20px">
-      <div class="coverPg">
-        <div id="tech-img"></div>
-        <div id="landing-welcome">
-          <div class="container welcome">
-            <div class="text-center">
-              <h2 class="mb-5">Key Technologies</h2>
-              <div class="row text-center">
-                <div class="col p-1 pb-3">
-                <img src="/assets/logo/html.png"  height="40" class="d-inline-block align-top" alt="logo">
-              </div>
-                <div class="col p-1 pb-3">
-                <img src="assets/logo/css.png"  height="40" class="d-inline-block align-top" alt="logo">
-              </div>
-                <div class="col p-1 pb-3">
-                <img src="/assets/logo/javascript.png"  height="40" class="d-inline-block align-top" alt="logo">
-              </div>
-                <div class="col p-1 pb-3">
-                <img src="/assets/logo/sql.png"  height="30" class="d-inline-block align-top" alt="logo">
-              </div>
-              </div>
-              <div class="row text-center">
-                <div class="col p-1 pb-3">
-                  <img src="/assets/logo/nodejs.png"  height="40" class="d-inline-block align-top" alt="logo">
-                </div>
-                <div class="col p-1 pb-3">
-                <img src="/assets/logo/bootstrap.png"  height="40" class="d-inline-block align-top" alt="logo">
-              </div>
-                <div class="col p-1 pb-3">
-                <img src="/assets/logo/handlebars.png"  height="40" class="d-inline-block align-top" alt="logo">
-              </div>
-                <div class="col p-1 pb-3">
-                <img src="/assets/logo/passportjs.png"  height="40" class="d-inline-block align-top" alt="logo">
-              </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>  
-    </div>
-    <div id="footer">
+  </div>
+</div>
+<!-- User story (about Us) -->
+<div id="UseStory" class="container">
+  <h2 style="margin: 30px">Why PageExchange?</h2>
+  <p style="text-indent: 30px;">
+    Unlike popular online marketplace platforms that require a financial investment, and library communities that
+    operate on the basis of borrowing,
+    PageExchange seeks to fill the niche that exists in between in order to promote an inclusive, charitable community.
+    As a new member of the sharing
+    economy, this online platform aims to bridge gaps by replacing the system of monetary exchange, and dismantle the
+    barriers that impose a sense of
+    exclusion. In order to accomplish this, PageExchange has implemented a credit system that encourages participants to
+    contribute, as well as
+    participate, in the circulation of books shared amongst individuals. Likewise, this platform does not require a
+    permanent address or subscription,
+    opening the doors of inclusion to those passing through who wish to be a part of a community founded upon the spirit
+    of sharing and a love for
+    literature.
+  </p>
+  <h2 style="margin: 30px">How Does it Work?</h2>
+  <p style="text-indent: 30px;">
+    In order to gain credits, users can access their “MyLibrary” page and select the “Add Book” option, allowing them to
+    make books they’d like to
+    donate available to other users. These books can be added by inputting the book title and selecting the correct book
+    option provided. Once a book
+    has been made available for request, the user will gain a credit. To spend this credit, the user may navigate to the
+    “Browse” page, exploring newly
+    added titles, or searching for a specific title, author, or genre and “requesting” a book of interest. In doing so,
+    a line of communication between
+    the user and the owner of the requested book will be opened so that a meetup time can be arranged. Once the exchange
+    has been made between the users
+    a confirmation message will be sent to both parties. A credit will be used up once confirmation has been sent.
+  </p>
+  <h2 style="margin: 30px">The Benefits of Using PageExchange:</h2>
+  <ul>
+    <li>In order to get, you must give, promoting sharing and ensuring that books will continue to be available.</li>
+    <li>There is no financial obligation involved in taking part as PageExchange functions on a credit system.</li>
+    <li>Exchanges can be made in a public space to ensure the safety of our community members.</li>
+    <li>Unlike libraries, the user is given the opportunity to keep their acquisitions rather than return them.</li>
+    <li>Books dodge their unnecessary fate in the recycling bin and are given a second life in which they can continue
+      to entertain and educate.</li>
+  </ul>
+</div>
 
+<!-- Developers -->
+<div class="developers">
+  <div class="row container-fluid">
+    <div class="devInfo col-sm-3 shadow p-3 mb-5 bg-white rounded"
+      style="margin-top: 20px; margin-bottom: 20px; height: 700px;">
+      <div class="card h-100 d-inline-block">
+        <div class="card-Img pb-3">
+          <img src="/assets/Headshots/Shayanne.png">
+        </div>
+        <div class="card-Content">
+          <h5 style="margin-left: 20px;">Shayanne</h5>
+          <p style="text-align: center; text-indent: 20px; margin: 10px">
+            Shayanne is a junior developer based in the Toronto area. He’s also an avid reader. His three favourite
+            books are “The Godfather” by Mario Puzo,
+            “Life after God” by Douglas Coupland and “Men without Women” by Haruki Murakami.
+          </p>
+          <div class="card-footer" style="text-align: center; position: absolute; bottom: 0; width: 100%">
+            <a href="https://github.com/ShayanneSamarasinghe" target="_blank"><img class="btn"
+                src="/assets/logo/GitHubMark.png"></img></a>
+          </div>
+        </div>
+      </div>
     </div>
+    <div class="devInfo col-sm-3 shadow p-3 mb-5 bg-white rounded"
+      style="margin-top: 20px; margin-bottom: 20px; height: 700px">
+      <div class="card h-100 d-inline-block">
+        <div class="card-Img pb-3">
+          <img src="/assets/Headshots/Samuel.png">
+        </div>
+        <div class="card-Content">
+          <h5 style="margin-left: 20px">Samuel</h5>
+          <p style="text-align: center; text-indent: 20px; margin: 10px">
+            Samuel is a fullstack developer with a mechanical engineering background. He does not enjoy reading books,
+            but his favourite books are, “Harry Potter”
+            by J. K. Rowling, “Kafka on the Shore” by Haruki Murakami, and “One Piece” by Eiichiro Oda (yes, this is
+            Manga).
+          </p>
+          <div class="card-footer" style="text-align: center; position: absolute; bottom: 0; width: 100%">
+            <a href="https://github.com/samuelyoo" target="_blank"><img class="btn"
+                src="/assets/logo/GitHubMark.png"></img></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="devInfo col-sm-3 shadow p-3 mb-5 bg-white rounded"
+      style="margin-top: 20px; margin-bottom: 20px; height: 700px">
+      <div class="card h-100 d-inline-block">
+        <div class="card-Img pb-3">
+          <img src="/assets/Headshots/Christine.png">
+        </div>
+        <div class="card-Content">
+          <h5 style="margin-left: 20px">Christine</h5>
+          <p style="text-align: center; text-indent: 20px; margin: 10px">
+            Christine is a front-end developer galvanizing a background in aesthetic design and education. Her three
+            favourite books are, “A Tale for the Time Being”
+            by Ruth Ozeki, “Lullabies for Little Criminals”, by Heather O’Neill, and “Lust for Life” by Irving Stone.
+          </p>
+          <div class="card-footer" style="text-align: center; position: absolute; bottom: 0; width: 100%">
+            <a href="https://github.com/ChristineClemens" target="_blank"><img class="btn"
+                src="/assets/logo/GitHubMark.png"></img></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="devInfo col-sm-3 shadow p-3 mb-5 bg-white rounded"
+      style="margin-top: 20px; margin-bottom: 20px; height: 700px">
+      <div class="card h-100 d-inline-block">
+        <div class="card-Img pb-3">
+          <img src="/assets/Headshots/james.jpg">
+        </div>
+        <div class="card-Content">
+          <h5 style="margin-left: 20px">James</h5>
+          <p style="text-align: center; text-indent: 20px; margin: 10px">
+            James is a fullstack developer from Toronto, with a background in physics and
+            astrophysics. He's a lover of all things space, his
+            three favourite books are "Agent to the Stars" by John Scalzi, "Children of Time" by Adrian Tchaikovsky,
+            and "Excession" by Iain M. Banks.
+          </p>
+          <div class="card-footer" style="text-align: center; position: absolute; bottom: 0; width: 100%">
+            <a href="https://github.com/titanian229" target="_blank"><img class="btn"
+                src="/assets/logo/GitHubMark.png"></img></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- technologies -->
+<div id="mainTech" style="margin: 30px; box-shadow: 10px 10px 5px lightgray; border-radius: 20px">
+  <div class="coverPg">
+    <div id="tech-img"></div>
+    <div id="landing-welcome">
+      <div class="container welcome">
+        <div class="text-center">
+          <h2 class="mb-5">Key Technologies</h2>
+          <div class="row text-center">
+            <div class="col p-1 pb-3">
+              <img src="/assets/logo/html.png" height="40" class="d-inline-block align-top" alt="logo">
+            </div>
+            <div class="col p-1 pb-3">
+              <img src="assets/logo/css.png" height="40" class="d-inline-block align-top" alt="logo">
+            </div>
+            <div class="col p-1 pb-3">
+              <img src="/assets/logo/javascript.png" height="40" class="d-inline-block align-top" alt="logo">
+            </div>
+            <div class="col p-1 pb-3">
+              <img src="/assets/logo/sql.png" height="30" class="d-inline-block align-top" alt="logo">
+            </div>
+          </div>
+          <div class="row text-center">
+            <div class="col p-1 pb-3">
+              <img src="/assets/logo/nodejs.png" height="40" class="d-inline-block align-top" alt="logo">
+            </div>
+            <div class="col p-1 pb-3">
+              <img src="/assets/logo/bootstrap.png" height="40" class="d-inline-block align-top" alt="logo">
+            </div>
+            <div class="col p-1 pb-3">
+              <img src="/assets/logo/handlebars.png" height="40" class="d-inline-block align-top" alt="logo">
+            </div>
+            <div class="col p-1 pb-3">
+              <img src="/assets/logo/passportjs.png" height="40" class="d-inline-block align-top" alt="logo">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="footer">
+
+</div>

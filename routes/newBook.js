@@ -39,15 +39,20 @@ router.get("/newBook/:bookTitle", secured(), async function (req, res) {
     //     console.log(book.volumeInfo.imageLinks.thumbnail)
     // }
 
+    bookTitleSearch = bookTitleSearch.map(function (book, index) {
+        if (book.volumeInfo.imageLinks && book.volumeInfo) {
+            return {
+                title: String(book.volumeInfo.title),
+                book_cover: book.volumeInfo.imageLinks ? String(book.volumeInfo.imageLinks.thumbnail) : "",
+                genre: String(book.volumeInfo.categories),
+                author: String(book.volumeInfo.authors),
+                id: index,
+                description: conditionalTruncate(String(book.volumeInfo.description)),
+            };
+        }
+    });
 
-    bookTitleSearch = bookTitleSearch.map((book, index) => ({
-        title: String(book.volumeInfo.title),
-        book_cover: book.volumeInfo.imageLinks ? String(book.volumeInfo.imageLinks.thumbnail) : "",
-        genre: String(book.volumeInfo.categories),
-        author: String(book.volumeInfo.authors),
-        id: index,
-        description: conditionalTruncate(String(book.volumeInfo.description)),
-    }));
+    bookTitleSearch = bookTitleSearch.filter(item => (item))
 
     res.render("newBook", { books: bookTitleSearch });
 });
