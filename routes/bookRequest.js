@@ -20,11 +20,14 @@ router.get("/request_book/:bookID", secured(), async function (req, res, next) {
 
     if (!bookInformation){
         res.render("404", {title: "404 Incorrect Book ID"})
-        return
+        return;
     }
 
     let userCredits = await UserModel.checkCredits(userProfile.user_id)
-
+    if (userCredits <= 0) {
+        res.render("creditswarning")
+        return;
+    }
     res.render("bookRequest", {
         title: "Request Page",
         bookTitle: bookInformation.title,
