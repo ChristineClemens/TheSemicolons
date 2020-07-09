@@ -26,8 +26,8 @@ router.post("/books", secured(), async function (req, res) {
     
     if ("id" in req.body) {
         //adding a credit
-        let userCredits = await UserModel.checkCredits(userProfile.user_id)
-        await UserModel.addCredits(userCredits + 1, userProfile.user_id)
+        
+        await UserModel.addCredits(userProfile.user_id)
 
         let bookTitle = req.body.originalSearch
         let bookID = req.body.id

@@ -49,6 +49,7 @@ class UserModel {
 
    //add credit
     async addCredits(userCredits, auth_id){
+        this.checkCredits(auth_id)
         let db = new orm ("mylibrary")
         await db.updateOne ("users", {credits: userCredits},{auth_id: auth_id})
         await db.close()
@@ -56,7 +57,8 @@ class UserModel {
     }
 
     //remove credit
-    async removeCredits(userCredits, auth_id){
+    async removeCredits(auth_id){
+        this.checkCredits(auth_id)
         let db = new orm ("mylibrary")
         await db.updateOne ("users", {credits: userCredits}, {auth_id: auth_id})
         await db.close()

@@ -25,8 +25,7 @@ router.post("/send_message", secured(), async function (req, res) {
         res.status(200).send("message sent successfully");
 
         //removing a credit because they've made a request
-        let userCredits = UserModel.checkCredits(userProfile.user_id);
-        UserModel.addCredits(userCredits - 1, userProfile.user_id);
+        UserModel.addCredits(userProfile.user_id);
 
         return;
     }
