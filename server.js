@@ -85,7 +85,6 @@ app.listen(PORT, function () {
     console.log("App listening on PORT " + PORT);
 });
 
-
 //STEPS TO ADDING A PAGE
 //create a handlebar file in views
 //Create a router, define in routes/ and render the handlebar file
