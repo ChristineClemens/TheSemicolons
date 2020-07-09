@@ -42,7 +42,7 @@ router.post("/send_message", secured(), async function (req, res) {
     }
 
     //adding the message to the database
-    await MessageModel.addMessage(req.body.senderID, userID, req.body.messageText, req.body.bookID);
+    await MessageModel.addMessage(req.body.recipientID, userID, req.body.messageText, req.body.bookID);
     res.status(200).send("message sent successfully");
     console.log("Message successfully saved");
 });
