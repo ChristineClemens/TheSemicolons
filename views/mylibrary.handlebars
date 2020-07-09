@@ -73,8 +73,8 @@
     </div>
 </div>
 <script>
-    async function deleteBook(id) {
-        const response = await fetch(`/api/books/${id}`, { method: "DELETE" })
+    function deleteBook(id) {
+        const response = fetch(`/api/books/${id}`, { method: "DELETE" })
         window.location.href = "/mylibrary"
     }
 

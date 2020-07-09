@@ -84,8 +84,8 @@ function parseBooks(bookList) {
 }
 
 function conditionalTruncate(string) {
-    if (string.length > 300) {
-        return string.trim().substring(0, 300) + "...";
+    if (string.length > 170) {
+        return string.trim().substring(0, 170) + "...";
     }
     return string;
 }

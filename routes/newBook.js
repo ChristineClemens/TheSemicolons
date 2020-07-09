@@ -38,19 +38,21 @@ router.get("/newBook/:bookTitle", secured(), async function(req, res) {
         genre: book.volumeInfo.categories,
         author: book.volumeInfo.authors,
         id: index,
-        description: conditionalTruncate(book.volumeInfo.description)
+        description: conditionalTruncate(String(book.volumeInfo.description)),
+        
     }))
-
+    
     res.render("newBook",{books: bookTitleSearch})
 });
 
 function conditionalTruncate(string) {
-    string = String(string)
-    if (string.length > 300) {
-        return string.trim().substring(0, 300) + "...";
+    console.log("The string should be here", string)
+    if (string){
+    if (string.length > 170) {
+        return string.trim().substring(0, 170) + "...";
     }
     return string
 }
-
+}
 
 module.exports = router;
