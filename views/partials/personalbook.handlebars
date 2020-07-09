@@ -2,7 +2,7 @@
     <div class="col-auto d-none d-lg-block">
         <img src="{{book_cover}}" alt="">
     </div>
-    <div class="resultBox col-md-8">
+    <div class="card resultBox col-md-8">
         <div class="row no-gutters rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
             <div class="resultBoxContent col">
                 <h3 class="mb-0" id="bookTitle">{{title}}</h3>
@@ -10,7 +10,7 @@
                 {{!-- <div class="mb-1 textMutedChange" id="date">1999</div> --}}
                 <p class="mb-auto" id="bookDescription">{{description}}</p>
                 <div class="footer d-flex justify-content-end">
-                    <button class="btn btn-danger m-2" onclick="deleteBook({{id}})">Delete</button>
+                    <button class="btn btn-danger m-2" onclick="deleteBook({{id}})">Delete</button> 
                     <button class="btn btn-warning m-2" onclick="deleteBook({{id}})">Donated</button>
                 </div>
             </div>

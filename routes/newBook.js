@@ -35,7 +35,7 @@ router.get("/newBook/:bookTitle", secured(), async function(req, res) {
         title: book.volumeInfo.title,
         book_cover: book.volumeInfo.imageLinks.thumbnail,
         genre: book.volumeInfo.categories,
-        author: book.volumeInfo.authors,// but I didn't see on other js files
+        author: book.volumeInfo.authors,
         id: index,
         description: conditionalTruncate(String(book.volumeInfo.description)),
         
@@ -45,10 +45,10 @@ router.get("/newBook/:bookTitle", secured(), async function(req, res) {
 });
 
 function conditionalTruncate(string) {
-    console.log("The string should be here", string) //does that work?
+    console.log("The string should be here", string)
     if (string){
     if (string.length > 170) {
-        return string.trim().substring(0, 170) + "..."; //try now?
+        return string.trim().substring(0, 170) + "...";
     }
     return string
 }
