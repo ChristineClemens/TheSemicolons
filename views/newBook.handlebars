@@ -1,44 +1,68 @@
+<div class="container mt-2">
 <label for="title">Book Title</label>
 <input type="text" id="title" name="title">
 
-<a onclick="searchGBooks()" id="submitButton">Submit New Book</a>
-<div class="bookresults">
-    <ul>
+{{!-- <a onclick="searchGBooks()" id="submitButton">Submit New Book</ a> --}}
+
+
+    <div class="input-append">
+        <button id="searchButton" class="btn btn-success my-2" type="submit">Search</button>
+        {{#if search}}
+        <a href="/newBook" class="btn btn-success ml-2 my-2" type="submit">Reset</a>
+        {{/if}}
+    </div>
+    <div class="bookresults">
+
         {{#if books}}
         {{#each books}}
-        <li>{{title}}</li>
-        <img src="{{book_cover}}" alt="">
-        <li><button onclick="addBook({{id}})">Choose Book</button></li>
-        {{/each}} //using router.post("/add_book/:index")
+        <div class="book row mt-4 ml-0.8 mr-0.5">
+            <div class="col-auto d-none d-lg-block">
+                <img src="{{book_cover}}" alt="">
+            </div>
+            <div class="resultBox col-md-8">
+                <div
+                    class="row no-gutters rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                    <div class="resultBoxContent col">
+                        <h3 class="mb-0" id="bookTitle">{{title}}</h3>
+                        <strong class="d-inline-block mb-2 textInfo" id="Genre">{{genre}}</strong>
+                        {{!-- <div class="mb-1 textMutedChange" id="date">1999</div> --}}
+                        <div class="description">
+                            <p class="mb-auto">{{description}}
+                            </p>
+                        </div>
+                        <a class="stretched-link" role="button" onclick="addBook({{id}})">Add This Book</a> 
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/each}}
         {{/if}}
-    </ul>
+    </div>
 </div>
+    <script>
+ 
+        async function addBook(id) {
+            let originalSearch = window.location.href.split("/")
+            originalSearch = originalSearch[originalSearch.length - 1]
 
-<script>
-    function searcGBooks(){
-        const title = document.querySelector("#title").value.trim()
-        window.location.href = "/newbook/" + title
-    }
-    async function addBook(id){
-        //The original search is going to be part of the URL here, so if we want
-        //the exact same results we could grab it there
-        let originalSearch = window.location.href.split("/")
-        originalSearch = originalSearch[originalSearch.length - 1]
-        
-        //then we want to send a fetch post request to /api/books
-        //with the book originalSearch and the id
-        
-        
-        //We don't need to assign a vari able, because we're sending something to the server
-        //not asking for something
-
-
-        await fetch("/api/books" {
-                method: "POST", //Post request, instead of the default which is get
-                headers: { 'Content-Type': "application/json" }, //telling the server we're sending JSON
+            await fetch("/api/books", {
+                method: "POST",
+                headers: { 'Content-Type': "application/json" },
                 body: JSON.stringify({
-                    bookID: id
-                })
 
-    }
-</script>
+                    id: id,
+                    originalSearch: originalSearch
+                })
+            })
+            window.location.href = "/mylibrary"
+        }
+
+        document.querySelector("#searchButton").addEventListener("click", async function () {
+            console.log("Search function ran")
+            let searchText = (document.querySelector("#title").value).trim()
+            if (searchText !== "") {
+                window.location.href = `/newbook/${searchText.split(" ").join("+")}`
+            }
+        })
+
+    </script>

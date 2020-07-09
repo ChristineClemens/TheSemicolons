@@ -27,9 +27,14 @@ router.get("/inbox", secured(), async function (req, res) {
         const senderName = await UserModel.getUsernameByDBID(sender)
         uniqueSenderNames.push({id: sender, name: ((senderName) ? senderName : "Unnamed User")})
     }
-    console.log(uniqueSenderNames);
+    
+    //checking credits
+    let userCredits = await UserModel.checkCredits(userProfile.user_id)
+
+
     res.render("messages", {
-        messages: uniqueSenderNames
+        messages: uniqueSenderNames,
+        credits: userCredits
     })
 });
 
@@ -52,19 +57,25 @@ router.get("/inbox/:sender_id", secured(), async function (req, res) {
         const senderName = await UserModel.getUsernameByDBID(message.sender_id);
         messageArray.push({
             message: message.message_text,
-            youReply: (message.sender_id == user),
+            youReply: (message.sender_id === user),
             name: ((senderName) ? senderName : "Unnamed User")
         }); 
     }
     let bookRequested = await BookModel.getBookFromDBID(messageChain[0].book_requested_id);
-    console.log(messageChain);
+    
+    let userCredits = await UserModel.checkCredits(userProfile.user_id)
+    
+
     res.render("innerchat", {
         recipientName: recipientName,
         senderName: senderName,
         bookCover: bookRequested.book_cover,
         bookTitle: bookRequested.title,
         bookAuthor: bookRequested.author,
-        messageChain: messageArray
+        messageChain: messageArray,
+        credits: userCredits,
+        bookID: messageChain[0].book_requested_id,
+        
     }) 
 });
 
