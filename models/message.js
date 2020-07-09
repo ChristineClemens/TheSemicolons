@@ -10,9 +10,7 @@ class MessageModel {
     async removeMessage(messageID) {
         let db = new orm("mylibrary");
         await db.removeOne("messages", { id: messageID });
-        console.log("removed")
         await db.close();
-        console.log("closed")
         return true
     }
     

@@ -47,7 +47,6 @@ class BookModel {
     async addBook(book) {
         //book is an object with title, author, etc
         let db = new orm("mylibrary");
-        console.log("inside addBook", book)
         await db.insertOne("books", book);
         await db.close();
     }
