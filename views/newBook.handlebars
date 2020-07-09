@@ -15,7 +15,7 @@
     <div class="bookresults container">
         {{#if books}}
         {{#each books}}
-        <div class="book row mt-4 ml-0.8 mr-0.5">
+        <div class="book row mt-4 ml-0.8 mr-0.5 mb-5">
             <div class="col-auto d-none d-lg-block">
                 <img src="{{book_cover}}" alt="bookCover">
             </div>
@@ -47,7 +47,6 @@
                 method: "POST",
                 headers: { 'Content-Type': "application/json" },
                 body: JSON.stringify({
-
                     id: id,
                     originalSearch: originalSearch
                 })
@@ -62,11 +61,5 @@
                 window.location.href = `/newbook/${searchText.split(" ").join("+")}`
             }
         })
-        function conditionalTruncate(string) {
-                if (string.length > 300) {
-                    return string.trim().substring(0, 300) + "...";
-                }
-                return string;
-        }
-
+        
     </script>
