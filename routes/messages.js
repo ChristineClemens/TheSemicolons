@@ -69,6 +69,7 @@ router.get("/inbox/:sender_id", secured(), async function (req, res) {
     res.render("innerchat", {
         recipientName: recipientName,
         senderName: senderName,
+        senderID: messageChain[0].sender_id,
         bookCover: bookRequested.book_cover,
         bookTitle: bookRequested.title,
         bookAuthor: bookRequested.author,
