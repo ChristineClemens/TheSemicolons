@@ -22,7 +22,7 @@ const strategy = new Auth0Strategy(
 );
 
 const sess = {
-    secret: "weProbablyMissedASemicolonSomewhereAndYetWeMadeSomethingCool",
+    secret: "IlCxQ438B1tFOGIvESOD9UlL1G2uckmXNytLSOEgKhQJgLQusHNSi_i7uHVJNQgb",
     cookie: {},
     resave: false,
     saveUninitialized: true,
@@ -73,6 +73,7 @@ const newBook = require("./routes/newBook")
 
 app.use(userInViews());
 app.use("/", authRouter);
+app.set("trust proxy", 1)
 
 app.use("/api", bookApiRouter, messagesAPIRouter, usersApiRouter);
 app.use("/", indexRouter, mylibrary, browseRouter, bookRequest, messages, newBook);

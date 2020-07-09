@@ -19,8 +19,16 @@
     <script src="https://kit.fontawesome.com/d8e179be37.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.4/gsap.min.js"></script>
     <link rel="stylesheet" href="/assets/style.css">
-
+    <link href="https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Raleway&display=swap" rel="stylesheet">
     <title>{{title}}</title>
+    <style>
+        body{
+            font-family: 'Raleway'
+        }
+        .resultBoxContent{
+            height:240px;
+        }
+    </style>
 </head>
 
 <body>
@@ -55,6 +63,9 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
             <ul class="navbar-nav text-right">
                 {{#unless notLoggedIn}}
+                <li class="nav-link">
+                    {{credits}}<i class="fa fa-plus-circle ml-1" aria-hidden="true"></i>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/mylibrary">My Library</a>
                 </li>
@@ -63,7 +74,7 @@
                 </li>
                 <li>
                     {{#if messages}}
-                    <a href="/messages" class="nav-link"><i id="mail" class="fa fa-envelope" aria-hidden="true"></i></a>
+                    <a href="/inbox" class="nav-link"><i id="mail" class="fa fa-envelope" aria-hidden="true"></i></a>
                     {{else}}
                     <a class="nav-link" href="/inbox"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>
                     {{/if}}

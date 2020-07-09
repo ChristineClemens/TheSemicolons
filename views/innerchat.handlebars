@@ -1,9 +1,4 @@
 <style>
-body {
-  margin: 0 auto;
-  max-width: 800px;
-  padding: 0 20px;
-}
 
 .container {
   border: 2px solid #dedede;
@@ -25,9 +20,9 @@ body {
 
 </style>
 
-
-
-<h2>Messages between {{recipientName}} and {{senderName}} about {{bookTitle}}</h2>
+<div class="container">
+  
+<h2>Messages between {{recipientName}} and {{senderName}}</h2>
 {{#each messageChain}}
 {{#if youReply }}
 <div class="container darker">
@@ -45,9 +40,11 @@ body {
 {{/each}}
 <div class="input-group mb-3">
   <div class="input-group-prepend">
-    <button class="btn btn-outline-secondary" id="send-button"  data-book={{bookID}} type="button">Send</button>
+    <button class="btn btn-outline-secondary" id="send-button"  data-book={{bookID}} data-sender={{recipientID}} type="button">Send</button>
   </div>
   <input type="text" class="form-control" id="messageText" placeholder="" aria-label="" aria-describedby="basic-addon1">
+</div>
+
 </div>
 
 <script>
@@ -57,16 +54,17 @@ body {
     sendButton.addEventListener("click", async function() {
         const messageText = document.querySelector("#messageText").value
         document.querySelector("#messageText").value = ''
-     
+        console.log(sendButton.dataset.sender)
         await fetch("/api/send_message", {
             method: "POST",
             headers: { 'Content-Type': "application/json" },
             body: JSON.stringify({
                 bookID: sendButton.dataset.book,
-                messageText: messageText
+                messageText: messageText,
+                recipientID: sendButton.dataset.sender
             })
         })
-
+      
        window.location.reload(false)
 
     })

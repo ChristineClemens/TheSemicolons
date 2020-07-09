@@ -1,5 +1,6 @@
 
 
+
 {{!-- <a onclick="searchGBooks()" id="submitButton">Submit New Book</ a> --}}
 <div class="card text-center">
   <div class="card-body">
@@ -12,24 +13,23 @@
   </div>
 </div>
 
+    <div class="bookresults container">
         {{#if books}}
         {{#each books}}
-        <div class="book row mt-4 ml-0.8 mr-0.5">
+        <div class="book row mt-4 ml-0.8 mr-0.5 mb-5">
             <div class="col-auto d-none d-lg-block">
-                <img src="{{book_cover}}" alt="">
+                <img src="{{book_cover}}" alt="bookCover">
             </div>
             <div class="resultBox col-md-8">
-                <div
-                    class="row no-gutters rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <div class="row no-gutters rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                     <div class="resultBoxContent col">
                         <h3 class="mb-0" id="bookTitle">{{title}}</h3>
                         <strong class="d-inline-block mb-2 textInfo" id="Genre">{{genre}}</strong>
-                        {{!-- <div class="mb-1 textMutedChange" id="date">1999</div> --}}
+                        <p>{{year}}</p>
                         <div class="description">
-                            <p class="mb-auto">{{description}}
-                            </p>
+                            <p class="mb-auto" id="bookDescription">{{description}}</p>
                         </div>
-                        <a class="stretched-link" role="button" onclick="addBook({{id}})">Add This Book</a> 
+                        <a class="stretched-link" role="button" onclick="addBook({{id}})">Add This Book</a>
                     </div>
                 </div>
             </div>
@@ -40,12 +40,11 @@
 </div>
     <script>
  
-        
         async function addBook(id) {
             let originalSearch = window.location.href.split("/")
             originalSearch = originalSearch[originalSearch.length - 1]
 
-            await fetch("/api/books", { //found it, it was a comma
+            await fetch("/api/books", {
                 method: "POST",
                 headers: { 'Content-Type': "application/json" },
                 body: JSON.stringify({
@@ -63,5 +62,5 @@
                 window.location.href = `/newbook/${searchText.split(" ").join("+")}`
             }
         })
-
+        
     </script>
