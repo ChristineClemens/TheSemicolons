@@ -1,21 +1,21 @@
-const mysql = require("mysql");
+const mysql = require('mysql');
+
 if (!process.env.JAWSDB_URL) {
-    require("dotenv").config();
+    require('dotenv').config();
 }
 
 function connect_db(db_name) {
     if (process.env.JAWSDB_URL) {
         return mysql.createConnection(process.env.JAWSDB_URL);
-    } else {
-        return mysql.createConnection({
-            host: "localhost",
-            user: process.env.SQLUSER,
-            password: process.env.SQLPASS,
-            port: 3306,
-            database: db_name,
-            insecureAuth: true
-        });
     }
+    return mysql.createConnection({
+        host: 'localhost',
+        user: process.env.SQLUSER,
+        password: process.env.SQLPASS,
+        port: 3306,
+        database: db_name,
+        insecureAuth: true,
+    });
 }
 
 function close_db(connection) {
