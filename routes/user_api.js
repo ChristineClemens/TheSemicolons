@@ -54,10 +54,7 @@ router.post('/location', secured(), async (req, res, next) => {
 // If a location value exists, PUT (replace) new location in database.
 router.put('/location', secured(), async (req, res, next) => {
     const { _raw, _json, ...userProfile } = req.user;
-    const location = await UserModel.getLocation(userProfile.user_id);
-    if (location) {
-        await UserModel.changeLocation(req.body.userLocation, userProfile.user_id);
-    }
+    await UserModel.changeLocation(req.body.userLocation, userProfile.user_id);
     res.status(200).send('YAY!');
 });
 
