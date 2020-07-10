@@ -83,12 +83,3 @@ app.use((req, res) => {
 app.listen(PORT, () => {
     console.log(`App listening on PORT ${PORT}`);
 });
-<<<<<<< HEAD
-
-
-//STEPS TO ADDING A PAGE
-//create a handlebar file in views
-//Create a router, define in routes/ and render the handlebar file
-//import the router into server.js
-=======
->>>>>>> a6b72f27ec2f431d4e6b265cd2185bae012d10b1
