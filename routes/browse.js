@@ -1,65 +1,23 @@
-const express = require("express");
+const express = require('express');
+
 const router = express.Router();
-const secured = require("../lib/middleware/secured");
-const book = require("../models/book");
-const BookModel = new book();
-const message = require ("../models/message");
-const MessageModel = new message()
-const user = require("../models/user")
-const UserModel = new user();
+const secured = require('../lib/middleware/secured');
+const Book = require('../models/book');
 
-/* GET home page. */
-router.get("/browse", secured(), async function (req, res, next) {
-    console.log("browse page loaded");
-    const { _raw, _json, ...userProfile } = req.user;
-    //getting all the books in the db
-    let allBooks = await BookModel.getAllBooks();
-    allBooks = parseBooks(allBooks);
-    let userInDB = await UserModel.getUserByID(userProfile.user_id);
-    let messages =  await MessageModel.getReceivedMessages(userInDB[0].id)
+const BookModel = new Book();
+const Message = require('../models/message');
 
-    let userCredits = await UserModel.checkCredits(userProfile.user_id)
+const MessageModel = new Message()
+const User = require('../models/user')
 
+const UserModel = new User();
 
-    res.render("browse", {
-        title: "Browse",
-        books: allBooks,
-        messages: messages,
-        credits: userCredits
-    });
-});
-
-router.get("/browse/:condition/:query", async function (req, res) {
-    const { _raw, _json, ...userProfile } = req.user;
-    let userInDB = await UserModel.getUserByID(userProfile.user_id);
-    let condition = req.params.condition;
-    let query = req.params.query;
-    console.log(`getting books based on search for browse page `, condition, query);
-    let allBooks = await BookModel.getBooksFuzzy(condition, query);
-    allBooks = parseBooks(allBooks);
-    let messages = await MessageModel.getReceivedMessages(userInDB[0].id)
-    let userCredits = await UserModel.checkCredits(userProfile.user_id)
-
-    res.render("browse", {
-        title: "Browse",
-        books: allBooks,
-        search: true,
-        messages: messages,
-        credits: userCredits
-    });
-});
-
-router.get("/view_book/:id", async function (req, res) {
-    console.log("Book information page loaded", req.params.id);
-    let bookID = req.params.id;
-    let bookInformation = await BookModel.getBookFromDBID(bookID);
-    console.log("book info", bookInformation);
-    if (bookInformation) {
-        res.render("bookInformation", { book: bookInformation });
-    } else {
-        res.render("404");
+function conditionalTruncate(string) {
+    if (string.length > 170) {
+        return `${string.trim().substring(0, 170)}...`;
     }
-});
+    return string;
+}
 
 function parseBooks(bookList) {
     return bookList.map((book) => ({
@@ -74,11 +32,56 @@ function parseBooks(bookList) {
     }));
 }
 
-function conditionalTruncate(string) {
-    if (string.length > 170) {
-        return string.trim().substring(0, 170) + "...";
+/* GET home page. */
+router.get('/browse', secured(), async (req, res, next) => {
+    console.log('browse page loaded');
+    const { _raw, _json, ...userProfile } = req.user;
+    // getting all the books in the db
+    let allBooks = await BookModel.getAllBooks();
+    allBooks = parseBooks(allBooks);
+    const userInDB = await UserModel.getUserByID(userProfile.user_id);
+    const messages = await MessageModel.getReceivedMessages(userInDB[0].id)
+
+    const userCredits = await UserModel.checkCredits(userProfile.user_id)
+
+    res.render('browse', {
+        title: 'Browse',
+        books: allBooks,
+        messages,
+        credits: userCredits,
+    });
+});
+
+router.get('/browse/:condition/:query', async (req, res) => {
+    const { _raw, _json, ...userProfile } = req.user;
+    const userInDB = await UserModel.getUserByID(userProfile.user_id);
+    const { condition } = req.params;
+    const { query } = req.params;
+    console.log('getting books based on search for browse page ', condition, query);
+    let allBooks = await BookModel.getBooksFuzzy(condition, query);
+    allBooks = parseBooks(allBooks);
+    const messages = await MessageModel.getReceivedMessages(userInDB[0].id)
+    const userCredits = await UserModel.checkCredits(userProfile.user_id)
+
+    res.render('browse', {
+        title: 'Browse',
+        books: allBooks,
+        search: true,
+        messages,
+        credits: userCredits,
+    });
+});
+
+router.get('/view_book/:id', async (req, res) => {
+    console.log('Book information page loaded', req.params.id);
+    const bookID = req.params.id;
+    const bookInformation = await BookModel.getBookFromDBID(bookID);
+    console.log('book info', bookInformation);
+    if (bookInformation) {
+        res.render('bookInformation', { book: bookInformation });
+    } else {
+        res.render('404');
     }
-    return string;
-}
+});
 
 module.exports = router;

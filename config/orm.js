@@ -1,4 +1,4 @@
-const { connect_db, close_db } = require("./connection");
+const { connect_db, close_db } = require('./connection');
 
 class DB {
     constructor(db_name) {
@@ -20,7 +20,7 @@ class DB {
 
     selectAll(tableName) {
         return new Promise((resolve, reject) => {
-            this.connection.query("SELECT * FROM ??", [tableName], function (err, rows) {
+            this.connection.query('SELECT * FROM ??', [tableName], (err, rows) => {
                 if (err) reject(err);
                 resolve(rows);
             });
@@ -29,10 +29,10 @@ class DB {
 
     selectSome(tableName, columnName, searchValue) {
         return new Promise((resolve, reject) => {
-            this.connection.query("SELECT * FROM ?? WHERE ?? = ?", [tableName, columnName, searchValue], function (
+            this.connection.query('SELECT * FROM ?? WHERE ?? = ?', [tableName, columnName, searchValue], (
                 err,
-                rows
-            ) {
+                rows,
+            ) => {
                 if (err) reject(err);
                 resolve(rows);
             });
@@ -42,12 +42,12 @@ class DB {
     selectSomeBetter(tableName, columnName1, searchValue1, columnName2, searchValue2) {
         return new Promise((resolve, reject) => {
             this.connection.query(
-                "SELECT * FROM ?? WHERE ?? = ? AND ?? = ?",
+                'SELECT * FROM ?? WHERE ?? = ? AND ?? = ?',
                 [tableName, columnName1, searchValue1, columnName2, searchValue2],
-                function (err, rows) {
+                (err, rows) => {
                     if (err) reject(err);
                     resolve(rows);
-                }
+                },
             );
         });
     }
@@ -55,19 +55,19 @@ class DB {
     selectSomeFuzzy(tableName, columnName, searchValue) {
         return new Promise((resolve, reject) => {
             this.connection.query(
-                "SELECT * FROM ?? WHERE ?? LIKE CONCAT('%', ?, '%')",
+                'SELECT * FROM ?? WHERE ?? LIKE CONCAT(\'%\', ?, \'%\')',
                 [tableName, columnName, searchValue],
-                function (err, rows) {
+                (err, rows) => {
                     if (err) reject(err);
                     resolve(rows);
-                }
+                },
             );
         });
     }
 
     insertOne(tableName, value) {
         return new Promise((resolve, reject) => {
-            this.connection.query("INSERT INTO ?? SET ?", [tableName, value], function (err, rows) {
+            this.connection.query('INSERT INTO ?? SET ?', [tableName, value], (err, rows) => {
                 if (err) reject(err);
                 resolve(rows);
             });
@@ -75,9 +75,9 @@ class DB {
     }
 
     updateOne(tableName, update, condition) {
-        //requires a string for tablename, and objects with a single key value pair for update and condition
+        // requires a string for tablename, and objects with a single key value pair for update and condition
         return new Promise((resolve, reject) => {
-            this.connection.query("UPDATE ?? SET ? WHERE ?", [tableName, update, condition], function (err, rows) {
+            this.connection.query('UPDATE ?? SET ? WHERE ?', [tableName, update, condition], (err, rows) => {
                 if (err) reject(err);
                 resolve(rows);
             });
@@ -86,7 +86,7 @@ class DB {
 
     removeOne(tableName, condition) {
         return new Promise((resolve, reject) => {
-            this.connection.query("DELETE FROM ?? WHERE ?", [tableName, condition], function (err, rows) {
+            this.connection.query('DELETE FROM ?? WHERE ?', [tableName, condition], (err, rows) => {
                 if (err) reject(err);
                 resolve(rows);
             });
@@ -96,12 +96,12 @@ class DB {
     leftJoinWhere(leftTable, rightTable, leftKey, rightKey, whereClauseCol, whereClauseVal) {
         return new Promise((resolve, reject) => {
             this.connection.query(
-                "SELECT * FROM ?? LEFT JOIN ?? ON ?? = ?? WHERE ?? = ?",
+                'SELECT * FROM ?? LEFT JOIN ?? ON ?? = ?? WHERE ?? = ?',
                 [leftTable, rightTable, leftKey, rightKey, whereClauseCol, whereClauseVal],
-                function (err, rows) {
+                (err, rows) => {
                     if (err) reject(err);
                     resolve(rows);
-                }
+                },
             );
         });
     }
@@ -109,12 +109,12 @@ class DB {
     innerJoinSorted(leftTable, rightTable, leftKey, rightKey, orderMethod) {
         return new Promise((resolve, reject) => {
             this.connection.query(
-                "SELECT * FROM ?? INNER JOIN ?? ON ?? = ?? ORDER BY ??",
+                'SELECT * FROM ?? INNER JOIN ?? ON ?? = ?? ORDER BY ??',
                 [leftTable, rightTable, leftKey, rightKey, orderMethod],
-                function (err, rows) {
+                (err, rows) => {
                     if (err) reject(err);
                     resolve(rows);
-                }
+                },
             );
         });
     }

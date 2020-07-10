@@ -135,24 +135,7 @@
     </div>
 </div>
 
-{{!-- 
-
-<h2>Welcome to PageExchange!</h2>
-<p>Enter some details about yourself</p>
-<label for="name">Your Name</label>
-<input type="text" id="nameInput" name="name">
-<label for="location">Your preferred location to meet up:</label>
-<input type="text" id="locationInput" name="location">
-<br>    
-<button id="saveBtn">Save</button>
-{{credits}}
-<div id="displayName"></div>
-<div id="displayLocation"></div> --}}
 <script>
-    //On confirmation, send the information to the api/users route and add the user, then reload the page.  
-    //The server will check on page reload for the presence of the required data and serve the mylibrary page
-    //Use user input in the nameInput field as the value to be inserted into the database.
-
     document.querySelector("#saveBtn").addEventListener("click", async function () {
         await submitName();
         await submitLocation();
