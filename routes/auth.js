@@ -1,56 +1,57 @@
-const express = require("express");
+const express = require('express');
+
 const router = express.Router();
-const passport = require("passport");
-require("dotenv").config();
-const util = require("util");
-const url = require("url");
-const querystring = require("querystring");
+const passport = require('passport');
+require('dotenv').config();
+const util = require('util');
+const url = require('url');
+const querystring = require('querystring');
 
 // Perform the login, after login Auth0 will redirect to callback
 router.get(
-    "/login",
-    passport.authenticate("auth0", {
-        scope: "openid email profile",
+    '/login',
+    passport.authenticate('auth0', {
+        scope: 'openid email profile',
     }),
-    function (req, res) {
-        console.log("Login attempted")
-        res.redirect("/");
-    }
+    (req, res) => {
+        console.log('Login attempted')
+        res.redirect('/');
+    },
 );
 
 // Perform the final stage of authentication and redirect to previously requested URL or '/user'
-router.get("/callback", function (req, res, next) {
-    passport.authenticate("auth0", function (err, user, info) {
+router.get('/callback', (req, res, next) => {
+    passport.authenticate('auth0', (err, user, info) => {
         if (err) {
             return next(err);
         }
         if (!user) {
-            return res.redirect("/login");
+            return res.redirect('/login');
         }
-        req.logIn(user, function (err) {
+        req.logIn(user, (err) => {
             if (err) {
                 return next(err);
             }
-            const returnTo = req.session.returnTo;
+            const { returnTo } = req.session;
             delete req.session.returnTo;
-            res.redirect(returnTo || "/mylibrary");
+            res.redirect(returnTo || '/mylibrary');
         });
     })(req, res, next);
 });
 
 // Perform session logout and redirect to homepage
-router.get("/logout", (req, res) => {
+router.get('/logout', (req, res) => {
     req.logout();
 
-    var returnTo = req.protocol + "://" + req.hostname;
-    var port = req.connection.localPort;
+    let returnTo = `${req.protocol}://${req.hostname}`;
+    const port = req.connection.localPort;
     if (port !== undefined && port !== 80 && port !== 443) {
-        returnTo += ":" + port;
+        returnTo += `:${port}`;
     }
-    var logoutURL = new url.URL(util.format("https://%s/v2/logout", process.env.AUTH0_DOMAIN));
-    var searchString = querystring.stringify({
+    const logoutURL = new url.URL(util.format('https://%s/v2/logout', process.env.AUTH0_DOMAIN));
+    const searchString = querystring.stringify({
         client_id: process.env.AUTH0_CLIENT_ID,
-        returnTo: returnTo,
+        returnTo,
     });
     logoutURL.search = searchString;
 
